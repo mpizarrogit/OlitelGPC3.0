@@ -356,14 +356,29 @@ exit;
 						</div>
 					  </div>
 					  <div class="row">
+					  <?php
+						$queryTipo = "Select * FROM estado_proyecto";
+						$resultTipo = mysqli_query($conexion,$queryTipo);
+
+					?>
 					   <div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Estado:</label>
 							   <div class="col-sm-9">
 							  <select class="form-control" name="estado" id="estado" required>
-								<option value="Activo" >Activo</option>
-								<option value="Pendiente" >Pendiente</option>
-								<option value="Terminado">Terminado</option>
+								<option value="" >Seleccione</option>
+								<?php
+									while ($row = $resultTipo->fetch_array()){
+									?>
+
+									<option value=" <?php echo $row['ID_EO_PROYECTO']; ?>">
+									<?php echo $row['Nombre_Estado']; ?>
+									</option>
+
+								<?php
+									}
+									?>
+								
 							  </select>
 							</div>
 						  </div>
@@ -518,7 +533,7 @@ exit;
 		  <!-- partial:../../partials/_footer.html -->
 		 <footer class="footer">
 			<div class="container-fluid clearfix">
-			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
 			  </span>
 			</div>
 		  </footer>
