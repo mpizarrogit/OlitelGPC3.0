@@ -311,7 +311,7 @@ exit;
 		
 			$consulta = "SELECT f.ID_FACT, f.ID_CL, f.NFACT, f.VALOR_PROYECTADO, f.F_FACTURA, f.Valor_Facturado, ip.ID_IP, c.ID_CL, c.NOM_CL
       FROM factura f
-      INNER JOIN informe_de_pago ip ON f.ID_FACT = ip.ID_IP
+      INNER JOIN informe_de_pago ip ON f.ID_FACT = ip.ID_FACTURA
       INNER JOIN cliente c ON f.ID_CL = c.ID_CL";
 			$resultado = mysqli_query($conexion, $consulta);
       

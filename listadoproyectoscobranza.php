@@ -306,7 +306,7 @@ exit;
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-			$consulta = "SELECT * FROM concepto where ID_TIPO = 1";
+			$consulta = "SELECT * FROM concepto where ID_TIPO != 2";
 			$resultado = mysqli_query($conexion, $consulta);
       
       

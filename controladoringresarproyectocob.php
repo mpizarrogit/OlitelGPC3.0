@@ -40,6 +40,10 @@ $ciud = utf8_decode($ciud);
 $region = utf8_decode($region);
 (isset($_POST['estado'])) ? $estado=$_POST['estado'] : $estado='';
 $estado = utf8_decode($estado);
+
+(isset($_POST['estadoCobranza'])) ? $estadoCob=$_POST['estadoCobranza'] : $estadoCob='';
+$estadoCob = utf8_decode($estadoCob);
+
 (isset($_POST['avan'])) ? $avance=$_POST['avan'] : $avance='';
 $avance = utf8_decode($avance);
 (isset($_POST['supentel'])) ? $supentel=$_POST['supentel'] : $supentel='';
@@ -62,6 +66,10 @@ $fda = utf8_decode($fda);
 $fdinf = utf8_decode($fdinf);
 (isset($_POST['creadopor'])) ? $creadopor=$_POST['creadopor'] : $creadopor='';
 $creadopor = utf8_decode($creadopor);
+
+(isset($_POST['valorPro'])) ? $valorProyecto=$_POST['valorPro'] : $valorProyecto='';
+$valorProyecto = utf8_decode($valorProyecto);
+
 (isset($_POST['ID_PERSONAS'])) ? $ID_PERSONAS=$_POST['ID_PERSONAS'] : $ID_PERSONAS='';
 $ID_PERSONAS = utf8_decode($ID_PERSONAS);
 
@@ -79,7 +87,7 @@ mysqli_select_db($conexion, $base_datos) or die("No se encuentra la BD");
 mysqli_set_charset($conexion, "utf8");
 
 
-$consulta = "INSERT INTO CONCEPTO (ID_CC, ID_TIPO, ID_SUPENTEL, ID_JDE, ID_CIUDAD, NOMBRE, FECHA_CREACION, SITIO, ESTADO, AVANCE, DESCRIPCION, OTT, INI_ASIG, INI_REAL, TER_ASIG, TER_REAL, FEC_INF, FECHADEASIGNACION, creadopor, ID_REGION,ID_PERSONAS) VALUES (".$cc.",".$tipo.",".$supentel.",".$jde.",".$ciud.",'".$nompro."','".$fechacreac."','".$sitio."','".$estado."',".$avance.",'".$desc."','".$ott."','".$fei."','".$fri."','".$fet."','".$frt."','".$fdinf."','".$fda."','".$creadopor."',".$region.",".$ID_PERSONAS.")";
+$consulta = "INSERT INTO CONCEPTO (ID_CC, ID_TIPO, ID_SUPENTEL, ID_JDE, ID_EO_PROYECTO, ID_EO_COB, ID_REGION, NOMBRE, FECHA_CREACION, CIUDAD, SITIO, AVANCE, DESCRIPCION, OTT, INI_ASIG, INI_REAL, TER_ASIG, TER_REAL, FEC_INF, FECHADEASIGNACION, CREADOPOR, VALORPROYECTO, ID_PERSONAS) VALUES (".$cc.", ".$tipo." , ".$supentel." , ".$jde." , ".$estado." , ".$estadoCob.",".$region.",'".$nompro."','".$fechacreac."','".$ciud."','".$sitio."',".$avance.",'".$desc."','".$ott."','".$fei."','".$fri."','".$fet."','".$frt."','".$fdinf."','".$fda."','".$creadopor."',".$valorProyecto.",".$ID_PERSONAS.")";
 /*
 $resultado = mysqli_prepare($conexion, $consulta);
 
@@ -119,7 +127,7 @@ if (mysqli_multi_query($conexion, $consulta)) {
 	if ($tipo==1){
         header('Location: listadoproyectoscobranza.php');
 	}else{
-		header('Location: listadoservicios.php');
+		header('Location: detallesServiciosFijos.php');
 	}
 
 }
@@ -133,6 +141,29 @@ echo "<script language='JavaScript'>
 	</script>";
 }
 
+//if (mysqli_multi_query($conexion, $consulta)) {
+	//if ($avance<=100 && $avance >=0){
+     //   echo "<script language='JavaScript'>
+	//	alert('Se a ingresado el registro'/n". $consulta ."/n".mysqli_connect($conexion).");
+	//		  </script>";
+	//}else{
+	//	echo "<script language='JavaScript'>
+	//	alert('El avance debe estar en un rango entre 0 - 100 y se a producido un error al intentar guardar el registro'/n". $consulta ."/n".mysqli_error($conexion).");
+
+	//		window.location.href='formagrproyectocobranza.php'; 
+	//</script>";
+	//}
+
+//}
+//else {
+/*echo "Error: " . $consulta . "<br>
+" . mysqli_error($conexion);*/
+//echo "<script language='JavaScript'>
+	//	alert('Error al intentar guardar el registro'/n". $consulta ."/n".mysqli_error($conexion).");
+
+	//		window.location.href='formagrproyectocobranza.php'; 
+	//</script>";
+//}
 
 
 mysqli_close($conexion);
