@@ -399,27 +399,27 @@ exit;
 			mysqli_set_charset($conexion, "utf8");
 		
       //$consulta = "SELECT * FROM informe_de_pago";
-      //$consulta = "SELECT ip.ID_IP, ip.ID_CC, ip.ID_CP, ip.ID_CC, ip.ID_TIPO, ip.NRO_COTI, ip.ESTADO, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, concepto.CP, concepto.OTT, concepto.AVANCE, concepto.VALORPROYECTO, je.NOM_JDE, cc.ID_CC, cc.NOM_CC, tp.ID_TIPO, tp.NOM_TIPO, pf.ID_IP, pf.ID_FACT, f.ID_FACT, f.NFACT
-      //FROM informe_de_pago ip
-      //INNER JOIN centro_de_costo cc ON ip.ID_CC = cc.ID_CC
-      //INNER JOIN concepto concepto ON ip.ID_CP = concepto.CP
-      //INNER JOIN jefe_entel je ON concepto.ID_JDE = je.ID_JDE
-      //INNER JOIN tipo tp ON ip.ID_TIPO = tp.ID_TIPO
-      //INNER JOIN pago_fact pf ON ip.ID_IP = pf.ID_IP
-      //INNER JOIN factura f ON pf.ID_FACT = f.ID_FACT";
-
       $consulta = "SELECT ip.ID_IP, ip.CP, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, ip.NRO_COTI, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, ecobranza.NOM_EO_COB ,concepto.OTT, concepto.ID_CC, concepto.ID_JDE, concepto.AVANCE, concepto.VALORPROYECTO,f.ID_FACT,f.NFACT, cc.NOM_CC, tp.NOM_TIPO, je.NOM_JDE 
-      FROM informe_de_pago ip
+      FROM informe_de_pago ip 
       INNER JOIN concepto concepto ON concepto.CP = ip.CP
       INNER JOIN estado_cobranza ecobranza ON concepto.ID_EO_COB = ecobranza.ID_EO_COB
       INNER JOIN tipo tp ON tp.ID_TIPO = ip.ID_TIPO
       INNER JOIN jefe_entel je ON je.ID_JDE = concepto.ID_JDE
       INNER JOIN centro_de_costo cc ON cc.ID_CC = concepto.ID_CC
-      INNER JOIN factura f ON f.ID_FACT = ip.ID_IP";
-			$resultado = mysqli_query($conexion, $consulta);
+      INNER JOIN factura f ON f.ID_FACT
+      WHERE f.ID_IP = ip.ID_IP AND f.ID_FACT = ip.ID_FACTURA";
+      $resultado = mysqli_query($conexion, $consulta);
 
-      
-      
+
+      //$consulta = "SELECT ip.ID_IP, ip.CP, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, ip.NRO_COTI, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, ecobranza.NOM_EO_COB ,concepto.OTT, concepto.ID_CC, concepto.ID_JDE, concepto.AVANCE, concepto.VALORPROYECTO,f.ID_FACT,f.NFACT, cc.NOM_CC, tp.NOM_TIPO, je.NOM_JDE 
+      //FROM informe_de_pago ip
+     // INNER JOIN concepto concepto ON concepto.CP = ip.CP
+      //INNER JOIN estado_cobranza ecobranza ON concepto.ID_EO_COB = ecobranza.ID_EO_COB
+     // INNER JOIN tipo tp ON tp.ID_TIPO = ip.ID_TIPO
+     /// INNER JOIN jefe_entel je ON je.ID_JDE = concepto.ID_JDE
+     // INNER JOIN centro_de_costo cc ON cc.ID_CC = concepto.ID_CC
+     // INNER JOIN factura f ON f.ID_FACT = ip.ID_FACTURA";  
+			
 
       //SELECT ip.ID_IP, ip.ID_CC, ip.ID_CP, ip.ID_CC, ip.ID_TIPO, ip.NRO_COTI, ip.ESTADO, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, concepto.CP, concepto.OTT, concepto.AVANCE, concepto.VALORPROYECTO, cc.ID_CC, cc.NOM_CC, tp.ID_TIPO, tp.NOM_TIPO, pf.ID_IP, pf.ID_FACT, f.ID_FACT, f.NFACT
       //FROM informe_de_pago ip

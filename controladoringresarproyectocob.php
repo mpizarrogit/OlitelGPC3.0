@@ -127,7 +127,7 @@ if (mysqli_multi_query($conexion, $consulta)) {
 	if ($tipo==1){
         header('Location: listadoproyectoscobranza.php');
 	}else{
-		header('Location: detallesServiciosFijos.php');
+		header('Location: listadoservicios.php');
 	}
 
 }
