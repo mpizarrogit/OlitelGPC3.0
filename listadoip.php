@@ -365,7 +365,8 @@ exit;
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li>
           <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li>  
-					<li class="nav-item"><a class="nav-link" href="listadoip.php">Informes de Pago</a></li>
+					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
+          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -407,7 +408,7 @@ exit;
       INNER JOIN jefe_entel je ON je.ID_JDE = concepto.ID_JDE
       INNER JOIN centro_de_costo cc ON cc.ID_CC = concepto.ID_CC
       INNER JOIN factura f ON f.ID_FACT
-      WHERE f.ID_IP = ip.ID_IP AND f.ID_FACT = ip.ID_FACTURA";
+      WHERE f.ID_IP = ip.ID_IP OR f.ID_FACT = ip.ID_FACTURA";
       $resultado = mysqli_query($conexion, $consulta);
 
 
@@ -465,7 +466,6 @@ exit;
 				<div class="card-body">
 					<div class="d-flex justify-content-between border-bottom">
 						<h2 class="text-primary">Informes de Pago Emitidos</h2>
-							  
 					</div>
 				</div>
 			</div>

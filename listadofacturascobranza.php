@@ -276,7 +276,8 @@ exit;
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
           <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="listadoip.php">Informes de Pago</a></li>
+					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
+          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -309,9 +310,8 @@ exit;
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-			$consulta = "SELECT f.ID_FACT, f.ID_CL, f.NFACT, f.VALOR_PROYECTADO, f.F_FACTURA, f.Valor_Facturado, ip.ID_IP, c.ID_CL, c.NOM_CL
+			$consulta = "SELECT f.ID_FACT, f.ID_IP ,f.ID_CL, f.NFACT, f.VALOR_PROYECTADO, f.F_FACTURA, f.Valor_Facturado, c.ID_CL, c.NOM_CL
       FROM factura f
-      INNER JOIN informe_de_pago ip ON f.ID_FACT = ip.ID_FACTURA
       INNER JOIN cliente c ON f.ID_CL = c.ID_CL";
 			$resultado = mysqli_query($conexion, $consulta);
       

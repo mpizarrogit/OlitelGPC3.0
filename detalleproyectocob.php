@@ -259,10 +259,11 @@ exit;
 			  </a>
 			  <div class="collapse" id="tables">
 				<ul class="nav flex-column sub-menu">
+					<li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
+					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
 					<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="listadoip.php">Informes de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -362,14 +363,17 @@ exit;
 					<form class="form-sample" method="post" action="#">
 					 <p class="card-description"> Creado por: <?php echo $row['CREADOPOR'] ?></p>
 						<input type="hidden" name="cp" id="cp" value="<?php echo $cp ?>">
-						 <div class="row">
+
+						<!----------------------------------------------------------------------------->
+						<div class="row">
 						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Nombre Proyecto:</label>
 							<div class="col-sm-9">
 								<section class="form-control">
 								 <?php	echo $row['NOMBRE']; ?>
-								</section>	 </div>
+								</section>	 
+							</div>
 						  </div>
 						</div>
 						<div class="col-md-6">
@@ -378,32 +382,40 @@ exit;
 							<div class="col-sm-9">
 								<section class="form-control">
 								 <?php	echo $row['DESCRIPCION']; ?>
-								</section>	  </div>
+								</section>	  
+							</div>
 						  </div>
 						</div>
 					  </div>
-					   <div class="row">
+
+					<!----------------------------------------------------------------------------->
+
+					  <div class="row">	
 						<div class="col-md-6">
+							<?php 
+							$ccproyecto = $row['ID_CC'];
+							$query = "SELECT * FROM centro_de_costo";
+							$result = $conexion->query($query);
+							?>	
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Ott:</label>
+							<label class="col-sm-3 col-form-label">Centro de Costo:</label>
 							<div class="col-sm-9">
-								 <section class="form-control">
-								 <?php	echo $row['OTT']; ?>
-								</section>	  </div>
+						   <section class="form-control">
+							<?php 
+								 $query = "SELECT cc.ID_CC, cc.NOM_CC FROM centro_de_costo cc, concepto c where cc.ID_CC = c.ID_CC and c.cp = '$cp'";
+								 $result = $conexion->query($query);
+							?> 
+								<?php
+									   while ($rowx = $result->fetch_array() )
+									{
+									?>
+										<?php echo $rowx['NOM_CC']; ?>
+							<?php } ?>					
+								</section>			
+							</div>
 						  </div>
 						</div>
-						  <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Fecha de creación:</label>
-							<div class="col-sm-9">
-							<section class="form-control">
-								 <?php	echo $row['FECHA_CREACION']; ?>
-								</section>	  
-							  </div>
-						  </div>
-						</div>	
-					  </div>	
-					  <div class="row">
+						
 						<div class="col-md-6">
 							<?php 
 							$tipoproyy = $row['ID_TIPO'];
@@ -428,253 +440,339 @@ exit;
 							</div>
 						  </div>
 						</div>
-						<div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Sitio:</label>
-							<div class="col-sm-9">
-								<section class="form-control"> <?php  echo $row['SITIO']; ?></section></div>
-						  </div>
-						</div>
-					  </div>
-					  <div class="row">
+					</div>					
+					<!----------------------------------------------------------------------------->
+					<!----------------------------------------------------------------------------->
+
+					<div class="row">	
 						<div class="col-md-6">
 							<?php 
+							$supentel = $row['ID_SUPENTEL'];
+							$querysup = "SELECT * FROM supentel";
+							$resultsup = $conexion->query($querysup);
+							?>	
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Supervisor Entel:</label>
+							<div class="col-sm-9">
+						   <section class="form-control">
+							<?php 
+								 $querysup = "SELECT sup.ID_SUPENTEL, sup.NOM_SUPENTEL FROM supentel sup, concepto c where sup.ID_SUPENTEL = c.ID_SUPENTEL and c.cp = '$cp'";
+								 $resultsup = $conexion->query($querysup);
+							?> 
+								<?php
+									   while ($rowx = $resultsup->fetch_array() )
+									{
+									?>
+										<?php echo $rowx['NOM_SUPENTEL']; ?>
+							<?php } ?>					
+								</section>			
+							</div>
+						  </div>
+						</div>
+						
+						<div class="col-md-6">
+							<?php 
+							$jdeproyecto = $row['ID_JDE'];
+							$queryjde = "SELECT * FROM jefe_entel";
+							$resultjde = $conexion->query($queryjde);
+							?>	
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Jefe de Entel:</label>
+							<div class="col-sm-9">
+						   <section class="form-control">
+							<?php 
+								 $queryjde = "SELECT jde.ID_JDE, jde.NOM_JDE FROM jefe_entel jde, concepto c where jde.ID_JDE = c.ID_JDE and c.cp = '$cp'";
+								 $resultjde = $conexion->query($queryjde);
+							?> 
+								<?php
+									   while ($rowjde = $resultjde->fetch_array())
+									{
+									?>
+										<?php echo $rowjde['NOM_JDE']; ?>
+							<?php } ?>					
+								</section>			
+							</div>
+						  </div>
+						</div>
+					</div>					
+					<!----------------------------------------------------------------------------->
+					<!----------------------------------------------------------------------------->
+
+					<div class="row">	
+						<div class="col-md-6">
+							<?php 
+							$eoproyecto = $row['ID_EO_PROYECTO'];
+							$query = "SELECT * FROM estado_proyecto";
+							$result = $conexion->query($query);
+							?>	
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Estado Proyecto:</label>
+							<div class="col-sm-9">
+						   <section class="form-control">
+							<?php 
+								 $query = "SELECT eop.ID_EO_PROYECTO, eop.Nombre_Estado FROM estado_proyecto eop, concepto c where eop.ID_EO_PROYECTO = c.ID_EO_PROYECTO and c.cp = '$cp'";
+								 $result = $conexion->query($query);
+							?> 
+								<?php
+									   while ($rowx = $result->fetch_array() )
+									{
+									?>
+										<?php echo $rowx['Nombre_Estado']; ?>
+							<?php } ?>					
+								</section>			
+							</div>
+						  </div>
+						</div>
+						
+						<div class="col-md-6">
+							<?php 
+							$eocobranza = $row['ID_EO_COB'];
+							$query = "SELECT * FROM estado_cobranza";
+							$result = $conexion->query($query);
+							?>	
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Estado Cobranza:</label>
+							<div class="col-sm-9">
+						   <section class="form-control">
+							<?php 
+								 $query = "SELECT eoc.ID_EO_COB, eoc.NOM_EO_COB FROM estado_cobranza eoc, concepto c where eoc.ID_EO_COB = c.ID_EO_COB and c.cp = '$cp'";
+								 $result = $conexion->query($query);
+							?> 
+								<?php
+									   while ($rowx = $result->fetch_array())
+									{
+									?>
+										<?php echo $rowx['NOM_EO_COB']; ?>
+							<?php } ?>					
+								</section>			
+							</div>
+						  </div>
+						</div>
+					</div>					
+					<!----------------------------------------------------------------------------->
+					<!----------------------------------------------------------------------------->
+
+					<div class="row">	
+						<div class="col-md-6">
+							<?php 
+							$region = $row['ID_REGION'];
 							$query = "SELECT * FROM region";
 							$result = $conexion->query($query);
 							?>	
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Región:</label>
-							<div class="col-sm-9" name="ID_REGION" id="ID_REGION">
-								 <section class="form-control">
-							 <?php 
-								$query = "SELECT region.ID_REGION , region.NOM_REGION FROM region, concepto WHERE concepto.ID_REGION = region.ID_REGION and concepto.cp = '$cp'";
-								$result = $conexion->query($query);
-								?>							
-									  <?php 
-										while ($row7 = $result->fetch_array() )
-										{
-										?>
-											<?php echo $row7['NOM_REGION']; ?>
-										<?php } ?>							 
-								  </section>		   
+							<label class="col-sm-3 col-form-label">Region:</label>
+							<div class="col-sm-9">
+						   <section class="form-control">
+							<?php 
+								 $query = "SELECT r.ID_REGION, r.NOM_REGION FROM region r, concepto c where r.ID_REGION = c.ID_REGION and c.cp = '$cp'";
+								 $result = $conexion->query($query);
+							?> 
+								<?php
+									   while ($rowx = $result->fetch_array() )
+									{
+									?>
+										<?php echo $rowx['NOM_REGION']; ?>
+							<?php } ?>					
+								</section>			
 							</div>
 						  </div>
 						</div>
+						
+						<div class="col-md-6">
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Fecha de Creacion:</label>
+							<div class="col-sm-9">
+						   		<section class="form-control">
+						   		<?php	echo $row['FECHA_CREACION']; ?>
+								</section>	  
+							</div>
+						  </div>
+						</div>
+					</div>					
+					<!----------------------------------------------------------------------------->
+					<!----------------------------------------------------------------------------->
+
+					<div class="row">	
 						<div class="col-md-6">
 							<?php 
-							$query = "SELECT * FROM CIUDAD";
+							$ciudad = $row['CIUDAD'];
+							$query = "SELECT * FROM ciudad";
 							$result = $conexion->query($query);
 							?>	
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Ciudad:</label>
-							<div class="col-sm-9" name="ciudpro" id="ciudpro">
-								 <section class="form-control">
-							 <?php 
-								$query = "SELECT ciudad.ID_CIUDAD, ciudad.NOM_CIUDAD FROM ciudad, concepto WHERE concepto.ID_CIUDAD = ciudad.ID_CIUDAD and concepto.cp = '$cp'";
-								$result = $conexion->query($query);
-								?>							
-									  <?php 
-										while ($row7 = $result->fetch_array() )
-										{
-										?>
-											<?php echo $row7['NOM_CIUDAD']; ?>
-										<?php } ?>							 
-								  </section>		   
+							<div class="col-sm-9">
+						   <section class="form-control">
+							<?php 
+								 $query = "SELECT ci.ID_CIUDAD, ci.NOM_CIUDAD FROM ciudad ci, concepto c where ci.ID_CIUDAD = c.CIUDAD and c.cp = '$cp'";
+								 $result = $conexion->query($query);
+							?> 
+								<?php
+									   while ($rowx = $result->fetch_array() )
+									{
+									?>
+										<?php echo $rowx['NOM_CIUDAD']; ?>
+							<?php } ?>					
+								</section>			
 							</div>
 						  </div>
 						</div>
 						
-						
-					  </div>
+						<div class="col-md-6">
+							<?php
+							//$sitio = $row['SITIO'];
+							//$query = "SELECT * FROM SITIO";
+							//$result = $conexion->query($query);
+							?>
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Sitio:</label>
+							<div class="col-sm-9">
+						   		<section class="form-control">
+						   		<?php
+								   echo $row['SITIO'];	
+								 	//$query = "SELECT s.ID_SITIO, s.NOM_SITIO FROM sitio s, concepto c WHERE s.ID_SITIO = c.SITIO and c.cp = '$cp'";
+									//$result = $conexion->query($query);
+								?>
+									<?php
+										//while ($rowx = $result->fetch_array() ){
+									?>
+									<?php// echo $rowx['NOM_SITIO']; ?>
+
+									<?php //} ?>
+								</section>	  
+							</div>
+						  </div>
+						</div>
+					</div>					
+					<!----------------------------------------------------------------------------->
 					<div class="row">
 						<div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Fecha de asignación:</label>
+							<label class="col-sm-3 col-form-label">OTT:</label>
 							<div class="col-sm-9">
-							 <div class="form-control">	 <?php	echo $row['FECHADEASIGNACION']; ?></div>
-							  </div>
+								 <section class="form-control">
+								 <?php	echo $row['OTT']; ?>
+								</section>	  
+							</div>
 						  </div>
 						</div>
-						<div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Avance %:</label>
-							<div class="col-sm-9">
-								<section class="form-control"><?php echo $row['AVANCE']; ?> </section></div>
-						  </div>
-						</div>
-						
-					  </div>
-						<div class="row">
+
 						  <div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Estado:</label>
-							   <div class="col-sm-9">
-							 <section class="form-control">
-								 <?php echo $row['ESTADO']; ?></section>
-							</div>
-						  </div>
-						</div>
-						<div class="col-md-6">
-						  <div class="form-group row">
-							<?php 
-								$query2 = "SELECT * FROM CENTRO_DE_COSTO";
-								$result2 = $conexion->query($query2);
-								?>
-														<label class="col-sm-3 col-form-label">Centro de costo:</label>
-														<div class="col-sm-9">
-							<?php 
-								$query2 = "SELECT centro_de_costo.ID_CC, centro_de_costo.NOM_CC from centro_de_costo, concepto WHERE centro_de_costo.ID_CC = concepto.ID_CC AND concepto.CP = '$cp'";
-								$result2 = $conexion->query($query2);
-								?>							   
-							   <?php 
-							while ( $row8 = $result2->fetch_array() )	 
-							{
-							?>
-										 <section class="form-control">
-											 <?php echo $row8['NOM_CC']; ?></section>
-							<?php
-							}  
-							?>					   
-							</div>
-						  </div>
-						</div>
-						
-					  </div>
-						<div class="row">
-						<div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Fecha estimada inicio:</label>
-								<div class="col-sm-9">
-							   <div class="form-control">  <?php  echo $row['INI_ASIG']; ?></div></div>
-						  </div>
-						</div>
-						<div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Fecha real de inicio:</label>
+							<label class="col-sm-3 col-form-label">Avance:</label>
 							<div class="col-sm-9">
-								<section class="form-control"><?php echo date('Y-m-d',strtotime($row["INI_REAL"])) ?></section></div>
+							<section class="form-control">
+								 <?php $AVANCE=$row['AVANCE'] ?>
+                            	<?php echo $AVANCE."% <meter max=100 id='barra' value=".$AVANCE." low='30' high='100' optimun='60'></meter>"; ?>
+								</section>	  
+							  </div>
 						  </div>
-						</div>
-						
-					  </div>
-					<div class="row">
-						<div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Fecha Estimada de término:</label>
-							<div class="col-sm-9">
-							  <div class="form-control">  <?php	 echo $row['TER_ASIG']; ?></div> </div>
-						  </div>
-						</div>
-						<div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Fecha real de término:</label>
-							<div class="col-sm-9">
-								<section class="form-control"><?php echo date('Y-m-d',strtotime($row["TER_REAL"])) ?></section> </div>
-						  </div>
-						</div>
-						
+						</div>	
 					  </div>	
+					
+
+					  <!----------------------------------------------------------------------------->
+
+					  <div class="row">
+					  <div class="col-md-6">
+					  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Inicio Asignado:</label>
+							<div class="col-sm-9">
+								<section class="form-control"> <?php  echo $row['INI_ASIG']; ?></section>
+							</div>
+						  </div>
+						</div>
+
+						<div class="col-md-6">
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Inicio Real:</label>
+							<div class="col-sm-9">
+								<section class="form-control"> <?php  echo $row['INI_REAL']; ?></section>
+							</div>
+						  </div>
+						</div>
+					  </div>
+
+						<!----------------------------------------------------------------------------->
+
+						<div class="row">
+					  <div class="col-md-6">
+					  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Termino Asignado:</label>
+							<div class="col-sm-9">
+								<section class="form-control"> <?php  echo $row['TER_ASIG']; ?></section>
+							</div>
+						  </div>
+						</div>
+
+						<div class="col-md-6">
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Termino Real:</label>
+							<div class="col-sm-9">
+								<section class="form-control"> <?php  echo $row['TER_REAL']; ?></section>
+							</div>
+						  </div>
+						</div>
+					  </div>
+
+						<!----------------------------------------------------------------------------->
+
+						<div class="row">
+					  <div class="col-md-6">
+					  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Fecha de Informe:</label>
+							<div class="col-sm-9">
+								<section class="form-control"> <?php  echo $row['FEC_INF']; ?></section>
+							</div>
+						  </div>
+						</div>
+
+						<div class="col-md-6">
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Fecha de Asignacion:</label>
+							<div class="col-sm-9">
+								<section class="form-control"> <?php  echo $row['FECHADEASIGNACION']; ?></section>
+							</div>
+						  </div>
+						</div>
+					  </div>
+
+						<!----------------------------------------------------------------------------->
+
 					  <div class="row">
 					  <div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Fecha entrega informe:</label>
-							<div class="col-sm-9">
-								<section class="form-control"><?php echo date('Y-m-d',strtotime($row["FEC_INF"])) ?> </section>
-							  </div>
-						  </div>
-						</div>
-					  <div class="col-md-6">
-							<?php 
-						$query = "SELECT * FROM supentel";
-						$result = $conexion->query($query);
-						?>	
-											  <div class="form-group row">
-												<label class="col-sm-3 col-form-label">Supervisor Entel:</label>
-												<div class="col-sm-9">
-								<?php 
-							 $query = "select supentel.ID_SUPENTEL, supentel.NOM_SUPENTEL FROM supentel, concepto WHERE supentel.ID_SUPENTEL = concepto.ID_SUPENTEL and cp ='$cp'";
-							 $result = $conexion->query($query);
-						?> 
-						 <?php
-								while ($row3 = $result->fetch_array() )
-								{
-								?>
-									<section class="form-control">
-									<?php echo $row3['NOM_SUPENTEL']; ?>
-													   </section>  
-						<?php } ?>
+								<label class="col-sm-3 col-form-label">Valor del Proyecto:</label>
+								 <div class="col-sm-9">
+								 <section class="form-control"> <?php  echo $row['VALORPROYECTO']; ?></section>
 							</div>
 						  </div>
 						</div>
-						
-					  </div>
-						 <div class="row">
-						 <div class="col-md-6">
-						  <div class="form-group row">
-							  <?php 
-							$query = "SELECT * FROM jefe_entel";
-							$result = $conexion->query($query);
-							?>
-													<label class="col-sm-3 col-form-label">Jefe de entel:</label>
-													 <div class="col-sm-9">
-							  <?php 
-								 $query3 = "select jefe_entel.ID_JDE, jefe_entel.NOM_JDE FROM jefe_entel, concepto WHERE jefe_entel.ID_JDE = concepto.ID_JDE and cp ='$cp'";
-								 $result3 = $conexion->query($query3);
-							?> 
-								 <?php 
-									while ($row3 = $result3->fetch_array() )
-									{
-									?>
-									  <section class="form-control"> <?php echo $row3['NOM_JDE']; ?></section>
-							<?php } ?>							
-							</div>
-						  </div>
-						</div>
+
 						<div class="col-md-6">
 						  <div class="form-group row">
 							  <?php 
 							//$query = "SELECT cp.ID_PERSONAS, p.NOM_PERSONAS  FROM cargo_de_persona as cp inner join personas as p on cp.ID_PERSONAS= p.ID_PERSONAS 
 							
 							//where cp.ID_CARGO=2 and p.ACTIVO='si';";
-							$query = "SELECT cp.ID_PERSONAS, p.NOM_PERSONAS  FROM cargo_de_persona as cp inner join personas as p on cp.ID_PERSONAS= p.ID_PERSONAS 
-							
-							where  p.ID_PERSONAS=".$id_personas;
+							$query = "SELECT p.ID_PERSONAS, p.NOM_PERSONAS  FROM personas p, concepto c WHERE p.ID_PERSONAS= c.ID_PERSONAS AND c.cp = '$cp'";
 							$result = $conexion->query($query);
 							?>
 								<label class="col-sm-3 col-form-label">Coordinador de Proyecto:</label>
 								 <div class="col-sm-9">
 								 <?php 
-									$row=$result->fetch_assoc();
+									$row=$result->fetch_array();
 									?>
-								  <section class="form-control"> <?php echo $row['NOM_PERSONAS']; ?></section>
+								  <section class="form-control" > <?php echo $row['NOM_PERSONAS']; ?></section>
 								  
 								 
 								</div>
 						  </div>
 						</div>
 					  </div>
-					   <div class="row">
-						
-						<?php 
-							  $consultacolab = "SELECT * from comprometidos, personas, cargo, concepto WHERE comprometidos.ID_CARGO = cargo.ID_CARGO and comprometidos.ID_PERSONAS = personas.ID_PERSONAS and comprometidos.CP = concepto.cp and comprometidos.cp = ".$cp;
-								 $resultadocolab = mysqli_query($conexion, $consultacolab);
-							  ?>	  
-						<div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Colaboradores Olitel:</label>
-							<div class="col-sm-9">
-								<section class="tmlet">
-								<?php  while($colab = mysqli_fetch_array($resultadocolab)){ 
-						  echo $colab['NOM_PERSONAS']." - ";
-						  echo ucfirst($colab['NOM_CARGO'])."</br>";
-						}
-						  ?>
-								</section>
-							  </div>
-						  </div>
-						</div>
-					  </div>
-							 <input class="btn btn-success mr-2" type="button" value="Volver" onclick="cancelar()">
+
+					<!----------------------------------------------------------------------------->
+							 <input class="btn btn-success mr-2" type="button" value="Volver a Listar Proyectos" onclick="cancelar()">
 					</form>
 				  </div>
 				</div>
@@ -687,7 +785,7 @@ exit;
 		  <!-- partial:../../partials/_footer.html -->
 			<footer class="footer">
 			<div class="container-fluid clearfix">
-			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
 			  </span>
 			</div>
 		  </footer>

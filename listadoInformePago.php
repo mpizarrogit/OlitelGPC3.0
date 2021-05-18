@@ -276,7 +276,8 @@ exit;
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
           <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="listadoip.php">Informes de Pago</a></li>
+					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
+          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -309,7 +310,7 @@ exit;
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-			$consulta = "SELECT ip.ID_IP, ip.CP, ip.ID_CCosto, ip.ID_TIPO, ip.ID_EO_COB, ip.NRO_COTI, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, cc.NOM_CC, tp.NOM_TIPO, ec.NOM_EO_COB
+			$consulta = "SELECT ip.ID_IP, ip.CP, ip.ID_CCosto, ip.ID_TIPO, ip.ID_FACTURA , ip.ID_EO_COB, ip.NRO_COTI, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, cc.NOM_CC, tp.NOM_TIPO, ec.NOM_EO_COB
       FROM informe_de_pago ip
       INNER JOIN centro_de_costo cc ON cc.ID_CC = ip.ID_CCosto
       INNER JOIN tipo tp ON tp.ID_TIPO = ip.ID_TIPO
@@ -354,7 +355,7 @@ exit;
 			<div class="">
 				<div class="card-body">
 					<div class="d-flex justify-content-between border-bottom">
-						<h2 class="text-primary">Facturas</h2>
+						<h2 class="text-primary">Informe de Pago</h2>
 							  
 					</div>
 				</div>
@@ -365,7 +366,7 @@ exit;
               <div class="col-md-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Listado de Facturas</h4>
+                    <h4 class="card-title">Listado de Informes de Pago</h4>
                      
                       <p class="text-right">   
 							<!--<a href="generar_excel.php">
@@ -395,6 +396,7 @@ exit;
                           <th> Valor de IP </th>
                           <th> Valor Facturado </th>
                           <th> Observaciones </th>
+                          <th> ID Factura Asoc </th>
                           <th> ACCIONES </th>
                         </tr>
                       </thead>
@@ -414,7 +416,7 @@ exit;
                             <td><?php echo $fila['VALOR_IP']; ?></td>
                             <td><?php echo $fila['VALOR_FACTURADO']; ?></td>
                             <td><?php echo $fila['OBSERVACIONES']; ?></td>
-
+                            <td><?php echo $fila['ID_FACTURA']; ?></td>
                            
                               <?PHP
                               //echo $fila['NOM_CL'];
@@ -437,22 +439,13 @@ exit;
                            // } ?>
    
                             <td>
-                             
-                                <a href='formeditfact.php?ID_FACT=<?php echo $fila['ID_IP']; ?>'><section class='imgtb'></section></a> 
-                                
-                              
+                            
                             </td>
                           </tr>
-                         
-                         
-                         
-                      
+
                         <?php    }
                           ?>
-                       
-                        
-                         
-                   
+
                         </tbody>
                       </table>
                     </div>

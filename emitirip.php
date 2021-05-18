@@ -350,23 +350,8 @@ exit;
                 </ul>
               </div>
             </li>  
-          
-            
-            
-          
           </ul>
         </nav>
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
           
         <!-- NO QUITAR FORM -->
         <div class="main-panel">
@@ -375,17 +360,11 @@ exit;
 				<div class="card-body">
 					<div class="d-flex justify-content-between border-bottom">
 						<h2 class="text-primary">Emitir Informe de Pago</h2>
-							  
 					</div>
 				</div>
 			</div>
             <div class="row">
-              
-              <div class="col-md-6 grid-margin stretch-card">
-                
-              </div>
-            
-            
+              <div class="col-md-6 grid-margin stretch-card"> </div>
              <?php 
                 
                 $cp = $_GET['cp'];
@@ -396,323 +375,213 @@ exit;
         $row=$resultado->fetch_assoc();
     
                 ?>
-              
-                
-                
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">CP: <?php echo $cp ?></h4>
-                      
-                      
-                      
                     <form class="form-sample" method="post" action="controladoremitirip.php">
-                        
-
                         <input type="hidden" name="cp" id="cp" value="<?php echo $cp ?>">
                         
-
-                         <div class="row">
+                    <!------------------------------------------------------------------------------------>
+                      <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Nombre Proyecto:</label>
                             <div class="col-sm-9">
                                 <section class="form-control">
                                  <?php  echo $row['NOMBRE']; ?>
-                                </section>   </div>
+                                </section>   
+                            </div>
                           </div>
                         </div>
+
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Descripción:</label>
                             <div class="col-sm-9">
                                 <section class="form-control">
                                  <?php  echo $row['DESCRIPCION']; ?>
-                                </section>    </div>
-                          </div>
-                            
-                        </div>
-                             
+                                </section>    
+                            </div>
+                          </div> 
+                        </div> 
                       </div>
                           
-                        
+                     <!------------------------------------------------------------------------------------>
                       <div class="row">
-                        <div class="col-md-6">
-                            
-                            
-                            
+                        <div class="col-md-6">                           
                             <?php 
-                            
                             $tipoproyy = $row['ID_TIPO'];
-    
                             $query = "SELECT * FROM TIPO";
-    
                             $result = $conexion->query($query);
                             ?>  
-                            
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Tipo Proyecto:</label>
-                            <div class="col-sm-9">
-                                
-                           <section class="form-control">
-    
-                           
-                                
+                            <div class="col-sm-9">   
+                           <section class="form-control">  
                             <?php 
-                                   
-         $query = "SELECT tipo.ID_TIPO, tipo.NOM_TIPO FROM tipo, concepto where tipo.ID_TIPO = concepto.ID_TIPO and concepto.cp = '$cp'";
-                                   
-         $result = $conexion->query($query);
-        
-                                   
-        
-    ?> 
-        <?php
-               while ($rowx = $result->fetch_array() )
-            {
-            ?>
-    
-                
-<input type="hidden"  id="ID_TIPO" name="ID_TIPO" value=" <?php echo $rowx['ID_TIPO']; ?>">
-                <?php echo $rowx['NOM_TIPO']; ?>
-                
-            
-    <?php } ?>                  
-                                
-                                
-                                
-                                
-                                </section>          
- 
+                             $query = "SELECT tipo.ID_TIPO, tipo.NOM_TIPO FROM tipo, concepto where tipo.ID_TIPO = concepto.ID_TIPO and concepto.cp = '$cp'";
+                              $result = $conexion->query($query);
+                            ?> 
+                            <?php
+                            while ($rowx = $result->fetch_array())
+                              {
+                            ?>
+                            <input type="hidden"  id="ID_TIPO" name="ID_TIPO" value=" <?php echo $rowx['ID_TIPO']; ?>">
+                            <?php echo $rowx['NOM_TIPO']; ?>
+                            <?php } ?>                  
+                            </section>          
                             </div>
                           </div>
                         </div>
-                          
-                          
-                           <div class="col-md-6">
-                          <div class="form-group row">
-                                  
-<?php 
-    
-    $query2 = "SELECT * FROM CENTRO_DE_COSTO";
-    
-    $result2 = $conexion->query($query2);
-    ?>
-                              
+
+                        <div class="col-md-6">
+                          <div class="form-group row">  
+                              <?php 
+                                 $query2 = "SELECT * FROM CENTRO_DE_COSTO";
+                                 $result2 = $conexion->query($query2);
+                              ?>
                             <label class="col-sm-3 col-form-label">Centro de costo:</label>
-                            <div class="col-sm-9">
-                
-               
-        
-                                          
-<?php 
-    
+                            <div class="col-sm-9">       
+                            <?php 
     $query2 = "SELECT centro_de_costo.ID_CC, centro_de_costo.NOM_CC from centro_de_costo, concepto WHERE centro_de_costo.ID_CC = concepto.ID_CC AND concepto.CP = '$cp'";
-    
     $result2 = $conexion->query($query2);
-    ?>                             
-                                     
-                   <?php 
-    
-    
-                while ( $row8 = $result2->fetch_array() )    
-                {
-                ?>
-    
+                            ?>                                          
+                          <?php 
+                          while ( $row8 = $result2->fetch_array())    
+                          {
+                          ?>
                              <section class="form-control">
-                                 <?php echo $row8['NOM_CC']; ?></section>
+                                <input type="hidden"  id="ID_CC" name="ID_CC" value=" <?php echo $row8['ID_CC']; ?>">
+                                 <?php echo $row8['NOM_CC']; ?>
+                              </section>
         
-                <?php
-                }  
-                ?>                     
-                                     
- 
+                                        <?php
+                                        }  
+                                        ?>                     
                             </div>
                           </div>
                         </div>
-                        
                       </div>
                       
-                        
-                        
-                    
+                <!------------------------------------------------------------------------------------>
+
                  <div class="row">
                      <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Avance %:</label>
-                            <div class="col-sm-9">
-                                <section class="form-control"><?php echo $row['AVANCE']; ?> </section></div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Estado:</label>
-                               <div class="col-sm-9">
-                             
-                             <section class="form-control">
-                                 <?php echo $row['ESTADO']; ?></section>
-                            </div>
-                          </div>
-                            
-                        </div>
-                      </div>
-                        
-                          <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Valor proyecto:</label>
-                               <div class="col-sm-9">
-                             
-                             <section class="form-control">
-                                 <?php echo number_format($row['VALORPROYECTO'], 0, ",", "."); ?></section>
-                            </div>
-                          </div>
-                            
-                        </div>
-                                <?php 
-                            
-                          
-                            $query = "SELECT MAX(NIP) AS id FROM informe_de_pago;";
-    
-                            $result = $conexion->query($query);
-							
-                             while ( $row8 = $result->fetch_array() )    
-							{
-								
-								$nip= $row8['id'];
-								if($nip==""){
-									$nip=1;
-								}
-								else{
-									$nip=$nip+1;
-								}
-							}  
-							?> 
-                             
-                              
-                              <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">N° IP:</label>
-                               <div class="col-sm-9">
-                             <section class="form-control"><?php echo $nip; ?>
-                             <input type="hidden" class="form-control" name="nip" value="<?php echo $nip; ?>">   </section>                           
-                            </div>
-                          </div>
-                            
-                        </div>      
-                      
-                      </div>
-                        
-                        
-   <div class="row">
-
-                        
-                             <div class="col-md-6">
-                          <div class="form-group row">
-                              
                               <?php 
-    
-    $query = "SELECT * FROM TIPO_INFORME";
-    
-    $result = $conexion->query($query);
-    ?>
-                              
-                              
-                            <label class="col-sm-3 col-form-label">Tipo IP:</label>
-                             <div class="col-sm-9">
-                              <select class="form-control" name="TIPOIP" id="TIPOIP" required>
-								<option value="" > Seleccione </option>
-    <?php 
-            while ($row = $result->fetch_array() )
-            {
-            ?>
-    
-                <option value=" <?php echo$row['ID_TIPO'] ?>">
-                <?php echo $row['NOMBRE']; ?>
-                </option>
-            
-    <?php } ?>
-    
-    
-    </select>    
-    
-                            </div>
-                            
+                                 $queryec = "SELECT * FROM estado_cobranza";
+                                 $resultec = $conexion->query($queryec);
+                              ?>
+                                <label class="col-sm-3 col-form-label">Estado de Cobranza:</label>
+                                <div class="col-sm-9">
+                              <?php 
+                                  $queryec = "SELECT ec.ID_EO_COB, ec.NOM_EO_COB FROM estado_cobranza ec, concepto c WHERE ec.ID_EO_COB = c.ID_EO_COB AND c.CP = '$cp'";
+                                  $resultec = $conexion->query($queryec);
+                              ?>                                          
+                              <?php 
+                                  while ( $rowx = $resultec->fetch_array())    
+                                  {
+                              ?>
+                              <section class="form-control"> 
+                              <input type="hidden"  id="escobranza" name="escobranza" value=" <?php echo $rowx['ID_EO_COB']; ?>">
+                              <?php echo $rowx['NOM_EO_COB']; ?> 
+                              </section>
+                              <?php }  ?>     
+                                </div>
                           </div>
-                        </div>
-                       
-                        
-                          
-                              <div class="col-md-6">
+                      </div>
+
+                        <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Valor IP:</label>
-                               <div class="col-sm-9">
-                             
-                             <input type="number" class="form-control" name="valorip" required>
-                              
-                            </div>
+                            <label class="col-sm-3 col-form-label">Número de Cotización</label>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" name="ncoti" id="ncoti" value="0" />
+                                </div>
                           </div>
-                            
-                        </div>   
-                     
-                        </div>      
+                        </div>
+                    </div>
                         
-                        
-                       
-                       <div class="row">
-                            
-                               <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Fecha IP:</label>
-                               <div class="col-sm-9">
-                             
-                             <input type="date" class="form-control" name="fdc" required>
-                              
-                            </div>
-                          </div>
-                            
-                        </div>
-                           
-                            <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">N° cotización:</label>
-                               <div class="col-sm-9">
-                             
-                             <input type="text" class="form-control" name="ncoti">
-                              
-                            </div>
-                          </div>
-                            
-                        </div>
-                           
-                           
-                           
-                        </div>
-                      
+                  <!------------------------------------------------------------------------------------>
+
                       <div class="row">
-                            
-                               <div class="col-md-6">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Fecha Envio IP</label>
+                              <div class="col-sm-9">
+                              <input type="date" class="form-control" name="fechaenvio"  id="fechaenvio" placeholder="dd/mm/yyyy"  required/>
+                              </div>
+                          </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">NIP:</label>
+                            <div class="col-sm-9">
+                              <input type="text" class="form-control" name="nip"  id="nip" value="0" /> 
+                            </div>                             
+                          </div>
+                        </div>
+                      </div>      
+                        
+                    <!------------------------------------------------------------------------------------>
+
+                    <!------------------------------------------------------------------------------------>
+
+                      <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Valor IP</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="valorip" id="valorip" />
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="col-md-6">
+                            <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Valor Facturado</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="valorfac"  id="valorfac" value="0"/> 
+                              </div>                             
+                            </div>
+                          </div>
+                      </div>      
+                        
+                    <!------------------------------------------------------------------------------------>
+                  
+                      <div class="row">
+                        <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Observaciones:</label>
-                               <div class="col-sm-9">
-                             
-                            <input type="text" class="form-control" name="observaciones" id="observaciones">
-                              
-                            </div>
+                              <div class="col-sm-9">  
+                                <input type="text" class="form-control" name="observaciones" id="observaciones">
+                              </div>
                           </div>
-                            
                         </div>
-                           
-                         
-                           
-                           
-                           
-                        </div>
-     
-                        
-                             
-                             
-                             <button type="submit" class="btn btn-success mr-2">Emitir ip</button>
+
+                        <div class="col-md-6">
+						              <div class="form-group row">
+							              <label class="col-sm-3 col-form-label">Factura:</label>
+							                <?php 
+								                $query = "SELECT * FROM FACTURA";
+								                $result = $conexion->query($query);
+								              ?>	
+							        	    <div class="col-sm-9">
+									      <select	 class="form-control" name="idfactura" id="idfactura">
+									      <option value="0" >ID Factura&nbsp;&nbsp; - &nbsp;&nbsp;N° Factura</option>
+									          <?php 
+										          while ( $row = $result->fetch_array() ) {?>
+										          <option value=" <?php echo $row['ID_FACT'] ?> " >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['ID_FACT']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['NFACT']; ?> </option>
+										        <?php } ?>
+									      </select>
+								        </div>
+						          </div>
+                    </div>
+
+
+
+                             <button type="submit" class="btn btn-success mr-2">Emitir Informe de Pago</button>
                         
                              <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
                       

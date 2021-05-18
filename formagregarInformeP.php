@@ -139,7 +139,8 @@ exit;
                 <ul class="nav flex-column sub-menu">
 					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
-          <li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
+          			<li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
+		  			<li class="nav-item"><a class="nav-link" href="AsignarFacturaAIP.php">Asignar Factura a IP</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
@@ -232,12 +233,25 @@ exit;
 						<!------------------------------------------------------------------------------->
                         <!---------------------------------CONCEPTO-------------------------------------->
                         <!------------------------------------------------------------------------------->
-                        <div class="col-md-6">
-						  <div class="form-group row">
+						<div class="col-md-6">
+						<div class="form-group row">
 							<label class="col-sm-4 col-form-label">Concepto:</label>
-							<div class="col-sm-9">
-							  <input type="text" class="form-control" name="concepto" id="concepto" autofocus="autofocus" required /> </div>
+							<?php 
+								$query = "SELECT * FROM CONCEPTO ";
+								$result = $conexion->query($query);
+								?>	
+								<div class="col-sm-9">
+									<select	 class="form-control" name="concepto" id="concepto" required>
+									<option value="" >Seleccione</option>
+									<?php 
+										while ( $row = $result->fetch_array() ) {?>
+										<option value=" <?php echo $row['CP'] ?> " ><?php echo $row['CP']; ?></option>
+										<?php
+										}?>
+									</select>
+								</div>
 						  </div>
+						  
 						</div>
                         <!------------------------------------------------------------------------------->
                         <!---------------------------------NOMBRE CC------------------------------------->
@@ -250,7 +264,7 @@ exit;
 								$result = $conexion->query($query);
 								?>	
 								<div class="col-sm-9">
-									<select	 class="form-control" name="nombrecc" id="nombrecc" required>
+									<select	 class="form-control" name="idcosto" id="idcosto" required>
 									<option value="" >Seleccione</option>
 									<?php 
 										while ( $row = $result->fetch_array() ) {?>
@@ -262,23 +276,23 @@ exit;
 						  </div>
 						  
 						</div>
-                     	<!------------------------------------------------------------------------------->
-                        <!---------------------------------OTT/OPR--------------------------------------->
+     
                         <!------------------------------------------------------------------------------->
-					    
+                        <!---------------------------------TIPO DE SERVICIO------------------------------>
+                        <!------------------------------------------------------------------------------->
 						<div class="col-md-6">
 						<div class="form-group row">
-							<label class="col-sm-4 col-form-label">OTT/OPR</label>
+							<label class="col-sm-4 col-form-label">Tipo de Servicio:</label>
 							<?php 
-								$query = "SELECT * FROM CONCEPTO";
+								$query = "SELECT * FROM TIPO";
 								$result = $conexion->query($query);
 								?>	
 								<div class="col-sm-9">
-									<select	 class="form-control" name="ott" id="ott" required>
+									<select	 class="form-control" name="tiposervicio" id="tiposervicio" required>
 									<option value="" >Seleccione</option>
 									<?php 
 										while ( $row = $result->fetch_array() ) {?>
-										<option value=" <?php echo $row['CP'] ?> " ><?php echo $row['OTT']; ?></option>
+										<option value=" <?php echo $row['ID_TIPO'] ?> " ><?php echo $row['NOM_TIPO']; ?></option>
 										<?php
 										}?>
 									</select>
@@ -287,21 +301,9 @@ exit;
 						  
 						</div>
                         <!------------------------------------------------------------------------------->
-                        <!---------------------------------TIPO DE SERVICIO------------------------------>
-                        <!------------------------------------------------------------------------------->
-					
-							 <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-4 col-form-label">Tipo de Servicio:</label>
-							<div class="col-sm-9">
-							  <input type="text" class="form-control" name="tiposervicio" id="tiposervicio" /> </div>
-						  </div>
-						</div>
-                        </div>
-                        <!------------------------------------------------------------------------------->
                         <!---------------------------------N° FACTURA------------------------------------>
                         <!------------------------------------------------------------------------------->
-                        <div class="row">
+                        
 						<div class="col-md-6">
 						<div class="form-group row">
 							<label class="col-sm-4 col-form-label">N° Factura:</label>
@@ -310,11 +312,11 @@ exit;
 								$result = $conexion->query($query);
 								?>	
 								<div class="col-sm-9">
-									<select	 class="form-control" name="nfactura" id="nfactura" required>
-									<option value="" >Seleccione</option>
+									<select	 class="form-control" name="idfactura" id="idfactura">
+									<option value="0" >ID Factura&nbsp;&nbsp; - &nbsp;&nbsp;N° Factura</option>
 									<?php 
 										while ( $row = $result->fetch_array() ) {?>
-										<option value=" <?php echo $row['ID_FACT'] ?> " ><?php echo $row['NFACT']; ?></option>
+										<option value=" <?php echo $row['ID_FACT'] ?> " >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['ID_FACT']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['NFACT']; ?> </option>
 										<?php
 										}?>
 									</select>
@@ -322,22 +324,22 @@ exit;
 						  </div>
 						  
 						</div>
-                        <!------------------------------------------------------------------------------->
-                        <!---------------------------------RESPONSABLE P--------------------------------->
+						<!------------------------------------------------------------------------------->
+                        <!---------------------------------ESTADO---------------------------------------->
                         <!------------------------------------------------------------------------------->
 						<div class="col-md-6">
 						<div class="form-group row">
-							<label class="col-sm-4 col-form-label">Responsable P:</label>
+							<label class="col-sm-4 col-form-label">Estado Cobranza:</label>
 							<?php 
-								$query = "SELECT * FROM JEFE_ENTEL";
+								$query = "SELECT * FROM ESTADO_COBRANZA";
 								$result = $conexion->query($query);
 								?>	
 								<div class="col-sm-9">
-									<select	 class="form-control" name="responsablep" id="responsablep" required>
+									<select	 class="form-control" name="idestadocob" id="idestadocob" required>
 									<option value="" >Seleccione</option>
 									<?php 
 										while ( $row = $result->fetch_array() ) {?>
-										<option value=" <?php echo $row['ID_JDE'] ?> " ><?php echo $row['NOM_JDE']; ?></option>
+										<option value=" <?php echo $row['ID_EO_COB'] ?> " ><?php echo $row['NOM_EO_COB']; ?></option>
 										<?php
 										}?>
 									</select>
@@ -345,6 +347,7 @@ exit;
 						  </div>
 						  
 						</div>
+                
                       	<!------------------------------------------------------------------------------->
                         <!---------------------------------N° COTIZACION--------------------------------->
                         <!------------------------------------------------------------------------------->
@@ -353,46 +356,37 @@ exit;
 						  <div class="form-group row">
 							<label class="col-sm-4 col-form-label">N° Cotizacion:</label>
 							<div class="col-sm-9">
-							  <input type="text" class="form-control" name="ncoti" id="ncoti" /> </div>
+							  <input type="text" class="form-control" name="ncoti" id="ncoti" value="0" /> </div>
 						  </div>
 						</div>
-                        <!------------------------------------------------------------------------------->
-                        <!---------------------------------ESTADO---------------------------------------->
-                        <!------------------------------------------------------------------------------->
-                        <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-4 col-form-label">Estado:</label>
-							<div class="col-sm-9">
-							  <input type="text" class="form-control" name="estado"  id="estado" /> </div>
-						  </div>
-						</div>
-					</div>
+                    
+				
                     	<!------------------------------------------------------------------------------->
                         <!---------------------------------FECHA ENVIO----------------------------------->
                         <!------------------------------------------------------------------------------->
-				 <div class="row">
-					<div class="col-md-6">
+				
+						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-4 col-form-label">Fecha Envio :</label>
 							<div class="col-sm-9">
 							  <input type="date" class="form-control" name="fechaenvio"  id="fechaenvio" placeholder="dd/mm/yyyy"  required/> </div>
 						  </div>
 						</div>
-                        	<!--------------------------------------------------------------------------->
+                        <!--------------------------------------------------------------------------->
                         <!---------------------------------NIP------------------------------------------->
                         <!------------------------------------------------------------------------------->
                         <div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-4 col-form-label">NIP:</label>
 							<div class="col-sm-9">
-							  <input type="text" class="form-control" name="nip"  id="nip" /> </div>
+							  <input type="text" class="form-control" name="nip"  id="nip" value="0"/> </div>
 						  </div>
 						</div>
-					  </div>
+				
                       	<!------------------------------------------------------------------------------->
                         <!---------------------------------VALOR IP-------------------------------------->
                         <!------------------------------------------------------------------------------->
-					  <div class="row">
+					  
 						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-4 col-form-label">Valor IP:</label>
@@ -407,14 +401,14 @@ exit;
 						  <div class="form-group row">
 							<label class="col-sm-4 col-form-label">Valor Facturado:</label>
 							<div class="col-sm-9">
-							  <input type="text" class="form-control" name="valorfac"  id="valorfac" /> </div>
+							  <input type="text" class="form-control" name="valorfac"  id="valorfac" value="0" /> </div>
 						  </div>
 						</div>
-					 </div>
+					
                      	<!------------------------------------------------------------------------------->
                         <!---------------------------------OBERSAVACIONES-------------------------------->
                         <!------------------------------------------------------------------------------->
-                      <div class="row">
+                      
 						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-4 col-form-label">Observaciones:</label>
@@ -424,7 +418,7 @@ exit;
 						</div>
                         </div>
 					  
-							 <button type="submit" class="btn btn-success mr-2">Agregar</button>
+							 <button type="submit" class="btn btn-success mr-2">Agregar Informe de Pago</button>
 							  <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
 					</form>
 					  <br>
@@ -439,7 +433,7 @@ exit;
 		  <!-- partial:../../partials/_footer.html -->
 		 <footer class="footer">
 			<div class="container-fluid clearfix">
-			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
 			  </span>
 			</div>
 		  </footer>

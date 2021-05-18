@@ -1,8 +1,9 @@
 <?php
-$nfactura= $_POST['nfactura'];
 $cfactura = $_POST['cfactura'];
-$vfactura = $_POST['vfactura'];
+$nfactura = $_POST['nfactura'];
+$vproyecto = $_POST['vProyectado'];
 $ffactura = $_POST['ffactura'];
+$vfactura = $_POST['vFacturado'];
 
 require("bd.php");
 
@@ -15,7 +16,7 @@ if(mysqli_connect_errno()){
     exit();    
 }
 
-$sql = "INSERT INTO FACTURA (NFACT, ID_CL, VALOR,POR_FACTURAR,F_FACTURA) VALUES ('".$nfactura."', ".$cfactura.",'".$vfactura."','".$vfactura."','".$ffactura."')";
+$sql = "INSERT INTO FACTURA (ID_CL, NFACT, VALOR_PROYECTADO ,F_FACTURA , Valor_Facturado) VALUES ('".$cfactura."', ".$nfactura.",".$vproyecto.",'".$ffactura."',".$vfactura.")";
 
 /*$sql .= "INSERT INTO COMPROMETIDOS (CP,ID_CARGO,ID_PERSONAS) VALUES ('".$cp."', '2','".$cor."')";*/
 

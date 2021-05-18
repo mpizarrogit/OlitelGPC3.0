@@ -1,11 +1,16 @@
 <?php
 $cp = $_POST['cp'];
-$fechaenvioip = $_POST['fdc'];
-$TIPOIP = $_POST['TIPOIP'];
-$VALORIP = $_POST['valorip'];
-$idip = $_POST['nip'];
+$ccosto = $_POST['ID_CC'];
+$TIPOIP = $_POST['ID_TIPO'];
+$estadocobranza = $_POST['escobranza'];
 $ncoti =$_POST['ncoti'];
-$OBSERVACIONES=$_POST['observaciones'];
+$fechaenvioip = $_POST['fechaenvio'];
+$idip = $_POST['nip'];
+$VALORIP = $_POST['valorip'];
+$valorfacturado = $_POST['valorfac'];
+$OBSERVACIONES = $_POST['observaciones'];
+$factura =  $_POST['idfactura'];
+
 
 
 
@@ -22,7 +27,7 @@ mysqli_set_charset($conexion, "utf8");
 
 
 //$consulta = "INSERT INTO informe_de_pago (nip,ID_TIPO,VALOR_IP,FECHAENVIOIP,CP,NRO_COTI,OBSERVACIONES) VALUES (?,?,?,?,?,?,?)";
-$consulta = "INSERT INTO informe_de_pago (nip,ID_TIPO,VALOR_IP,FECHAENVIOIP,CP,NRO_COTI,OBSERVACIONES) VALUES ('".$idip."',".$TIPOIP.",".$VALORIP.",'".$fechaenvioip."',".$cp.",'".$ncoti."','".$OBSERVACIONES."')";
+$consulta = "INSERT INTO informe_de_pago (CP, ID_CCosto, ID_TIPO, ID_FACTURA, ID_EO_COB, NRO_COTI, FECHAENVIOIP, NIP, VALOR_IP, VALOR_FACTURADO, OBSERVACIONES) VALUES (".$cp." , ".$ccosto." , ".$TIPOIP." , ".$factura." , ".$estadocobranza." , '".$ncoti."' , '".$fechaenvioip."' , '".$idip."' , ".$VALORIP." , ".$valorfacturado." , '".$OBSERVACIONES."')";
 /*
 $resultado = mysqli_prepare($conexion, $consulta);
 

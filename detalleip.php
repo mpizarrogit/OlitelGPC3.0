@@ -357,7 +357,7 @@ exit;
 		  <div class="">
 			<div class="card-body">
 				<div class="d-flex justify-content-between border-bottom">
-					<h2 class="text-primary">Detalle Informe de Pago</h2>
+					<h2 class="text-primary">Informe de Pago Detallado</h2>
 				</div>
 			</div>
 			</div>
@@ -378,18 +378,23 @@ exit;
 		INNER JOIN centro_de_costo cc ON cc.ID_CC = concepto.ID_CC
 		INNER JOIN factura f ON f.ID_FACT = ip.ID_IP
 		WHERE ip.ID_IP ='$id_ip'";
-		$resultado= $conexion->query($query);
-		$row=$resultado->fetch_assoc();
+		$resultado = mysqli_query($conexion, $query);
+		$row = mysqli_fetch_array($resultado);
 				?>
 			  <div class="col-12 grid-margin">
 				<div class="card">
 				  <div class="card-body">
 					<h4 class="card-title"></h4>
+
+					<!---------------------------------------------------------------------->
 					<form class="form-sample" method="post" action="controladoreditip.php">
+					<!---------------------------------------------------------------------->
+
+					<!---------------------------------------------------------------------->
 						 <div class="row">
 						<div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">IP</label>
+							<label class="col-sm-3 col-form-label">ID IP</label>
 							<div class="col-sm-9">
 							  <section class="form-control"> <?php echo $row['ID_IP'];?> </section>
 								<input type="hidden" class="form-control" name="id_ip" id="id_ip" value="<?php echo $row['ID_IP'];?>" required />
@@ -397,276 +402,172 @@ exit;
 						  </div>
 						</div>
 
-
-
 						  <div class="col-md-6">
-						  
-						     <?php 
-							$query3 = "SELECT * FROM CONCEPTO";
-							$result3 = $conexion->query($query3);
-							?>
 							  <div class="form-group row">
 								<label class="col-sm-3 col-form-label">CP</label>
 								<div class="col-sm-9">
-									  <section	class="form-control">
-									  <?php 
-							$query = "SELECT CONCEPTO.CP FROM CONCEPTO, INFORME_DE_PAGO WHERE CONCEPTO.CP = INFORME_DE_PAGO.CP AND INFORME_DE_PAGO.ID_IP = '$id_ip'";
-							$result = $conexion->query($query);
-							?>							
-								  <?php 
-									while ($row7 = $result->fetch_array() )
-									{
-									?>
-										<option value=" <?php echo$row7['CP'] ?>">
-										<?php echo $row7['CP']; ?>
-										</option>
-							<?php } ?>							 
+									  <section	class="form-control">					
+									  <?php echo $row['CP']; ?>						 
 							  </section>
 							</div>
 						  </div>
-						  
 						</div>
 					  </div>
 
+					<!---------------------------------------------------------------------->
 
 					  <div class="row">
 						<div class="col-md-6">
-						
-					
-						  
-												   <?php 
-							$query = "SELECT * FROM CONCEPTO";
-							$result = $conexion->query($query);
-							?>
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">CC</label>
 							<div class="col-sm-9" name="cc" id="cc">
 							  <section class="form-control">
-						 <?php 
-							$query = "SELECT CONCEPTO.CP, CENTRO_DE_COSTO.NOM_CC FROM CENTRO_DE_COSTO, CONCEPTO WHERE CENTRO_DE_COSTO.ID_CC = CONCEPTO.ID_CC AND CONCEPTO.ID_CC = '$id_ip'";
-							$result = $conexion->query($query);
-							?>							
-								  <?php 
-									while ($row7 = $result->fetch_array() )
-									{
-									?>
-										<option value=" <?php echo$row7['ID_CC'] ?>" >
-										<?php echo $row7['NOM_CC']; ?>
-										</option>
-							<?php } ?>							 
+							  <?php echo $row['NOM_CC']; ?>						 
 							</section>
 							</div>
 						  </div>
-						
 						</div>
+
 						<div class="col-md-6">
-														   <?php 
-							$query2 = "SELECT * FROM CONCEPTO";
-							$result2 = $conexion->query($query2);
-							?>
-												  <div class="form-group row">
-													<label class="col-sm-3 col-form-label">OTT/OPR</label>
-													<div class="col-sm-9">
-													  <section	class="form-control">
-									  <?php 
-							$query = "SELECT CONCEPTO.CP, CONCEPTO.OTT FROM CONCEPTO, INFORME_DE_PAGO WHERE CONCEPTO.CP = INFORME_DE_PAGO.ID_CP AND INFORME_DE_PAGO.ID_IP = '$id_ip'";
-							$result = $conexion->query($query);
-							?>							
-								  <?php 
-									while ($row7 = $result->fetch_array())
-									{
-									?>
-										<option value=" <?php echo $row7['CP'] ?>">
-										<?php echo $row7['OTT']; ?>
-										</option>
-							<?php } ?>							 
+							<div class="form-group row">
+							<label class="col-sm-3 col-form-label">OTT/OPR</label>
+								<div class="col-sm-9">
+								<section	class="form-control">
+									<?php echo $row['OTT']; ?>				 
 								</section>
 						  </div>
 						  </div>
 					  </div>
-						</div>
+					</div>
 
-
+					<!---------------------------------------------------------------------->
 
 							<div class="row">
                             <div class="col-md-6">
-														   <?php 
-							$query2 = "SELECT * FROM TIPO";
-							$result2 = $conexion->query($query2);
-							?>
-												  <div class="form-group row">
-													<label class="col-sm-3 col-form-label">Tipo de Servicio</label>
-													<div class="col-sm-9">
-													  <section	class="form-control">
-									  <?php 
-							$query = "SELECT TIPO.ID_TIPO, TIPO.NOM_TIPO FROM TIPO, INFORME_DE_PAGO WHERE TIPO.ID_TIPO = INFORME_DE_PAGO.ID_TIPO AND INFORME_DE_PAGO.ID_IP = '$id_ip'";
-							$result = $conexion->query($query);
-							?>							
-								  <?php 
-									while ($row7 = $result->fetch_array() )
-									{
-									?>
-										<option value=" <?php echo$row7['ID_TIPO'] ?>">
-										<?php echo $row7['NOM_TIPO']; ?>
-										</option>
-							<?php } ?>							 
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Tipo de Servicio</label>
+									<div class="col-sm-9">
+									  <section	class="form-control">
+
+									  <?php echo $row['NOM_TIPO']; ?>
+
 								</section>
 						  </div>
 						  </div>
 						</div>
-                        
-
                      
                         <div class="col-md-6">
-														   <?php 
-							$query2 = "SELECT * FROM FACTURA";
-							$result2 = $conexion->query($query2);
-							?>
-												  <div class="form-group row">
-													<label class="col-sm-3 col-form-label">N° de Factura</label>
-													<div class="col-sm-9">
-													  <section	class="form-control">
-									  <?php 
-							$query = "SELECT FACTURA.ID_FACT, FACTURA.NFACT FROM FACTURA, PAGO_FACT WHERE FACTURA.ID_FACT = PAGO_FACT.ID_FACT AND PAGO_FACT.ID_IP = '$id_ip'";
-							$result = $conexion->query($query);
-							?>							
-								  <?php 
-									while ($row7 = $result->fetch_array() )
-									{
-									?>
-										<option value=" <?php echo$row7['ID_FACT'] ?>">
-										<?php echo $row7['NFACT']; ?>
-										</option>
-							<?php } ?>							 
+						  <div class="form-group row">
+						<label class="col-sm-3 col-form-label">N° de Factura</label>
+							<div class="col-sm-9">
+						  <section	class="form-control">
+									  <?php $row['NFACT']; ?>					 
 								</section>
                                      </div>
 						         </div>
 					         </div>
 						</div>
                        
-
-                          <div class="row">
+					   <!---------------------------------------------------------------------->
+                    <div class="row">
 						<div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">N° Cotizacion</label>
+							<label class="col-sm-3 col-form-label">Responsable de Pago</label>
 							<div class="col-sm-9">
-							  <section class="form-control"> <?php echo $row['NRO_COTI'];?> </section>
-								<input type="hidden" class="form-control" name="cotizacion" id="coti" value="<?php echo $row['ID_IP'];?>" required />
+							  <section class="form-control"> <?php echo $row['NOM_JDE'];?> </section>
 							  </div>
 						  </div>
 						</div>
 
-
-                       
                         <div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Estado</label>
-							<div class="col-sm-9">
-							  <section class="form-control"> <?php echo $row['ESTADO'];?> </section>
-								<input type="hidden" class="form-control" name="estado" id="estad" value="<?php echo $row['ID_IP'];?>" required />
-							  </div>
+							<label class="col-sm-3 col-form-label">Nº. de Cotizacion</label>
+								<div class="col-sm-9">
+							  		<section class="form-control"> <?php echo $row['NRO_COTI'];?> </section>
+							  	</div>
 						  </div>
-                          </div>
-                         
-                      
-
-
-                       
+                        </div>
+                    </div>
+                      <!---------------------------------------------------------------------->
+					<div class="row">
 						<div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Fecha Envio</label>
-							<div class="col-sm-9">
-							  <section class="form-control"> <?php echo $row['FECHAENVIOIP'];?> </section>
-								<input type="hidden" class="form-control" name="fecha" id="fechaenvio" value="<?php echo $row['ID_IP'];?>" required />
+							<label class="col-sm-3 col-form-label">Estado Cobranza</label>
+								<div class="col-sm-9">
+							  	<section class="form-control"> <?php echo $row['NOM_EO_COB'];?> </section>
 							  </div>
 						  </div>
-                          </div>
+                        </div>
 
-                         
 						<div class="col-md-6">
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Fecha de Envio IP</label>
+								<div class="col-sm-9">
+							  		<section class="form-control"> <?php echo $row['FECHAENVIOIP'];?> </section>
+							  	</div>
+						  </div>
+                        </div>
+					</div>
+						<!---------------------------------------------------------------------->
+					<div class="row">
+                        <div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">NIP</label>
-							<div class="col-sm-9">
-							  <section class="form-control"> <?php echo $row['NIP'];?> </section>
-								<input type="hidden" class="form-control" name="nip" id="nip" value="<?php echo $row['ID_IP'];?>" required />
+								<div class="col-sm-9">
+							  	<section class="form-control"> <?php echo $row['NIP'];?> </section>
 							  </div>
 						  </div>
-                          </div>
+                        </div>
 
-
-                          <div class="col-md-6">
+                        <div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Valor IP</label>
-							<div class="col-sm-9">
-							  <section class="form-control"> <?php echo $row['VALOR_IP'];?> </section>
-								<input type="hidden" class="form-control" name="valorip" id="valorip" value="<?php echo $row['ID_IP'];?>" required />
-							  </div>
+							<label class="col-sm-3 col-form-label">Valor Informe de Pago</label>
+								<div class="col-sm-9">
+							  		<section class="form-control"> <?php echo $row['VALOR_IP'];?> </section>
+							  	</div>
 						  </div>
-                          </div>
+                        </div>
+					</div>
 
-                          <div class="col-md-6">
+						<!---------------------------------------------------------------------->
+							<!---------------------------------------------------------------------->
+					<div class="row">
+                        <div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Valor Facturado</label>
-							<div class="col-sm-9">
-							  <section class="form-control"> <?php echo $row['VALOR_FACTURADO'];?> </section>
-								<input type="hidden" class="form-control" name="valorfact" id="valorfact" value="<?php echo $row['ID_IP'];?>" required />
+								<div class="col-sm-9">
+							  	<section class="form-control"> <?php echo $row['VALOR_FACTURADO'];?> </section>
 							  </div>
 						  </div>
-                          </div>
+                        </div>
 
-
-                          <div class="col-md-6">
+                        <div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Observaciones</label>
+								<div class="col-sm-9">
+							  		<section class="form-control"> <?php echo $row['OBSERVACIONES'];?> </section>
+							  	</div>
+						  </div>
+                        </div>
+					</div>
+
+						<!---------------------------------------------------------------------->
+
+					<div class="row">
+                        <div class="col-md-6">
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">Avances</label>
 							<div class="col-sm-9">
-							  <section class="form-control"> <?php echo $row['OBSERVACIONES'];?> </section>
-								<input type="hidden" class="form-control" name="observaciones" id="observaciones" value="<?php echo $row['ID_IP'];?>" required />
+							  <section class="form-control"> 
+							  <?php $AVANCEe = $row['AVANCE'] ?>
+                            	<?php echo $AVANCEe."% <meter max=100 id='barra' value=".$AVANCEe." low='30' high='100' optimun='60'></meter>"; ?>
+								</section>
 							  </div>
 						  </div>
-                          </div>
-
-                          
-                          <div class="col-md-6">
-														   <?php 
-							$query2 = "SELECT * FROM CONCEPTO";
-							$result2 = $conexion->query($query2);
-							?>
-												  <div class="form-group row">
-													<label class="col-sm-3 col-form-label">Avance</label>
-													<div class="col-sm-9">
-													  <section	class="form-controll">
-									  <?php 
-							$query = "SELECT CONCEPTO.CP, CONCEPTO.AVANCE FROM CONCEPTO, INFORME_DE_PAGO WHERE CONCEPTO.CP = INFORME_DE_PAGO.ID_CP AND INFORME_DE_PAGO.ID_IP = '$id_ip'";
-							$result = $conexion->query($query);
-							?>							
-								  <?php 
-									while ($row7 = $result->fetch_array() )
-									{
-									?>
-										<option value=" <?php echo$row7['CP'] ?>">
-										<?php number_format($row7['AVANCE'], 0, ",", "."); $AVANCE=$row7['AVANCE'] ?>
-                                        <?php echo $AVANCE."% <meter max=100 id='barra' value=".$AVANCE." low='30' high='60' optimun='100'></meter>"; ?>
-										</option>
-							<?php } ?>							 
-								</section>
-                                     </div>
-						         </div>
-					   
-                          
-					
-
-
-
-					
-					
-						
-						<div class="col-md-6">
-						  
-						
-						</div>
-                        <br>
+                        </div>
 					  </div>
-							  <a href="listadoip.php"><input class="btn btn-success mr-2" type="button" value="Volver a Formulario Informe de Pago"></a>
+
+							  <a href="listadoip.php"><input class="btn btn-success mr-2" type="button" value="Volver a Reportes de Cobranza"></a>
 						 
 					</form>
 					  <br>
@@ -681,7 +582,7 @@ exit;
 		  <!-- partial:../../partials/_footer.html -->
 		 <footer class="footer">
 			<div class="container-fluid clearfix">
-			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
 			  </span>
 			</div>
 		  </footer>

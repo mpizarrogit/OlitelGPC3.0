@@ -264,15 +264,10 @@ exit;
                 <div class="text-wrapper">
                   <p class="profile-name"><?php echo $nombreuser;?></p>
                     
-                    
-                    
                   <p class="designation"><?php echo "Usuario: ".$nombrerol;?></p>
                 </div>
               </a>
             </li>
-              
-              
-              
               
            <li class="nav-item nav-category">Menú Principal</li><li class='nav-item'><a class='nav-link' href='./principalcobranza.php'><i class='menu-icon fa fa-th'></i><span class='menu-title'>Inicio</span></a></li>
           
@@ -314,7 +309,8 @@ exit;
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
           <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="listadoip.php">Informes de Pago</a></li>
+					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
+          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -381,20 +377,8 @@ exit;
                 </ul>
               </div>
             </li>-->
-           
-            
-            
-          
           </ul>
         </nav>
-          
-          
-          
-          
-          
-          
-          
-          
         <!-- NO QUITAR FORM -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -407,29 +391,17 @@ exit;
 			  </div>
 			</div>
             <div class="row">
-              
               <div class="col-md-6 grid-margin stretch-card">
-                
               </div>
-             
-            
-            
-             
-              
-                
-                
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title"></h4>
-                      
-                      
-                      
+                    <h4 class="card-title"></h4> 
                     <form class="form-sample" method="post" action="controladoragregarfactura.php">
-                   
-                        
+
+                  <!------------------------------------------------------------------------------------->
+
                          <div class="row">
-                             
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Número factura:</label>
@@ -440,15 +412,15 @@ exit;
                              
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Valor:</label>
+                            <label class="col-sm-3 col-form-label">Valor Proyectado:</label>
                             <div class="col-sm-9">
-                              <input type="number" class="form-control" name="vfactura"  id="vfactura" required/> </div>
+                              <input type="number" class="form-control" name="vProyectado"  id="vProyectado" required/> </div>
                           </div>
-                            
                         </div>
                       </div>
-                         
-                        
+
+                <!------------------------------------------------------------------------------------->
+
                       <div class="row">
                         <div class="col-md-6">
                             
@@ -463,11 +435,9 @@ exit;
                             <label class="col-sm-3 col-form-label">Cliente:</label>
                             <div class="col-sm-9">
                                 
-                            <select  class="form-control" name="cfactura" id="cfactura"  required>
-							 <option value="" > Seleccione </option>
+                        <select  class="form-control" name="cfactura" id="cfactura"  required>
+							            <option value="" > Seleccione </option>
                             <?php 
-							
-    
                             while ( $row = $result->fetch_array() )    
                             {
                             ?>
@@ -479,41 +449,38 @@ exit;
                         <?php
                             }  
                         ?>
- 
-      </select>
+                      </select>
                             </div>
                           </div>
                         </div>
                        
-                          
-                          <div class="col-md-6">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Valor Facturado:</label>
+                            <div class="col-sm-9">
+                              <input type="number" class="form-control" name="vFacturado" id="vFacturado" required /> 
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!------------------------------------------------------------------------------------->
+
+                      <div class="row">
+                      <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Fecha factura:</label>
                             <div class="col-sm-9">
                               <input type="date" class="form-control" name="ffactura"  id="ffactura" required/> </div>
                           </div>
-                            
                         </div>
-                          
-                         
                       </div>
-                     
+                             
                     
-              
-                      
-                     
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                             <button type="submit" class="btn btn-success mr-2">Agregar</button>
+
+                        <!------------------------------------------------------------------------------------->
+
+                             <button type="submit" class="btn btn-success mr-2"> Agregar Factura (+) </button>&nbsp;
                              <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
 
                     </form>
