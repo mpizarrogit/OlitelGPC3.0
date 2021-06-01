@@ -434,7 +434,7 @@ exit;
                       <?php
                       
                       $consulta2 = "SELECT * FROM OC where OC.ID_FACT =".$idfactura;
-			             $resultado2 = mysqli_query($conexion, $consulta2);
+			                $resultado2 = mysqli_query($conexion, $consulta2);
                             echo " <p class='card-description'> OC Asignadas: ";
                             while($fila2 = mysqli_fetch_array($resultado2)){
                             echo $fila2['NOC']." , ";

@@ -246,9 +246,9 @@ exit;
               </a>
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
-          <li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
+        			<li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
@@ -273,11 +273,11 @@ exit;
               </a>
               <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
-          <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
+    				<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Informes Servicios Fijos</a></li> 
 					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
-          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -310,7 +310,7 @@ exit;
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-			$consulta = "SELECT f.ID_FACT, f.ID_IP ,f.ID_CL, f.NFACT, f.VALOR_PROYECTADO, f.F_FACTURA, f.Valor_Facturado, c.ID_CL, c.NOM_CL
+			$consulta = "SELECT f.ID_FACT, f.ID_IP ,f.ID_CL, f.NFACT, f.VALOR_FACTURA, f.F_FACTURA, f.Valor_Facturado, c.ID_CL, c.NOM_CL
       FROM factura f
       INNER JOIN cliente c ON f.ID_CL = c.ID_CL";
 			$resultado = mysqli_query($conexion, $consulta);
@@ -371,22 +371,23 @@ exit;
 								<button type="button" class="btn btn-inverse-secondary"><img src="img/microsoft-excel.png" width="16px" height="16px"> Generar Excel</button>
 							</a>-->
 							<a title= "Agregar Factura" href="formagregarfactura.php">
-								<button  type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Factura</button>
+								<button  type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Agregar una Factura</button>
 							</a>
 						</p>  
                     <div class="table-responsive">
                         
                                               
                         
-                      <table id="order-listing" class="table table-striped">
+                      <table id="order-listing" class="table table-striped" style="text-align:center;">
                           
 
-                        <thead>
+                        <thead style="text-align:center;">
                         <tr>
+                          <th> ID FACTURA </th>
                           <th> N° FACTURA </th>
                           <th>FECHA</th>
-                          <th> VALOR</th>
-                          <th> VALOR A ASOCIAR</th>  
+                          <th> VALOR DE FACTURA</th>
+                          <th> VALOR ASOCIADO</th>  
                           <th> CLIENTE </th>
                           <th> IP ASOC </th>
                           <th>ACCIONES</th>
@@ -394,20 +395,30 @@ exit;
                       </thead>
                         <tbody>
                             
-                            
+                            <?php     
+                              ?>
                              <?php  while($fila = mysqli_fetch_array($resultado)){ ?>
                            
-                      
-
-
-                            
                           <tr>
-                            <td><?php  echo $fila['NFACT']; ?></td>
-                            <td><?php  echo $fila['F_FACTURA']; ?></td>
-                            <td><?php  echo  $fila['VALOR_PROYECTADO']; ?></td>
-                            <td><?php echo  $fila['Valor_Facturado']; ?></td>
-                            <td><?php echo $fila['NOM_CL']; ?></td>
-                            <td><?php echo $fila['ID_IP']; ?></td>
+                            <td style="text-align:center;"><?php  echo $fila['ID_FACT']; ?></td>
+                            <td style="text-align:center;"><?php  echo $fila['NFACT']; ?></td>
+                            <td style="text-align:center;"><?php  echo $fila['F_FACTURA']; ?></td>
+                            <td style="text-align:center;"><?php  echo  $fila['VALOR_FACTURA']; ?></td>
+                            <td style="text-align:center;"><?php echo  $fila['Valor_Facturado']; ?></td>
+                            <td style="text-align:center;"><?php echo $fila['NOM_CL']; ?></td>
+
+                          <td>
+                            <?php
+                            $consultaIP = "SELECT * FROM facturaaip WHERE NFACT =".$fila['NFACT'];
+			                      $resultadoIP = mysqli_query($conexion, $consultaIP);
+
+                            while($fila3 = mysqli_fetch_array($resultadoIP)){
+                              echo $fila3['ID_IP']." , ";
+                                }
+                                  
+                            ?>
+                             
+                          </td>
                            
                               <?PHP
                               //echo $fila['NOM_CL'];
@@ -433,7 +444,7 @@ exit;
                              
                                 <a href='formeditfact.php?ID_FACT=<?php echo $fila['ID_FACT']; ?>'><section class='imgtb'></section></a> 
                                 
-                                <a href='form_fac_a_1ip.php?nfactura=<?php echo $fila['NFACT']?>&vfactura=<?php echo $fila['VALOR_PROYECTADO']; ?>&idfactura=<?php echo $fila['ID_FACT']?>'><button type='button' class='btn btn-warning'> Asociar IP </button></a>
+                                <a href='AsignarIPaFactura.php?nfactura=<?php echo $fila['NFACT']?>&idfactura=<?php echo $fila['ID_FACT']?>'><button type='button' class='btn btn-warning'> Asociar un IP </button></a>
                                 
                                 <a href= 'formagregaroc.php?idfactura=<?php echo $fila['ID_FACT']; ?>'><button type='button' class='btn btn-danger'> OC </button></a>
                             </td>
@@ -442,8 +453,7 @@ exit;
                          
                          
                       
-                        <?php    }
-                          ?>
+                        <?php    } ?>
                        
                         
                          
@@ -464,7 +474,7 @@ exit;
           <footer class="footer">
             <div class="container-fluid clearfix">
               
-              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
               </span>
             </div>
           </footer>

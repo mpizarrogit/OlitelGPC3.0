@@ -137,10 +137,9 @@ exit;
               </a>
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
+				<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
-          			<li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
-		  			<li class="nav-item"><a class="nav-link" href="AsignarFacturaAIP.php">Asignar Factura a IP</a></li>
+        			<li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
@@ -153,6 +152,8 @@ exit;
 					<li class="nav-item"><a class="nav-link" href="formagregarSupE.php">Agregar Supervisor Externo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarTipoI.php">Agregar Tipo Informe</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarTipo.php">Agregar Tipo Proyecto</a></li>
+
+
 				</ul>
               </div>
             </li>
@@ -164,10 +165,11 @@ exit;
 			  </a>
 			  <div class="collapse" id="tables">
 				<ul class="nav flex-column sub-menu">
+				<li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="listadoip.php">Informes de Pago</a></li>
+    				<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Informes Servicios Fijos</a></li> 
+					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -181,6 +183,7 @@ exit;
 					<li class="nav-item"><a class="nav-link" href="listadoSupE.php">Supervisor Externo</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoTipoI.php">Tipo Informe</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoTipo.php">Tipo Proyecto</a></li>
+					
 				</ul>
 			  </div>
 			</li>
@@ -242,10 +245,10 @@ exit;
 								?>	
 								<div class="col-sm-9">
 									<select	 class="form-control" name="concepto" id="concepto" required>
-									<option value="" >Seleccione</option>
+									<option value="" >CP &nbsp; - &nbsp; NOMBRE</option>
 									<?php 
 										while ( $row = $result->fetch_array() ) {?>
-										<option value=" <?php echo $row['CP'] ?> " ><?php echo $row['CP']; ?></option>
+										<option value=" <?php echo $row['CP'] ?> " ><?php echo $row['CP']; ?> &nbsp; -  &nbsp;<?php echo $row['NOMBRE']; ?></option>
 										<?php
 										}?>
 									</select>
@@ -265,7 +268,7 @@ exit;
 								?>	
 								<div class="col-sm-9">
 									<select	 class="form-control" name="idcosto" id="idcosto" required>
-									<option value="" >Seleccione</option>
+									<option value="" >Seleccione...</option>
 									<?php 
 										while ( $row = $result->fetch_array() ) {?>
 										<option value=" <?php echo $row['ID_CC'] ?> " ><?php echo $row['NOM_CC']; ?></option>
@@ -406,7 +409,7 @@ exit;
 						</div>
 					
                      	<!------------------------------------------------------------------------------->
-                        <!---------------------------------OBERSAVACIONES-------------------------------->
+                        <!---------------------------------OBSERVACIONES-------------------------------->
                         <!------------------------------------------------------------------------------->
                       
 						<div class="col-md-6">
@@ -419,7 +422,7 @@ exit;
                         </div>
 					  
 							 <button type="submit" class="btn btn-success mr-2">Agregar Informe de Pago</button>
-							  <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
+							  <input class="btn btn-light" type="button" value="Listado de Informes de Pago" onclick="cancelar()">
 					</form>
 					  <br>
 				  </div>
@@ -454,8 +457,8 @@ exit;
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script>
 		function cancelar(){
-			if (confirm("¿Está seguro que desea cancelar?")){
-				history.back();
+			if (confirm("¿Desea ir al listado de Informes de Pago?")){
+				window.location.href="listadoInformePago.php";
 			}
 		}
 	</script>

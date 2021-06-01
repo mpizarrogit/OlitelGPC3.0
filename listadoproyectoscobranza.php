@@ -242,9 +242,9 @@ exit;
               </a>
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
-          <li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
+        			<li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
@@ -269,11 +269,11 @@ exit;
               </a>
               <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
-          <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
+    				<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Informes Servicios Fijos</a></li> 
 					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
-          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -380,56 +380,40 @@ exit;
                       
                     <div class="table-responsive bordered">
                     
-                                     
-                        
-                      <table id="order-listing" class="table table-striped">
+                      <table id="order-listing" class="table table-striped" style="text-align:center;">
                           
-                          
-                          
-                             
-                          
-                           
-
                         <thead>
-                            
-                          
-                          <tr>
-                           <th> CP </th>
+  
+                        <tr>
+                          <th> CP </th>
                           <th> NOMBRE PROYECTO</th>
                           <th> CC </th>
                           <th> FECHA INICIO REAL</th>
                           <th> FECHA INICIO ESTIMADO </th>
-
                           <th> AVANCE </th>
-                          
-                          <th> VALOR </th>
-                            <th> ACCIONES </th>
+                          <th> VALOR PROYECTO</th>
+                          <th> ACCIONES </th>
                           </tr>
                         </thead>
-                        <tbody>
-                            
-                            
+                        <tbody >
+                                                        
                              <?php  while($fila = mysqli_fetch_array($resultado)){ ?>
-                           
-                      
 
-
-                            
                           <tr>
-                            <td><?php echo $fila['CP'];?></td>
-                            <td  class="text-capitalize"><?php echo $fila['NOMBRE'];?></td>
+                            <td style="text-align:center;"><?php echo $fila['CP'];?></td>
+                            <td  class="text-capitalize" style="text-align:left;"><?php echo $fila['NOMBRE'];?></td>
                               
                               <?php   $query3="SELECT * FROM centro_de_costo where id_cc = ".$fila['ID_CC'];
                         $resultado3= $conexion->query($query3);
                         $row3=$resultado3->fetch_assoc(); ?>
                               
-                            <td><?php echo ucfirst($row3['NOM_CC']); ?></td>
-                            <td><?php echo $fila['INI_REAL']; ?></td>
-                            <td><?php echo $fila['INI_ASIG']; ?></td>
-                            <td><?php echo $fila['AVANCE']."% <meter max=100 id='barra' value=".$fila['AVANCE']." low='30' high='60' optimun='100'></meter>"; ?></td>
-                            <td><?php echo  number_format($fila['VALORPROYECTO'], 0, ",", ".");?></td>
+                            <td style="text-align:left;"><?php echo ucfirst($row3['NOM_CC']); ?></td>
+                            <td style="text-align:center;"><?php echo $fila['INI_REAL']; ?></td>
+                            <td style="text-align:center;"><?php echo $fila['INI_ASIG']; ?></td>
+                            <td style="text-align:center;"><?php echo $fila['AVANCE']."% <meter max=100 id='barra' value=".$fila['AVANCE']." low='30' high='60' optimun='100'></meter>"; ?></td>
+                            <td style="text-align:center;"><?php echo  number_format($fila['VALORPROYECTO'], 0, ",", ".");?></td>
                             
-                            <td>
+                            <td style="text-align:center;">
                              <a href='formeditproyectoscobranza.php?cp=<?PHP echo $fila['CP']; ?>'> <section class='imgtb'></section></a>
                              <a href= 'detalleproyectocob.php?cp=<?PHP echo $fila['CP']; ?>'><section class='dtl'></section></a>   
                               <a href= 'emitirip.php?cp=<?PHP echo $fila['CP']; ?>'><button type='button' class='btn btn-success mr-2'> IP </button></a>      
@@ -463,7 +447,7 @@ exit;
           <footer class="footer">
             <div class="container-fluid clearfix">
               
-              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
               </span>
             </div>
           </footer>

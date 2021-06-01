@@ -260,11 +260,11 @@ exit;
               </a>
               <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
+          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
-          <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
+          <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Informes Servicios Fijos</a></li> 
 					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
-          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -278,7 +278,6 @@ exit;
 					<li class="nav-item"><a class="nav-link" href="listadoSupE.php">Supervisor Externo</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoTipoI.php">Tipo Informe</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoTipo.php">Tipo Proyecto</a></li>
-          <li class="nav-item"><a class="nav-link" href="filtradopruebas.php">FILTRADO PRUEBA</a></li>
 				</ul>
               </div>
             </li>

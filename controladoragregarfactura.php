@@ -1,7 +1,6 @@
 <?php
 $cfactura = $_POST['cfactura'];
 $nfactura = $_POST['nfactura'];
-$vproyecto = $_POST['vProyectado'];
 $ffactura = $_POST['ffactura'];
 $vfactura = $_POST['vFacturado'];
 
@@ -16,7 +15,7 @@ if(mysqli_connect_errno()){
     exit();    
 }
 
-$sql = "INSERT INTO FACTURA (ID_CL, NFACT, VALOR_PROYECTADO ,F_FACTURA , Valor_Facturado) VALUES ('".$cfactura."', ".$nfactura.",".$vproyecto.",'".$ffactura."',".$vfactura.")";
+$sql = "INSERT INTO FACTURA (ID_CL, NFACT, F_FACTURA , Valor_Facturado) VALUES (".$cfactura.", ".$nfactura.",'".$ffactura."',".$vfactura.")";
 
 /*$sql .= "INSERT INTO COMPROMETIDOS (CP,ID_CARGO,ID_PERSONAS) VALUES ('".$cp."', '2','".$cor."')";*/
 

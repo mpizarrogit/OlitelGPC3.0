@@ -51,7 +51,7 @@ $resultado = mysqli_query($conexion, $consulta);
 			exit;  
 
 		}  else {
-			 header('Location: listadoip.php');
+			 header('Location: listadoInformePago.php');
 		}
 
 /*------------------------------------------------------------------*/

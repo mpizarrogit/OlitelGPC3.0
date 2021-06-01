@@ -139,7 +139,7 @@ exit;
                 <ul class="nav flex-column sub-menu">
 					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
-          <li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
+        			<li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
@@ -163,11 +163,11 @@ exit;
 			  </a>
 			  <div class="collapse" id="tables">
 				<ul class="nav flex-column sub-menu">
+					<li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
+    				<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Informes Servicios Fijos</a></li> 
 					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
-         			<li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -365,7 +365,7 @@ exit;
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Avance %:</label>
 							<div class="col-sm-9">
-							  <input type="number" class="form-control" name="avan" id="avan" min="0" max="100" minlength="1" maxlength="3" placeholder="0"  required /> 
+							  <input type="number" class="form-control" name="avan" id="avan" min="0" max="100" minlength="1" maxlength="3" placeholder="0" /> 
 							</div>
 						  </div>
 						</div>
@@ -621,7 +621,7 @@ exit;
 						  	<div class="form-group row">	 
 						  	<div class="col-sm-9">
 							  <button type="submit" class="btn btn-success mr-2" aling="center">Agregar Proyecto (+)</button>
-							 <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
+							 <input class="btn btn-light" type="button" value="Listado de Proyectos" onclick="cancelar()">
 							</div>
 						  	</div>
 						</div>
@@ -661,8 +661,8 @@ exit;
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script>
 		function cancelar(){
-			if (confirm("¿Está seguro que desea cancelar?")){
-				history.back();
+			if (confirm("¿Desea ir al listado de Proyectos?")){
+				window.location.href="listadoproyectoscobranza.php";
 			}
 		}
 	</script>

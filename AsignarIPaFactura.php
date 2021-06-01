@@ -282,10 +282,11 @@ exit;
               </a>
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
           <li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
-          <li class="nav-item"><a class="nav-link" href="AsignarFacturaAIP.php">Asignar Factura a IP</a></li>
+          <li class="nav-item"><a class="nav-link" href="AsignarFacturaAIP.php">Asociar Factura a IP</a></li>
+          <li class="nav-item"><a class="nav-link" href="AsignarIPaFactura.php">Asociar IP a Factura</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
@@ -310,10 +311,11 @@ exit;
               </a>
               <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
           <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="listadoip.php">Informes de Pago</a></li>
+					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -404,7 +406,7 @@ exit;
 			<div class="">
 				<div class="card-body">
 					<div class="d-flex justify-content-between border-bottom">
-						<h2 class="text-primary">Asignar IP a Factura</h2>
+						<h2 class="text-primary">Asociar IP a Factura</h2>
 							  
 					</div>
 				</div>
@@ -419,7 +421,8 @@ exit;
              <?php
               
                 
-       
+              $nfact = $_GET['nfactura'];
+              $idfactura = $_GET['idfactura'];
                 
          
                 
@@ -430,7 +433,22 @@ exit;
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Asignar Informe de Pago a Factura</h4>
+                    <h4 class="card-title"> INFORMES DE PAGO ASOCIADOS &nbsp;&nbsp;
+                    <br><br>
+                    <?php 
+
+                      $consulta2 = "SELECT * FROM facturaaip where facturaaip.NFACT =".$nfact;
+			             $resultado2 = mysqli_query($conexion, $consulta2);
+                            echo " <p class='card-description'> IP: ";
+                            while($fila2 = mysqli_fetch_array($resultado2)){
+                            echo $fila2['ID_IP']." , ";
+                              }
+                        echo " </p>";
+
+                    $id_ip = $fila2['ID_IP'];
+                    ?>
+
+                    </h4>
 
                     <!--?php
                       
@@ -446,84 +464,68 @@ exit;
                       
       
                     
-                    <form class="form-sample" method="post" action="">
+                    <form class="form-sample" method="post" action="controladoragregaripafactura.php">
                         
-                         <div class="row">
+                         
                              
-                      
+                       <!------------------------------------------------------------------------------->
+                        <!---------------------------------N° FACTURA------------------------------------>
+                        <!------------------------------------------------------------------------------->
+                  <div class="row">           
+						        <div class="col-md-6">
+						          <div class="form-group row">
+							          <label class="col-sm-4 col-form-label">Datos de Factura:</label>
+							            <?php 
+                            
+								            //$query = "SELECT * FROM FACTURA";
+								            //$result = $conexion->query($query);
+								          ?>	
+								    <div class="col-sm-9">
+                              <li> ID de Factura&nbsp;&nbsp; = &nbsp;&nbsp; <?php echo $idfactura; ?> </li>
+                              <li> Numero de Factura &nbsp;&nbsp; = &nbsp;&nbsp; <?php echo $nfact; ?> </li>
+                              <input type="hidden" value="<?php echo $nfact; ?>" name="nfact" id="nfact" />
+							  	  </div>
+						          </div>
+						        </div>
                         <!------------------------------------------------------------------------------->
                         <!---------------------------------IP-------------------------------------->
                         <!------------------------------------------------------------------------------->
 						<div class="col-md-6">
-						<div class="form-group row">
-							<label class="col-sm-4 col-form-label">IP:</label>
-							<?php 
-								$query = "SELECT * FROM INFORME_DE_PAGO";
-								$result = $conexion->query($query);
-								?>	
+						  <div class="form-group row">
+							  <label class="col-sm-4 col-form-label">Informe de Pago</label>
+							    <?php 
+								      $query = "SELECT * FROM INFORME_DE_PAGO";
+								      $result = $conexion->query($query);
+								  ?>	
 								<div class="col-sm-9">
-									<select	 class="form-control" name="ocfactura" id="ocfactura"required>
-									<option value="" >Seleccione</option>
+									<select	 class="form-control" name="informepago" id="informepago"required>
+									<option value="" > &nbsp;&nbsp;&nbsp; ID IP &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CP</option>
 									<?php 
 										while ( $row = $result->fetch_array() ) {?>
-										<option value=" <?php echo $row['ID_IP'] ?> " ><?php echo $row['ID_IP']; ?></option>
-										<?php
-										}?>
+										<option value=" <?php echo $row['ID_IP'] ?> " >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['ID_IP']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['CP']; ?></option>
+										<?php } ?>
 									</select>
 								</div>
 						  </div>
-						  
 						</div>
-
-                         <!------------------------------------------------------------------------------->
-                        <!---------------------------------N° FACTURA------------------------------------>
-                        <!------------------------------------------------------------------------------->
-                        
-						<div class="col-md-6">
-						<div class="form-group row">
-							<label class="col-sm-4 col-form-label">Factura:</label>
-							<?php 
-								$query = "SELECT * FROM FACTURA";
-								$result = $conexion->query($query);
-								?>	
-								<div class="col-sm-9">
-									<select	 class="form-control" name="idfactura" id="idfactura" required>
-									<option value="" >ID Factura&nbsp;&nbsp; - &nbsp;&nbsp;N° Factura</option>
-									<?php 
-										while ( $row = $result->fetch_array() ) {?>
-										<option value=" <?php echo $row['ID_FACT'] ?> " >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['ID_FACT']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['NFACT']; ?> </option>
-										<?php
-										}?>
-									</select>
-								</div>
-						  </div>
-						  
-						</div>
-                              
+          </div>                 
                     <!--  <input type="hidden" class="form-control" name="id_fact" id="id_fact" value="<!-?php  echo $idip ?>"/>-->
-
-                          </div>
-                        </div>
-                             
-                       
-                      </div>
-                         
                         
-                             <button type="submit" class="btn btn-success mr-2">Enviar</button>
-                        
-                        
-                              <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
-
-                    </form>
-                      <br>
-                      
-
-                  
+              <div class="row">
+                <div class="form-group row">
+                  <div class="col-sm-9">
+                          <button type="submit" class="btn btn-success mr-2">Asociar </button>
+                  </div>      
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-9">
+                      <input class="btn btn-light" type="button" value="Volver a listar Facturas" onclick="cancelar()">
                   </div>
                 </div>
               </div>
+        </form>
+                      <br>
               <div class="col-12">
-
               </div>
             </div>
           </div>
@@ -532,7 +534,7 @@ exit;
            <footer class="footer">
             <div class="container-fluid clearfix">
               
-              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
               </span>
             </div>
           </footer>
@@ -548,7 +550,7 @@ exit;
     <!-- endinject -->
 	<script>
 		function cancelar(){
-			if (confirm("¿Está seguro que desea cancelar?")){
+			if (confirm("¿Desea volver al listado de Facturas?")){
 				window.location.href="listadofacturascobranza.php";
 			}
 		}

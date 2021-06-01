@@ -583,7 +583,7 @@ exit;
 
                              <button type="submit" class="btn btn-success mr-2">Emitir Informe de Pago</button>
                         
-                             <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
+                             <input class="btn btn-light" type="button" value="Volver atrás" onclick="cancelar()">
                       
                     </form>
                
@@ -600,7 +600,7 @@ exit;
           <footer class="footer">
             <div class="container-fluid clearfix">
               
-              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
               </span>
             </div>
           </footer>
@@ -616,7 +616,7 @@ exit;
     <!-- endinject -->
 	<script>
 		function cancelar(){
-			if (confirm("¿Está seguro que desea cancelar?")){
+			if (confirm("¿Está seguro que desea cancelar y volver atrás?")){
 				history.back();
 			}
 		}

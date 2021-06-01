@@ -241,9 +241,9 @@ exit;
               </a>
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
+				<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
-          <li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
+        			<li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
@@ -267,10 +267,11 @@ exit;
 			  </a>
 			  <div class="collapse" id="tables">
 				<ul class="nav flex-column sub-menu">
+				<li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="listadoip.php">Informes de Pago</a></li>
+    				<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Informes Servicios Fijos</a></li> 
+					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -368,12 +369,13 @@ exit;
 				  <div class="card-body">
 					<h4 class="card-title"></h4>
 					<form class="form-sample" method="post" action="controladoreditfact.php">
+					<p class="card-description"> ID de Factura: <?php echo $id_fact ?></p>
 						 <div class="row">
 						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Por Facturar:</label>
 							<div class="col-sm-9">
-							  <section class="form-control"><?php  echo $row['POR_FACTURAR']; ?> </section>
+							<input class="form-control" type="number" name="porfacturar" id="porfacturar" value="<?php echo $row['POR_FACTURAR']; ?>"> 
 					 <input type="hidden" class="form-control" name="id_fact" id="id_fact" value="<?php	 echo $id_fact; ?>"/> </div>
 							  </div>
 						  </div>
@@ -381,23 +383,27 @@ exit;
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Número Factura:</label>
 							<div class="col-sm-9">
-							  <input type="number" class="form-control" name="nfact"  id="desc_pro"	 value="<?php  echo $row['NFACT']; ?>"/> </div>
+							  <input type="number" class="form-control" name="nfact"  id="nfact"	 value="<?php  echo $row['NFACT']; ?>"/>
+							</div>
 						  </div>
 						</div>
-						</div>
+
+					</div>
+
+
 				 <div class="row">
 					 <div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Valor Factura:</label>
 							<div class="col-sm-9">
-							  <input type="text" class="form-control" name="vfact" id="avan" value=" <?php echo $row['VALOR']; ?>" /> </div>
+							  <input type="number" class="form-control" name="vfact" id="vfact" value=" <?php echo $row['VALOR_FACTURA']; ?>" /> </div>
 						  </div>
 						</div>
 						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Fecha Factura:</label>
 							   <div class="col-sm-9">
-								  <input type="date" class="form-control" name="ffact" id="avan" value= <?php echo $row['F_FACTURA']; ?> />	  
+								  <input type="date" class="form-control" name="ffact" id="ffact" value= <?php echo $row['F_FACTURA']; ?> />	  
 							</div>
 						  </div>
 						</div>
@@ -434,7 +440,7 @@ exit;
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">OC:</label>
 							<div class="col-sm-9">
-							 <section class="form-control">	  
+							 <section class="form-control" name="oc" id="oc">	  
 								<?php 
 						$query2 = "select * from OC, factura where OC.ID_FACT = FACTURA.ID_FACT and FACTURA.ID_FACT = ".$row['ID_FACT'];
 					   $resultado2 = mysqli_query($conexion, $query2);
@@ -450,8 +456,9 @@ exit;
 						</div>
 						
 					  </div>
+
+
 					  <div class="row">
-						
 						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">IP Asociado:</label>
@@ -462,7 +469,7 @@ exit;
 					   $resultado3 = mysqli_query($conexion, $query3);
 						 while($fila3 = mysqli_fetch_array($resultado3)){
 							 ?>
-							  <?php	 echo $fila3['NIP']."  "; 
+							  <?php	 echo $fila3['ID_IP']."  "; 
 							 echo "<a href= 'eliminaripafact.php?fact=".$row['ID_FACT']."&ip=".$fila3['ID_IP']."'><section class='elim'></section></a> </td>"; echo "</br>";
 							  echo "<br>";
 							  ?>
@@ -488,7 +495,7 @@ exit;
 		  <!-- partial:../../partials/_footer.html -->
 	  <footer class="footer">
 			<div class="container-fluid clearfix">
-			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
 			  </span>
 			</div>
 		  </footer>

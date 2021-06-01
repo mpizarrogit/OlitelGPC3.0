@@ -335,9 +335,9 @@ exit;
               </a>
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
-          <li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
+        			<li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
@@ -362,11 +362,11 @@ exit;
               </a>
               <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
-					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li>
-          <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li>  
+					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
+    				<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Informes Servicios Fijos</a></li> 
 					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
-          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -400,10 +400,11 @@ exit;
 			mysqli_set_charset($conexion, "utf8");
 		
       //$consulta = "SELECT * FROM informe_de_pago";
-      $consulta = "SELECT ip.ID_IP, ip.CP, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, ip.NRO_COTI, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, ecobranza.NOM_EO_COB ,concepto.OTT, concepto.ID_CC, concepto.ID_JDE, concepto.AVANCE, concepto.VALORPROYECTO,f.ID_FACT,f.NFACT, cc.NOM_CC, tp.NOM_TIPO, je.NOM_JDE 
+      $consulta = "SELECT ip.ID_IP, ip.CP, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, ip.NRO_COTI, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, ecobranza.NOM_EO_COB ,concepto.OTT, concepto.ID_CC, concepto.ID_JDE, concepto.AVANCE, concepto.VALORPROYECTO,f.ID_FACT,f.NFACT, cc.NOM_CC, tp.NOM_TIPO, je.NOM_JDE, ep.ID_EO_PROYECTO, ep.Nombre_Estado
       FROM informe_de_pago ip 
       INNER JOIN concepto concepto ON concepto.CP = ip.CP
-      INNER JOIN estado_cobranza ecobranza ON concepto.ID_EO_COB = ecobranza.ID_EO_COB
+      INNER JOIN estado_cobranza ecobranza ON ecobranza.ID_EO_COB = ip.ID_EO_COB
+      INNER JOIN estado_proyecto ep ON ep.ID_EO_PROYECTO = concepto.ID_EO_PROYECTO
       INNER JOIN tipo tp ON tp.ID_TIPO = ip.ID_TIPO
       INNER JOIN jefe_entel je ON je.ID_JDE = concepto.ID_JDE
       INNER JOIN centro_de_costo cc ON cc.ID_CC = concepto.ID_CC
@@ -465,7 +466,7 @@ exit;
 			<div class="">
 				<div class="card-body">
 					<div class="d-flex justify-content-between border-bottom">
-						<h2 class="text-primary">Informes de Pago Emitidos</h2>
+						<h2 class="text-primary">COBRANZA</h2>
 					</div>
 				</div>
 			</div>
@@ -475,13 +476,13 @@ exit;
               <div class="col-md-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="concss">Listado de Informes</h4>
+                    <h4 class="concss">Reporte Cobranza</h4>
 						   <p class="text-right">   
 							<a href="generar_excel_cobr.php">
 								<button type="button" class="btn btn-inverse-secondary"><img src="img/microsoft-excel.png" width="16px" height="16px"> Generar Excel</button>
 							</a>
 							<a title= "Agregar Proyecto" href="formagrproyectocobranza.php">
-								<button  type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i>Agregar Proyecto</button>
+								<button  type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i>Agregar Proyecto (+)</button>
 							</a>
 						</p>  
 
@@ -490,7 +491,7 @@ exit;
                       <table id="order-listing" class="table table-striped">
 
                        <thead>
-                        <tr>
+                        <tr style="text-align:center;">
                           <th> IP </th>
                           <th> CP</th>
                           <th> CC </th>
@@ -499,8 +500,9 @@ exit;
                           <th> N de Factura </th>
                           <th> Responsable de Pago </th>
                           <th> N Cotizacion</th>
-                          <th> Estado </th>
-                          <th> Fecha de Envio  </th>
+                          <th> Estado Cobranza</th>
+                          <th> Estado Proyecto</th>
+                          <th> Fecha de Envio </th>
                           <th> NIP </th>
                           <th> Valor IP </th>
 						              <th> Valor Facturado </th>
@@ -511,9 +513,10 @@ exit;
                           <td placeholder="OC"> </td>
                           <td placeholder="VISTA"> </td>
                         </tr>
+                       
                       </thead>
                             
-                         <tbody>   
+                         <tbody style="text-align:center;">   
                              
                           <?php
                             //$query = "SELECT * FROM informe_de_pago INNER JOIN centro_de_costo ON informe_de_pago.ID_CC = centro_de_costo.ID_CC WHERE informe_de_pago.ID_CC = centro_de_costo.ID_CC ";
@@ -548,6 +551,7 @@ exit;
                                 <td><?php echo $fila['NOM_JDE'];  ?></td>
                                 <td><?php echo $fila['NRO_COTI'];  ?></td>
                                 <td><?php echo $fila['NOM_EO_COB']; ?></td> 
+                                <td><?php echo $fila['Nombre_Estado']; ?></td> 
                               <?php
                                 //$consulta3 = "SELECT centro_de_costo.ID_CC, centro_de_costo.NOM_CC, informe_de_pago.ID_CC FROM centro_de_costo INNER JOIN informe_de_pago ON centro_de_costo.ID_CC = informe_de_pago.ID_CC";
                                 //$query2 = "SELECT ip.ID_CC, cc.ID_CC, cc.NOM_CC FROM informe_de_pago ip INNER JOIN centro_de_costo cc ON ip.ID_CC = cc.ID_CC";
@@ -737,7 +741,7 @@ exit;
           <footer class="footer">
             <div class="container-fluid clearfix">
               
-              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
               </span>
             </div>
           </footer>

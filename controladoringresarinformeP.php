@@ -95,9 +95,9 @@ if($ok == false){
 */
 if (mysqli_multi_query($conexion, $consulta)) {
 	if ($tipo==1){
-        header('Location: listadoip.php');
+        header('Location: listadoInformePago.php');
 	}else{
-		header('Location: listadoip.php');
+		header('Location: listadoInformePago.php');
 	}
 
 }

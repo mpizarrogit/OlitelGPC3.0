@@ -64,8 +64,10 @@ $frt = utf8_decode($frt);
 $fda = utf8_decode($fda);
 (isset($_POST['fdinf'])) ? $fdinf=$_POST['fdinf'] : $fdinf='';
 $fdinf = utf8_decode($fdinf);
+
 (isset($_POST['creadopor'])) ? $creadopor=$_POST['creadopor'] : $creadopor='';
 $creadopor = utf8_decode($creadopor);
+
 
 (isset($_POST['valorPro'])) ? $valorProyecto=$_POST['valorPro'] : $valorProyecto='';
 $valorProyecto = utf8_decode($valorProyecto);

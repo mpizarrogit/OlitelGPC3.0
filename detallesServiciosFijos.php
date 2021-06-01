@@ -311,8 +311,9 @@ exit;
               </a>
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
+        			<li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
@@ -337,11 +338,11 @@ exit;
               </a>
               <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
-          <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
-          <li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
-          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
+    				<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Informes Servicios Fijos</a></li> 
+					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -375,7 +376,7 @@ exit;
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-			$consulta = "SELECT ip.ID_IP,ip.CP,ip.ID_CCosto, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, f.ID_FACT, f.VALOR_PROYECTADO, f.Valor_Facturado, ec.ID_EO_COB, ec.NOM_EO_COB, cc.ID_CC, cc.NOM_CC
+			$consulta = "SELECT ip.ID_IP,ip.CP,ip.ID_CCosto, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, f.ID_FACT, f.VALOR_FACTURA, f.Valor_Facturado, ec.ID_EO_COB, ec.NOM_EO_COB, cc.ID_CC, cc.NOM_CC
       FROM INFORME_DE_PAGO ip
       INNER JOIN estado_cobranza ec ON ip.ID_EO_COB = ec.ID_EO_COB
       INNER JOIN FACTURA f ON ip.ID_FACTURA = f.ID_FACT
@@ -451,13 +452,13 @@ exit;
                     <div class="table-responsive bordered">
                       <table id="order-listing" class="table table-striped">
                           
-                        <thead>
+                        <thead style="text-align:center;">
                           <tr>
                            <th> CP </th>
                           <th> CC</th>
                           <th> ESTADO DE COBRANZA </th>
                           <th> VALOR PROYECTADO</th>
-                          <th> VALOR FACTURADO</th>
+                          <th> VALOR PROYECTO</th>
                           <th> ACCIONES </th>
                          
                           </tr>
@@ -466,11 +467,12 @@ exit;
                          <?php  while($fila = mysqli_fetch_array($resultado)){ ?>
                            
                             <tr>
-                                <td><?php echo $fila['CP'];?></td>
-                                <td><?php echo $fila['NOM_CC'];?></td>
-                                <td><?php echo $fila['NOM_EO_COB'];?></td>
-                                <td><?php echo $fila['VALOR_PROYECTADO'];?></td>
-                                <td><?php echo $fila['Valor_Facturado'];?></td>
+                                <td style="text-align:left;"><?php echo $fila['CP'];?></td>
+                                <td style="text-align:center;"><?php echo $fila['NOM_CC'];?></td>
+                                <td style="text-align:center;"><?php echo $fila['NOM_EO_COB'];?></td>
+                                <td style="text-align:center;"><?php echo $fila['VALOR_FACTURA'];?></td>
+                                <td style="text-align:center;"><?php echo $fila['Valor_Facturado'];?></td>
+                                <div class="row">
 
                            
                                 <?php   //$query3="SELECT * FROM centro_de_costo where id_cc = ".$fila['ID_CC'];
@@ -481,11 +483,12 @@ exit;
   
                                 <td>
                              
-                             <a href='formeditfact.php?ID_FACT=<?php echo $fila['CP']; ?>'><section class='imgtb'></section></a> 
-                             
-                             <a href='form_fac_a_1ip.php?nfactura=<?php echo $fila['CP']?>&vfactura=<?php echo $fila['VALOR_PROYECTADO']; ?>&idfactura=<?php echo $fila['ID_FACT']?>'><button type='button' class='btn btn-warning'> Asociar IP </button></a>
-                             
-                             <a href= 'formagregaroc.php?idfactura=<?php echo $fila['ID_FACT']; ?>'><button type='button' class='btn btn-danger'> OC </button></a>
+                                <a href='formeditip.php?ID_IP=<?PHP echo $fila['ID_IP']; ?>'><section class='imgtb'></section></a>
+                          
+                          
+                          <a href= 'ipdetallado.php?ID_IP=<?php echo $fila['ID_IP']; ?>'><section class='dtl'></section></a>
+                      
+                          <a href= 'formagregaroc.php?idfactura=<?php echo $fila['ID_FACT']; ?>'><button type='button' class='btn btn-danger'> OC </button></a>
                                 </td>
                             </tr>
                 
@@ -509,7 +512,7 @@ exit;
           <footer class="footer">
             <div class="container-fluid clearfix">
               
-              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
               </span>
             </div>
           </footer>

@@ -357,7 +357,7 @@ exit;
 		  <div class="">
 			<div class="card-body">
 				<div class="d-flex justify-content-between border-bottom">
-					<h2 class="text-primary">Reporte Detallado</h2>
+					<h2 class="text-primary"> Detalle de Informe de Pago</h2>
 				</div>
 			</div>
 			</div>
@@ -369,15 +369,11 @@ exit;
 			   <?php 
 				$id_ip = $_GET['ID_IP'];
 	  include ("bd.php");
-		$query="SELECT ip.ID_IP, ip.CP, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, ip.NRO_COTI, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, ecobranza.NOM_EO_COB , ep.ID_EO_PROYECTO ,ep.Nombre_Estado ,concepto.OTT, concepto.ID_CC, concepto.ID_JDE, concepto.AVANCE, concepto.VALORPROYECTO,f.ID_FACT,f.NFACT, cc.NOM_CC, tp.NOM_TIPO, je.NOM_JDE 
-		FROM informe_de_pago ip
-		INNER JOIN concepto concepto ON concepto.CP = ip.CP
-		INNER JOIN estado_cobranza ecobranza ON concepto.ID_EO_COB = ecobranza.ID_EO_COB
-		INNER JOIN estado_proyecto ep ON ep.ID_EO_PROYECTO = concepto.ID_EO_PROYECTO
-		INNER JOIN tipo tp ON tp.ID_TIPO = ip.ID_TIPO
-		INNER JOIN jefe_entel je ON je.ID_JDE = concepto.ID_JDE
-		INNER JOIN centro_de_costo cc ON cc.ID_CC = concepto.ID_CC
-		INNER JOIN factura f ON f.ID_FACT = ip.ID_IP
+		$query="SELECT ip.ID_IP, ip.CP, ip.ID_CCosto, ip.ID_TIPO, ip.ID_EO_COB , ip.NRO_COTI, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES , cc.NOM_CC, tp.NOM_TIPO, ec.NOM_EO_COB 
+        FROM informe_de_pago ip
+        INNER JOIN centro_de_costo cc ON cc.ID_CC = ip.ID_CCosto
+        INNER JOIN tipo tp ON tp.ID_TIPO = ip.ID_TIPO
+        INNER JOIN estado_cobranza ec ON ec.ID_EO_COB = ip.ID_EO_COB
 		WHERE ip.ID_IP ='$id_ip'";
 		$resultado = mysqli_query($conexion, $query);
 		$row = mysqli_fetch_array($resultado);
@@ -392,7 +388,7 @@ exit;
 					<!---------------------------------------------------------------------->
 
 					<!---------------------------------------------------------------------->
-						 <div class="row">
+				    <div class="row">
 						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">ID IP</label>
@@ -403,21 +399,23 @@ exit;
 						  </div>
 						</div>
 
-						  <div class="col-md-6">
-							  <div class="form-group row">
+						<div class="col-md-6">
+						    <div class="form-group row">
 								<label class="col-sm-3 col-form-label">CP</label>
-								<div class="col-sm-9">
+							    <div class="col-sm-9">
 									  <section	class="form-control">					
 									  <?php echo $row['CP']; ?>						 
-							  </section>
-							</div>
-						  </div>
+							        </section>
+							    </div>
+						    </div>
 						</div>
-					  </div>
+
+					</div>
 
 					<!---------------------------------------------------------------------->
 
 					  <div class="row">
+
 						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">CC</label>
@@ -429,22 +427,21 @@ exit;
 						  </div>
 						</div>
 
-						<div class="col-md-6">
-							<div class="form-group row">
-							<label class="col-sm-3 col-form-label">OTT/OPR</label>
+                        <div class="col-md-6">
+						  <div class="form-group row">
+							<label class="col-sm-3 col-form-label">NIP</label>
 								<div class="col-sm-9">
-								<section	class="form-control">
-									<?php echo $row['OTT']; ?>				 
-								</section>
+							  	<section class="form-control"> <?php echo $row['NIP'];?> </section>
+							  </div>
 						  </div>
-						  </div>
-					  </div>
+                        </div>
+						
 					</div>
 
 					<!---------------------------------------------------------------------->
 
-							<div class="row">
-                            <div class="col-md-6">
+					<div class="row">
+                        <div class="col-md-6">
 							<div class="form-group row">
 								<label class="col-sm-3 col-form-label">Tipo de Servicio</label>
 									<div class="col-sm-9">
@@ -452,33 +449,32 @@ exit;
 
 									  <?php echo $row['NOM_TIPO']; ?>
 
-								</section>
-						  </div>
-						  </div>
+								        </section>
+						            </div>
+						    </div>
 						</div>
                      
                         <div class="col-md-6">
 						  <div class="form-group row">
-						<label class="col-sm-3 col-form-label">N° de Factura</label>
-							<div class="col-sm-9">
-						  <section	class="form-control">
-									  <?php $row['NFACT']; ?>					 
-								</section>
-                                     </div>
-						         </div>
-					         </div>
-						</div>
+							<label class="col-sm-3 col-form-label">Valor Informe de Pago</label>
+								<div class="col-sm-9">
+							  		<section class="form-control"> <?php echo $row['VALOR_IP'];?> </section>
+							  	</div>
+						  </div>
+                        </div>
+                        
+					</div>
                        
 					   <!---------------------------------------------------------------------->
                     <div class="row">
-						<div class="col-md-6">
+                        <div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Responsable de Pago</label>
-							<div class="col-sm-9">
-							  <section class="form-control"> <?php echo $row['NOM_JDE'];?> </section>
+							<label class="col-sm-3 col-form-label">Valor Facturado</label>
+								<div class="col-sm-9">
+							  	<section class="form-control"> <?php echo $row['VALOR_FACTURADO'];?> </section>
 							  </div>
 						  </div>
-						</div>
+                        </div>
 
                         <div class="col-md-6">
 						  <div class="form-group row">
@@ -488,6 +484,7 @@ exit;
 							  	</div>
 						  </div>
                         </div>
+
                     </div>
                       <!---------------------------------------------------------------------->
 					<div class="row">
@@ -502,72 +499,18 @@ exit;
 
 						<div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Estado Proyecto</label>
+							<label class="col-sm-3 col-form-label">Fecha de Envio IP</label>
 								<div class="col-sm-9">
-							  		<section class="form-control"> <?php echo $row['Nombre_Estado'];?> </section>
+							  		<section class="form-control"> <?php echo $row['FECHAENVIOIP'];?> </section>
 							  	</div>
 						  </div>
                         </div>
 					</div>
 						<!---------------------------------------------------------------------->
-					<div class="row">
-                        <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">FECHAENVIOIP</label>
-								<div class="col-sm-9">
-							  	<section class="form-control"> <?php echo $row['FECHAENVIOIP'];?> </section>
-							  </div>
-						  </div>
-                        </div>
 
-                        <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">NIP</label>
-								<div class="col-sm-9">
-							  		<section class="form-control"> <?php echo $row['NIP'];?> </section>
-							  	</div>
-						  </div>
-                        </div>
-					</div>
-
-						<!---------------------------------------------------------------------->
 							<!---------------------------------------------------------------------->
 					<div class="row">
                         <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Valor Informe de Pago</label>
-								<div class="col-sm-9">
-							  	<section class="form-control"> <?php echo $row['VALOR_IP'];?> </section>
-							  </div>
-						  </div>
-                        </div>
-
-                        <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Valor Facturado</label>
-								<div class="col-sm-9">
-							  		<section class="form-control"> <?php echo $row['VALOR_FACTURADO'];?> </section>
-							  	</div>
-						  </div>
-                        </div>
-					</div>
-
-						<!---------------------------------------------------------------------->
-
-					<div class="row">
-                        <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Avances</label>
-							<div class="col-sm-9">
-							  <section class="form-control"> 
-							  <?php $AVANCEe = $row['AVANCE'] ?>
-                            	<?php echo $AVANCEe."% <meter max=100 id='barra' value=".$AVANCEe." low='30' high='100' optimun='60'></meter>"; ?>
-								</section>
-							  </div>
-						  </div>
-                        </div>
-
-						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Observaciones</label>
 								<div class="col-sm-9">
@@ -575,10 +518,12 @@ exit;
 							  	</div>
 						  </div>
                         </div>
-					  </div>
+					</div>
 
-							  <a href="listadoip.php"><input class="btn btn-success mr-2" type="button" value="Volver a Reportes de Cobranza"></a>
-						 
+						<!---------------------------------------------------------------------->
+
+							  
+                              <input class="btn btn-success" type="button" value="Volver Atras" onclick="cancelar()">
 					</form>
 					  <br>
 				  </div>
@@ -611,6 +556,13 @@ exit;
 	<script src="./assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
 	<script src="./assets/vendors/icheck/icheck.min.js"></script>
 	<!-- End plugin js for this page -->
+    <script>
+		function cancelar(){
+			if (confirm("¿Desea volver al Listado?")){
+				window.location.href="formagregarInformeP.php";
+			}
+		}
+	</script>
 	<!-- inject:js -->
 	<script src="./assets/js/shared/off-canvas.js"></script>
 	<script src="./assets/js/shared/hoverable-collapse.js"></script>

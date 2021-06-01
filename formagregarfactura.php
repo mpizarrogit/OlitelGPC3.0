@@ -279,9 +279,9 @@ exit;
               </a>
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
-          <li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
+        			<li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
@@ -306,11 +306,11 @@ exit;
               </a>
               <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
-          <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
+    				<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Informes Servicios Fijos</a></li> 
 					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
-          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
@@ -412,9 +412,9 @@ exit;
                              
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Valor Proyectado:</label>
+                            <label class="col-sm-3 col-form-label">Fecha factura:</label>
                             <div class="col-sm-9">
-                              <input type="number" class="form-control" name="vProyectado"  id="vProyectado" required/> </div>
+                              <input type="date" class="form-control" name="ffactura"  id="ffactura" required/> </div>
                           </div>
                         </div>
                       </div>
@@ -466,22 +466,8 @@ exit;
 
                       <!------------------------------------------------------------------------------------->
 
-                      <div class="row">
-                      <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Fecha factura:</label>
-                            <div class="col-sm-9">
-                              <input type="date" class="form-control" name="ffactura"  id="ffactura" required/> </div>
-                          </div>
-                        </div>
-                      </div>
-                             
-                    
-
-                        <!------------------------------------------------------------------------------------->
-
                              <button type="submit" class="btn btn-success mr-2"> Agregar Factura (+) </button>&nbsp;
-                             <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
+                             <input class="btn btn-light" type="button" value="Listado de Facturas" onclick="cancelar()">
 
                     </form>
                       <br>
@@ -501,7 +487,7 @@ exit;
             <footer class="footer">
             <div class="container-fluid clearfix">
               
-              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
               </span>
             </div>
           </footer>
@@ -517,7 +503,7 @@ exit;
     <!-- endinject -->
 	<script>
 		function cancelar(){
-			if (confirm("¿Está seguro que desea cancelar?")){
+			if (confirm("¿Desea ir al listado de Facturas?")){
 				window.location.href="listadofacturascobranza.php";
 			}
 		}
