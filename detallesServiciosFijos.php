@@ -456,9 +456,10 @@ exit;
                           <tr>
                            <th> CP </th>
                           <th> CC</th>
-                          <th> ESTADO DE COBRANZA </th>
-                          <th> VALOR PROYECTADO</th>
-                          <th> VALOR PROYECTO</th>
+                          <th> ESTADO COBRANZA </th>
+                          <th> NRO. FACTURA</th>
+                          <th> NOMBRE</th>
+                          <th> VALOR FACTURADO </th>
                           <th> ACCIONES </th>
                          
                           </tr>
@@ -471,6 +472,7 @@ exit;
                                 <td style="text-align:center;"><?php echo $fila['NOM_CC'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['NOM_EO_COB'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['VALOR_FACTURA'];?></td>
+                                <td style="text-align:center;"><?php echo $fila['Valor_Facturado'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['Valor_Facturado'];?></td>
                                 <div class="row">
 

@@ -392,6 +392,7 @@ exit;
                           <th> FECHA INICIO ESTIMADO </th>
                           <th> AVANCE </th>
                           <th> VALOR PROYECTO</th>
+                          <th> ASOCIAR IP </th>
                           <th> ACCIONES </th>
                           </tr>
                         </thead>
@@ -412,11 +413,10 @@ exit;
                             <td style="text-align:center;"><?php echo $fila['INI_ASIG']; ?></td>
                             <td style="text-align:center;"><?php echo $fila['AVANCE']."% <meter max=100 id='barra' value=".$fila['AVANCE']." low='30' high='60' optimun='100'></meter>"; ?></td>
                             <td style="text-align:center;"><?php echo  number_format($fila['VALORPROYECTO'], 0, ",", ".");?></td>
-                            
+                            <td style="text-align:center;"> <a href= 'emitirip.php?cp=<?PHP echo $fila['CP']; ?>'><button type='button' class='btn btn-success mr-2'>Asociar IP </button></a> </td>
                             <td style="text-align:center;">
                              <a href='formeditproyectoscobranza.php?cp=<?PHP echo $fila['CP']; ?>'> <section class='imgtb'></section></a>
                              <a href= 'detalleproyectocob.php?cp=<?PHP echo $fila['CP']; ?>'><section class='dtl'></section></a>   
-                              <a href= 'emitirip.php?cp=<?PHP echo $fila['CP']; ?>'><button type='button' class='btn btn-success mr-2'> IP </button></a>      
                             </td>
                           </tr>
                          

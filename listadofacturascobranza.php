@@ -403,8 +403,8 @@ exit;
                             <td style="text-align:center;"><?php  echo $fila['ID_FACT']; ?></td>
                             <td style="text-align:center;"><?php  echo $fila['NFACT']; ?></td>
                             <td style="text-align:center;"><?php  echo $fila['F_FACTURA']; ?></td>
-                            <td style="text-align:center;"><?php  echo  $fila['VALOR_FACTURA']; ?></td>
-                            <td style="text-align:center;"><?php echo  $fila['Valor_Facturado']; ?></td>
+                            <td style="text-align:center;"><?php  echo  $fila['Valor_Facturado']; ?></td>
+                            <td style="text-align:center;"><?php echo  0//VALOR_IP TABLA IP ?></td>
                             <td style="text-align:center;"><?php echo $fila['NOM_CL']; ?></td>
 
                           <td>

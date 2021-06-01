@@ -523,7 +523,7 @@ exit;
 						<!---------------------------------------------------------------------->
 
 							  
-                              <input class="btn btn-success" type="button" value="Volver Atras" onclick="cancelar()">
+                              <input class="btn btn-success" type="button" value="Volver al Listado" onclick="cancelar()">
 					</form>
 					  <br>
 				  </div>
@@ -559,7 +559,7 @@ exit;
     <script>
 		function cancelar(){
 			if (confirm("¿Desea volver al Listado?")){
-				window.location.href="formagregarInformeP.php";
+				window.location.href="listadoInformePago.php";
 			}
 		}
 	</script>

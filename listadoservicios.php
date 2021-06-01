@@ -465,6 +465,7 @@ exit;
 
                           
                           <th> VALOR PROYECTO</th>
+                          <th> Asociar IP </th>
                             <th> ACCIONES </th>
                           </tr>
                         </thead>
@@ -521,10 +522,10 @@ exit;
                             
                             ?></td>
                             
-                            <td>
+                            <td style="text-align:center;"> <a href= 'emitirip.php?cp=<?PHP echo $fila['CP']; ?>'><button type='button' class='btn btn-success mr-2'>Asociar IP </button></a> </td>
+                            <td style="text-align:center;">
                              <a href='formeditproyectoscobranza.php?cp=<?PHP echo $fila['CP']; ?>'> <section class='imgtb'></section></a>
                              <a href= 'detalleproyectocob.php?cp=<?PHP echo $fila['CP']; ?>'><section class='dtl'></section></a>   
-                               <a href= 'emitirip.php?cp=<?PHP echo $fila['CP']; ?>'><button type='button' class='btn btn-success mr-2'> IP </button></a> 
                             </td>
                           </tr>
                          
