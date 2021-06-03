@@ -801,7 +801,7 @@ exit;
 	<!-- endinject -->
 	<script>
 		function cancelar(){
-				history.back();
+			window.location.href="listadoInformePago.php";
 		}
 	</script>
 	<!-- Plugin js for this page -->

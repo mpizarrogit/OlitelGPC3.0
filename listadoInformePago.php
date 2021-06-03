@@ -385,18 +385,17 @@ exit;
 
                         <thead style="text-align:center;">
                         <tr>
-                          <th> Nº de IP </th>
+                          <th> N.º de IP </th>
                           <th> CP </th>
                           <th> Centro de Costo</th>
                           <th> Tipo de Proyecto</th>  
                           <th> Estado de Cobranza </th>
-                          <th> Nº de Cotización </th>
+                          <th> N.º de Cotización </th>
                           <th> Envío de IP </th>
-                          <th> NIP </th>
                           <th> Valor de IP </th>
                           <th> Valor Facturado </th>
                           <th> Observaciones </th>
-                          <th> ID Factura Asoc </th>
+                          <th> N.º Factura Asoc </th>
                           <th> ACCIONES </th>
                           <th> Asociar Facturas</th>
                         </tr>
@@ -407,13 +406,12 @@ exit;
 
                           <tr>
                             <td style="text-align:center;"><?php  echo $fila['ID_IP']; ?></td>
-                            <td style="text-align:left;"><?php  echo $fila['CP']; ?></td>
+                            <td style="text-align:center;"><?php  echo $fila['CP']; ?></td>
                             <td style="text-align:center;"><?php  echo  $fila['NOM_CC']; ?></td>
                             <td style="text-align:center;"><?php echo  $fila['NOM_TIPO']; ?></td>
                             <td style="text-align:center;"><?php echo $fila['NOM_EO_COB']; ?></td>
                             <td style="text-align:center;"><?php echo $fila['NRO_COTI']; ?></td>
                             <td style="text-align:center;"><?php echo $fila['FECHAENVIOIP']; ?></td>
-                            <td style="text-align:center;"><?php echo $fila['NIP']; ?></td>
                             <td style="text-align:center;"><?php echo $fila['VALOR_IP']; ?></td>
                             <td style="text-align:center;"><?php echo $fila['VALOR_FACTURADO']; ?></td>
                             <td style="text-align:left;"><?php echo $fila['OBSERVACIONES']; ?></td>

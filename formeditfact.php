@@ -482,7 +482,7 @@ exit;
 						</div>
 					  </div>
 							 <button type="submit" class="btn btn-success mr-2">Editar</button>
-							 <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
+							 <input class="btn btn-light" type="button" value="Listar Facturas" onclick="cancelar()">
 					</form>
 				  </div>
 				</div>
@@ -515,7 +515,7 @@ exit;
 	<script src="./assets/vendors/icheck/icheck.min.js"></script>
 	<script>
 		function cancelar(){
-			if (confirm("¿Está seguro que desea cancelar?")){
+			if (confirm("¿Desea ver Facturas?")){
 				window.location.href="listadofacturascobranza.php";
 			}
 		}

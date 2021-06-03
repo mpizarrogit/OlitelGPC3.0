@@ -395,7 +395,7 @@ exit;
 						 <div class="row">
 						<div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">ID IP</label>
+							<label class="col-sm-3 col-form-label" >N.º de IP</label>
 							<div class="col-sm-9">
 							  <section class="form-control"> <?php echo $row['ID_IP'];?> </section>
 								<input type="hidden" class="form-control" name="id_ip" id="id_ip" value="<?php echo $row['ID_IP'];?>" required />
@@ -405,7 +405,7 @@ exit;
 
 						  <div class="col-md-6">
 							  <div class="form-group row">
-								<label class="col-sm-3 col-form-label">CP</label>
+								<label class="col-sm-3 col-form-label">N.º de CP</label>
 								<div class="col-sm-9">
 									  <section	class="form-control">					
 									  <?php echo $row['CP']; ?>						 
@@ -420,7 +420,7 @@ exit;
 					  <div class="row">
 						<div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">CC</label>
+							<label class="col-sm-3 col-form-label">Centro de Costo</label>
 							<div class="col-sm-9" name="cc" id="cc">
 							  <section class="form-control">
 							  <?php echo $row['NOM_CC']; ?>						 
@@ -459,7 +459,7 @@ exit;
                      
                         <div class="col-md-6">
 						  <div class="form-group row">
-						<label class="col-sm-3 col-form-label">N° de Factura</label>
+						<label class="col-sm-3 col-form-label">N.º de Factura</label>
 							<div class="col-sm-9">
 						  <section	class="form-control">
 									  <?php $row['NFACT']; ?>					 
@@ -482,7 +482,7 @@ exit;
 
                         <div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Nº. de Cotizacion</label>
+							<label class="col-sm-3 col-form-label">N.º de Cotizacion</label>
 								<div class="col-sm-9">
 							  		<section class="form-control"> <?php echo $row['NRO_COTI'];?> </section>
 							  	</div>
@@ -513,19 +513,22 @@ exit;
 					<div class="row">
                         <div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">FECHAENVIOIP</label>
+							<label class="col-sm-3 col-form-label">Fecha envío de IP</label>
 								<div class="col-sm-9">
 							  	<section class="form-control"> <?php echo $row['FECHAENVIOIP'];?> </section>
 							  </div>
 						  </div>
                         </div>
 
-                        <div class="col-md-6">
+						<div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">NIP</label>
-								<div class="col-sm-9">
-							  		<section class="form-control"> <?php echo $row['NIP'];?> </section>
-							  	</div>
+							<label class="col-sm-3 col-form-label">Avance</label>
+							<div class="col-sm-9">
+							  <section class="form-control"> 
+							  <?php $AVANCEe = $row['AVANCE'] ?>
+                            	<?php echo $AVANCEe."% <meter max=100 id='barra' value=".$AVANCEe." low='30' high='100' optimun='60'></meter>"; ?>
+								</section>
+							  </div>
 						  </div>
                         </div>
 					</div>
@@ -535,7 +538,7 @@ exit;
 					<div class="row">
                         <div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Valor Informe de Pago</label>
+							<label class="col-sm-3 col-form-label">Valor de IP</label>
 								<div class="col-sm-9">
 							  	<section class="form-control"> <?php echo $row['VALOR_IP'];?> </section>
 							  </div>
@@ -555,18 +558,6 @@ exit;
 						<!---------------------------------------------------------------------->
 
 					<div class="row">
-                        <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Avances</label>
-							<div class="col-sm-9">
-							  <section class="form-control"> 
-							  <?php $AVANCEe = $row['AVANCE'] ?>
-                            	<?php echo $AVANCEe."% <meter max=100 id='barra' value=".$AVANCEe." low='30' high='100' optimun='60'></meter>"; ?>
-								</section>
-							  </div>
-						  </div>
-                        </div>
-
 						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Observaciones</label>

@@ -231,7 +231,7 @@ exit;
 
 					<!-- FORMULARIO -->
 					<form class="form-sample" method="post" action="controladoringresarinformeP.php">
-						 <div class="row">
+						<div class="row">
 						<input name="creadopor" type="hidden" id="creadopor" value="<?php echo $_SESSION['username']; ?>" >		
 						<!------------------------------------------------------------------------------->
                         <!---------------------------------CONCEPTO-------------------------------------->
@@ -292,7 +292,7 @@ exit;
 								?>	
 								<div class="col-sm-9">
 									<select	 class="form-control" name="tiposervicio" id="tiposervicio" required>
-									<option value="" >Seleccione</option>
+									<option value="" >Seleccione...</option>
 									<?php 
 										while ( $row = $result->fetch_array() ) {?>
 										<option value=" <?php echo $row['ID_TIPO'] ?> " ><?php echo $row['NOM_TIPO']; ?></option>
@@ -306,27 +306,14 @@ exit;
                         <!------------------------------------------------------------------------------->
                         <!---------------------------------N° FACTURA------------------------------------>
                         <!------------------------------------------------------------------------------->
-                        
-						<div class="col-md-6">
-						<div class="form-group row">
-							<label class="col-sm-4 col-form-label">N° Factura:</label>
-							<?php 
-								$query = "SELECT * FROM FACTURA";
-								$result = $conexion->query($query);
-								?>	
-								<div class="col-sm-9">
-									<select	 class="form-control" name="idfactura" id="idfactura">
-									<option value="0" >ID Factura&nbsp;&nbsp; - &nbsp;&nbsp;N° Factura</option>
-									<?php 
-										while ( $row = $result->fetch_array() ) {?>
-										<option value=" <?php echo $row['ID_FACT'] ?> " >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['ID_FACT']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['NFACT']; ?> </option>
-										<?php
-										}?>
-									</select>
-								</div>
+                        <div class="col-md-6">
+						  <div class="form-group row">
+							<label class="col-sm-4 col-form-label">Valor IP:</label>
+							<div class="col-sm-9">
+							  <input type="text" class="form-control" name="valorip" id="valorip" placeholder="0" required/> </div>
 						  </div>
-						  
 						</div>
+						
 						<!------------------------------------------------------------------------------->
                         <!---------------------------------ESTADO---------------------------------------->
                         <!------------------------------------------------------------------------------->
@@ -339,7 +326,7 @@ exit;
 								?>	
 								<div class="col-sm-9">
 									<select	 class="form-control" name="idestadocob" id="idestadocob" required>
-									<option value="" >Seleccione</option>
+									<option value="" >Seleccione...</option>
 									<?php 
 										while ( $row = $result->fetch_array() ) {?>
 										<option value=" <?php echo $row['ID_EO_COB'] ?> " ><?php echo $row['NOM_EO_COB']; ?></option>
@@ -375,43 +362,7 @@ exit;
 							  <input type="date" class="form-control" name="fechaenvio"  id="fechaenvio" placeholder="dd/mm/yyyy"  required/> </div>
 						  </div>
 						</div>
-                        <!--------------------------------------------------------------------------->
-                        <!---------------------------------NIP------------------------------------------->
-                        <!------------------------------------------------------------------------------->
-                        <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-4 col-form-label">NIP:</label>
-							<div class="col-sm-9">
-							  <input type="text" class="form-control" name="nip"  id="nip" value="0"/> </div>
-						  </div>
-						</div>
-				
-                      	<!------------------------------------------------------------------------------->
-                        <!---------------------------------VALOR IP-------------------------------------->
-                        <!------------------------------------------------------------------------------->
-					  
-						<div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-4 col-form-label">Valor IP:</label>
-							<div class="col-sm-9">
-							  <input type="text" class="form-control" name="valorip" id="valorip" /> </div>
-						  </div>
-						</div>
-                        <!------------------------------------------------------------------------------->
-                        <!---------------------------------VALOR FACTURADO------------------------------->
-                        <!------------------------------------------------------------------------------->
-                        <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-4 col-form-label">Valor Facturado:</label>
-							<div class="col-sm-9">
-							  <input type="text" class="form-control" name="valorfac"  id="valorfac" value="0" /> </div>
-						  </div>
-						</div>
-					
-                     	<!------------------------------------------------------------------------------->
-                        <!---------------------------------OBSERVACIONES-------------------------------->
-                        <!------------------------------------------------------------------------------->
-                      
+
 						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-4 col-form-label">Observaciones:</label>
@@ -420,6 +371,26 @@ exit;
 						  </div>
 						</div>
                         </div>
+                        <!--------------------------------------------------------------------------->
+                        <!---------------------------------NIP------------------------------------------->
+                        <!------------------------------------------------------------------------------->
+                        
+				
+                      	<!------------------------------------------------------------------------------->
+                        <!---------------------------------VALOR IP-------------------------------------->
+                        <!------------------------------------------------------------------------------->
+					  
+						
+                        <!------------------------------------------------------------------------------->
+                        <!---------------------------------VALOR FACTURADO------------------------------->
+                        <!------------------------------------------------------------------------------->
+                        
+					
+                     	<!------------------------------------------------------------------------------->
+                        <!---------------------------------OBSERVACIONES-------------------------------->
+                        <!------------------------------------------------------------------------------->
+                      
+						
 					  
 							 <button type="submit" class="btn btn-success mr-2">Agregar Informe de Pago</button>
 							  <input class="btn btn-light" type="button" value="Listado de Informes de Pago" onclick="cancelar()">

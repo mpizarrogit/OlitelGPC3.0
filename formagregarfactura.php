@@ -406,7 +406,7 @@ exit;
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Número factura:</label>
                             <div class="col-sm-9">
-                              <input type="number" class="form-control" name="nfactura" id="nfactura" required /> </div>
+                              <input type="number" class="form-control" name="nfactura" id="nfactura" placeholder="0" required /> </div>
                           </div>
                         </div>
                              
@@ -436,7 +436,7 @@ exit;
                             <div class="col-sm-9">
                                 
                         <select  class="form-control" name="cfactura" id="cfactura"  required>
-							            <option value="" > Seleccione </option>
+							            <option value="" > Seleccione... </option>
                             <?php 
                             while ( $row = $result->fetch_array() )    
                             {
@@ -458,7 +458,7 @@ exit;
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Valor Facturado:</label>
                             <div class="col-sm-9">
-                              <input type="number" class="form-control" name="vFacturado" id="vFacturado" required /> 
+                              <input type="number" class="form-control" name="vFacturado" id="vFacturado" placeholder="0" required /> 
                             </div>
                           </div>
                         </div>

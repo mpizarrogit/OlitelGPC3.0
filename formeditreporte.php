@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 session_start();
 
@@ -592,7 +592,7 @@ exit;
                     <!------------------------------------------------------------------------------------>
                     <!------------------------------------------------------------------------------------>
                              <button type="submit" class="btn btn-success mr-2">Modificar IP</button>
-                              <input class="btn btn-light" type="button" value="Listar Informes de Pago" onclick="cancelar()">
+                              <input class="btn btn-light" type="button" value="Listado de Reportes" onclick="cancelar()">
                       
                     </form>
                
@@ -631,7 +631,7 @@ exit;
 	<script>
 		function cancelar(){
 			if (confirm("¿Desea listar los Reportes de Cobranza?")){
-				window.location.href="listadoInformePago.php";
+				window.location.href="listadoip.php";
 			}
 		}
 	</script>

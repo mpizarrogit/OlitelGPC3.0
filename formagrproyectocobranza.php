@@ -256,7 +256,7 @@ exit;
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">OTT/OPR:</label>
 							<div class="col-sm-9">
-							  <input type="text" class="form-control" name="ott" id="ott" /> 
+							  <input type="text" class="form-control" name="ott" id="ott" placeholder="0"/> 
 							</div>
 						  </div>
 						</div>
@@ -282,7 +282,7 @@ exit;
 							<label class="col-sm-3 col-form-label">Tipo Proyecto:</label>
 							<div class="col-sm-9">
 							<select	 class="form-control" name="tipopro" id="tipopro" required>
-							<option value="" selected> Seleccione </option>
+							<option value="" selected> Seleccione... </option>
 							<?php 
 							while ( $row = $result->fetch_array() )	   
 							{
@@ -320,7 +320,7 @@ exit;
 							<label class="col-sm-3 col-form-label">Región:</label>
 							<div class="col-sm-9" name="regionpro" id="regionpro">
 							  <select name="regionpro" class="form-control" id="regionpro" onChange="obtenerCiudades(this.value);" required>
-								<option value=''> Seleccione </option>
+								<option value=''> Seleccione... </option>
 									<?php
 									
 										while($row= $consulta_paises->fetch_object())
@@ -338,7 +338,7 @@ exit;
 							<label class="col-sm-3 col-form-label">Ciudad:</label>
 							<div class="col-sm-9" name="ciudpro1" id="ciudpro1">
 							  <select name="ciudpro" id="ciudpro" class="form-control" required>
-									<option value=''> Seleccione </option>
+									<option value=''> Seleccione... </option>
 										<?php
 											while($row= $consulta_ciudades->fetch_object())
 										   {
@@ -365,7 +365,7 @@ exit;
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Avance %:</label>
 							<div class="col-sm-9">
-							  <input type="number" class="form-control" name="avan" id="avan" min="0" max="100" minlength="1" maxlength="3" placeholder="0" /> 
+							  <input type="number" class="form-control" name="avan" id="avan" min="0" max="100" minlength="1" maxlength="3" placeholder="0 - 100" /> 
 							</div>
 						  </div>
 						</div>
@@ -381,7 +381,7 @@ exit;
 							<label class="col-sm-3 col-form-label">Estado Proyecto:</label>
 							   <div class="col-sm-9">
 							  <select class="form-control" name="estado" id="estado" required>
-								<option value="" >Seleccione</option>
+								<option value="" >Seleccione...</option>
 								<?php
 									while ($rowPRO = $resultPRO->fetch_array()){
 									?>
@@ -405,7 +405,7 @@ exit;
 							<label class="col-sm-3 col-form-label">Estado Cobranza:</label>
 							   <div class="col-sm-9">
 							  <select class="form-control" name="estadoCobranza" id="estadoCobranza" required>
-								<option value="" >Seleccione</option>
+								<option value="" >Seleccione...</option>
 								<?php
 									while ($rowCOB = $resultCOB->fetch_array()){
 									?>
@@ -432,7 +432,7 @@ exit;
 									<label class="col-sm-3 col-form-label">Supervisor Externo:</label>
 									<div class="col-sm-9">
 									   <select class="form-control" name="supentel" id="supentel" required>
-									   <option value="" selected> Seleccione </option>
+									   <option value="" selected> Seleccione... </option>
 							<?php 
 									while ($row = $result->fetch_array() )
 									{
@@ -455,7 +455,7 @@ exit;
 									<label class="col-sm-3 col-form-label">Supervisor Externo:</label>
 									<div class="col-sm-9">
 									   <select class="form-control" name="supentel" id="supentel" required>
-									   <option value="" selected> Seleccione </option>
+									   <option value="" selected> Seleccione... </option>
 							<?php 
 									while ($row = $result->fetch_array() )
 									{
@@ -480,7 +480,7 @@ exit;
 								<label class="col-sm-3 col-form-label">Centro de Costo:</label>
 								<div class="col-sm-9">
 									 <select class="form-control" name="cc" id="cc" required>
-										<option value="" selected> Seleccione </option>
+										<option value="" selected> Seleccione... </option>
 										<?php 
 										while ( $row = $result->fetch_array() )	   
 										{
@@ -505,7 +505,7 @@ exit;
 								<label class="col-sm-3 col-form-label">Jefe Externo:</label>
 								 <div class="col-sm-9">
 								  <select class="form-control" name="jde" id="jde" required>
-									<option value="" selected> Seleccione </option>
+									<option value="" selected> Seleccione... </option>
 							<?php 
 									while ($row = $result->fetch_array() )
 									{
@@ -579,7 +579,7 @@ exit;
 								<label class="col-sm-3 col-form-label">Coordinador de Proyecto:</label>
 								 <div class="col-sm-9">
 								  <select class="form-control" name="ID_PERSONAS" id="ID_PERSONAS" required>
-									<option value="" selected> Seleccione </option>
+									<option value="" selected> Seleccione... </option>
 							<?php 
 									while ($row = $result->fetch_array() )
 									{

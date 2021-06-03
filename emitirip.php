@@ -515,71 +515,31 @@ exit;
                         </div>
                         
                         <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">NIP:</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" name="nip"  id="nip" value="0" /> 
-                            </div>                             
-                          </div>
-                        </div>
-                      </div>      
-                        
-                    <!------------------------------------------------------------------------------------>
-
-                    <!------------------------------------------------------------------------------------>
-
-                      <div class="row">
-                          <div class="col-md-6">
                             <div class="form-group row">
                               <label class="col-sm-3 col-form-label">Valor IP</label>
                               <div class="col-sm-9">
-                                <input type="text" class="form-control" name="valorip" id="valorip" />
+                                <input type="text" class="form-control" name="valorip" id="valorip" placeholder="0" required/>
                               </div>
-                            </div>
-                          </div>
-                        
-                          <div class="col-md-6">
-                            <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Valor Facturado</label>
-                              <div class="col-sm-9">
-                                <input type="text" class="form-control" name="valorfac"  id="valorfac" value="0"/> 
-                              </div>                             
                             </div>
                           </div>
                       </div>      
                         
                     <!------------------------------------------------------------------------------------>
-                  
+
+                    <!------------------------------------------------------------------------------------>
+
                       <div class="row">
-                        <div class="col-md-6">
+                          <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Observaciones:</label>
                               <div class="col-sm-9">  
-                                <input type="text" class="form-control" name="observaciones" id="observaciones">
+                                <input type="text" class="form-control" name="observaciones" id="observaciones" placeholder="">
                               </div>
                           </div>
-                        </div>
-
-                        <div class="col-md-6">
-						              <div class="form-group row">
-							              <label class="col-sm-3 col-form-label">Factura:</label>
-							                <?php 
-								                $query = "SELECT * FROM FACTURA";
-								                $result = $conexion->query($query);
-								              ?>	
-							        	    <div class="col-sm-9">
-									      <select	 class="form-control" name="idfactura" id="idfactura">
-									      <option value="0" >ID Factura&nbsp;&nbsp; - &nbsp;&nbsp;N° Factura</option>
-									          <?php 
-										          while ( $row = $result->fetch_array() ) {?>
-										          <option value=" <?php echo $row['ID_FACT'] ?> " >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['ID_FACT']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['NFACT']; ?> </option>
-										        <?php } ?>
-									      </select>
-								        </div>
-						          </div>
-                    </div>
-
-
+                        </div>   
+                      </div>
+                        
+                    <!------------------------------------------------------------------------------------>
 
                              <button type="submit" class="btn btn-success mr-2">Emitir Informe de Pago</button>
                         

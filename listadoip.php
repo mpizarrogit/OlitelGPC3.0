@@ -497,13 +497,12 @@ exit;
                           <th> CC </th>
                           <th> OTT / OPR</th>
                           <th> Tipo de Servicio</th>
-                          <th> N de Factura </th>
+                          <th> N.º de Factura </th>
                           <th> Responsable de Pago </th>
-                          <th> N Cotizacion</th>
+                          <th> N.º Cotizacion</th>
                           <th> Estado Cobranza</th>
                           <th> Estado Proyecto</th>
                           <th> Fecha de Envio </th>
-                          <th> NIP </th>
                           <th> Valor IP </th>
 						              <th> Valor Facturado </th>
                           <th> Observaciones </th> 
@@ -678,7 +677,6 @@ exit;
                           ?>
                               
                               <td><?php echo $fila['FECHAENVIOIP']; ?></td> 
-                              <td><?php echo $fila['NIP']; ?></td> 
                             <td><?php  echo $fila['VALOR_IP']; ?></td>
                             <td><?php echo $fila['VALOR_FACTURADO']; ?></td>
                             <td><?php  echo $fila['OBSERVACIONES']; ?></td>
@@ -708,7 +706,7 @@ exit;
                            
                            
           <td>
-                                <a href='formeditip.php?ID_IP=<?PHP echo $fila['ID_IP']; ?>'><section class='imgtb'></section></a></td>
+                                <a href='formeditreporte.php?ID_IP=<?PHP echo $fila['ID_IP']; ?>'><section class='imgtb'></section></a></td>
                           
                           
                                 <td > <a href= 'detalleip.php?ID_IP=<?php echo $fila['ID_IP']; ?>'><section class='dtl'></section></a></td>

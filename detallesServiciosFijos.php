@@ -376,10 +376,11 @@ exit;
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-			$consulta = "SELECT ip.ID_IP,ip.CP,ip.ID_CCosto, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, f.ID_FACT, f.VALOR_FACTURA, f.Valor_Facturado, ec.ID_EO_COB, ec.NOM_EO_COB, cc.ID_CC, cc.NOM_CC
+			$consulta = "SELECT ip.ID_IP,ip.CP,ip.ID_CCosto, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, ip.VALOR_IP, ec.ID_EO_COB, ec.NOM_EO_COB, cc.ID_CC, cc.NOM_CC, c.CP, c.NOMBRE, ep.ID_EO_PROYECTO, ep.Nombre_Estado
       FROM INFORME_DE_PAGO ip
+      INNER JOIN concepto c ON ip.CP = c.CP
       INNER JOIN estado_cobranza ec ON ip.ID_EO_COB = ec.ID_EO_COB
-      INNER JOIN FACTURA f ON ip.ID_FACTURA = f.ID_FACT
+      INNER JOIN estado_proyecto ep ON c.ID_EO_PROYECTO = ep.ID_EO_PROYECTO
       INNER JOIN centro_de_costo cc ON ip.ID_Ccosto = cc.ID_CC
       WHERE ip.ID_TIPO = 2";
 			$resultado = mysqli_query($conexion, $consulta);
@@ -457,11 +458,11 @@ exit;
                            <th> CP </th>
                           <th> CC</th>
                           <th> ESTADO COBRANZA </th>
-                          <th> NRO. FACTURA</th>
+                          <th> ESTADO SERVICIO</th>
                           <th> NOMBRE</th>
-                          <th> VALOR FACTURADO </th>
+                          <th> VALOR IP </th>
+                          <th> ASOCIAR IP </th>
                           <th> ACCIONES </th>
-                         
                           </tr>
                         </thead>
                         <tbody>
@@ -471,9 +472,9 @@ exit;
                                 <td style="text-align:left;"><?php echo $fila['CP'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['NOM_CC'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['NOM_EO_COB'];?></td>
-                                <td style="text-align:center;"><?php echo $fila['VALOR_FACTURA'];?></td>
-                                <td style="text-align:center;"><?php echo $fila['Valor_Facturado'];?></td>
-                                <td style="text-align:center;"><?php echo $fila['Valor_Facturado'];?></td>
+                                <td style="text-align:center;"><?php echo $fila['Nombre_Estado'];?></td>
+                                <td style="text-align:center;"><?php echo $fila['NOMBRE'];?></td>
+                                <td style="text-align:center;"><?php echo $fila['VALOR_IP'];?></td>
                                 <div class="row">
 
                            
@@ -483,14 +484,16 @@ exit;
 
                                 <?php //echo ucfirst($fila['NOMBRE']);?>
   
+                              <td>
+
+                              <a href='AsignarFacturaAIP.php?idip=<?php echo $fila['ID_IP']?>&cp=<?php echo $fila['CP']?>'><button type='button' class='btn btn-warning'> Asociar Factura </button></a>
+
+                              </td>
+
+
                                 <td>
-                             
                                 <a href='formeditip.php?ID_IP=<?PHP echo $fila['ID_IP']; ?>'><section class='imgtb'></section></a>
-                          
-                          
-                          <a href= 'ipdetallado.php?ID_IP=<?php echo $fila['ID_IP']; ?>'><section class='dtl'></section></a>
-                      
-                          <a href= 'formagregaroc.php?idfactura=<?php echo $fila['ID_FACT']; ?>'><button type='button' class='btn btn-danger'> OC </button></a>
+                                <a href= 'ipdetallado.php?ID_IP=<?php echo $fila['ID_IP']; ?>'><section class='dtl'></section></a>
                                 </td>
                             </tr>
                 

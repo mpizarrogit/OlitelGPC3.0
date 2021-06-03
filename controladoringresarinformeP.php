@@ -39,11 +39,11 @@ $TIPOIP = $_POST['tiposervicio'];
 $estadocobranza = $_POST['idestadocob'];
 $ncoti = $_POST['ncoti'];
 $fechaenvioip = $_POST['fechaenvio'];
-$idip = $_POST['nip'];
+
 $VALORIP = $_POST['valorip'];
-$valorfacturado = $_POST['valorfac'];
+
 $OBSERVACIONES = $_POST['observaciones'];
-$factura =  $_POST['idfactura'];
+
 
 require("bd.php");
 $conexion = mysqli_connect($servidor, $usuario, $password, $base_datos);
@@ -56,7 +56,7 @@ if(mysqli_connect_errno()){
 mysqli_select_db($conexion, $base_datos) or die("No se encuentra la BD");
 mysqli_set_charset($conexion, "utf8");
 
-$consulta = "INSERT INTO informe_de_pago (CP, ID_CCosto, ID_TIPO, ID_FACTURA, ID_EO_COB, NRO_COTI, FECHAENVIOIP, NIP, VALOR_IP, VALOR_FACTURADO, OBSERVACIONES) VALUES (".$cp." , ".$ccosto." , ".$TIPOIP." , ".$factura." , ".$estadocobranza." , '".$ncoti."' , '".$fechaenvioip."' , '".$idip."' , ".$VALORIP." , ".$valorfacturado." , '".$OBSERVACIONES."')";
+$consulta = "INSERT INTO informe_de_pago (CP, ID_CCosto, ID_TIPO, ID_EO_COB, NRO_COTI, FECHAENVIOIP, VALOR_IP, OBSERVACIONES) VALUES (".$cp." , ".$ccosto." , ".$TIPOIP." , ".$estadocobranza." , '".$ncoti."' , '".$fechaenvioip."' , ".$VALORIP." , '".$OBSERVACIONES."')";
 //$consulta = "INSERT INTO INFORME_DE_PAGO (CP, ID_CCosto, ID_TIPO, ID_FACTURA, ID_EO_COB ,NRO_COTI, FECHAENVIOIP, NIP, VALOR_IP, VALOR_FACTURADO, OBSERVACIONES) VALUES (".$concepto.",'".$idcosto."','".$tiposervicio."',".$idfactura.",'".$idestadocob."','".$ncoti."','".$fechaenvio."','".$nip."',".$valorip.",".$valorfac.",'".$observaciones."')";
 /*
 $resultado = mysqli_prepare($conexion, $consulta);

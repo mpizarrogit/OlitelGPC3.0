@@ -484,7 +484,9 @@ exit;
                              <button type="submit" class="btn btn-success mr-2">Enviar</button>
                         
                         
-                              <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
+                              <input class="btn btn-light" type="button" value="Listar Reporte" onclick="cancelar()">
+
+                              <input class="btn btn-light" type="button" value="Listar Facturas" onclick="factura()">
 
                     </form>
                       <br>
@@ -504,7 +506,7 @@ exit;
            <footer class="footer">
             <div class="container-fluid clearfix">
               
-              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
               </span>
             </div>
           </footer>
@@ -520,7 +522,14 @@ exit;
     <!-- endinject -->
 	<script>
 		function cancelar(){
-			if (confirm("¿Está seguro que desea cancelar?")){
+			if (confirm("¿Desea ver los reportes?")){
+				window.location.href="listadoip.php";
+			}
+		}
+	</script>
+  <script>
+		function factura(){
+			if (confirm("¿Desea listar facturas?")){
 				window.location.href="listadofacturascobranza.php";
 			}
 		}
