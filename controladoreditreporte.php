@@ -1,22 +1,22 @@
-		<?php
+<?php
 
+$CP = $_POST['cp'];
 $IP = $_POST['id_ip'];
-$CP = $_POST['CP'];
 $cc = $_POST['ID_CC'];
+$ott = $_POST['OTT'];
 $tipo = $_POST['ID_TIPO'];
-$estadocobranza = $_POST['ID_EO_COB'];
-$nrocot = $_POST['nrocot'];
+$nfact = $_POST['nfact'];
+$jde = $_POST['jde'];
+$ncoti = $_POST['ncoti'];
+$eocob = $_POST['ID_EO_COB'];
+$eoproy = $_POST['ID_EO_PROYECTO'];
 $fechaip = $_POST['fechaip'];
-$valorip = $_POST['vip'];
-//$valorfact = $_POST['vfact'];
-//$nfasoc = $_POST['nfasoc'];
-$observaciones = $_POST['obs'];
+$nombre = $_POST['nompro'];
+$valorip = $_POST['valorip'];
+//$vf = $_POST['valorfact'];
+$obs = $_POST['obs'];
 
-
-
-
-
-		require("bd.php");
+require("bd.php");
 			$conexion = mysqli_connect($servidor, $usuario, $password, $base_datos);
 			
 			//Validar conexión.
@@ -28,7 +28,9 @@ $observaciones = $_POST['obs'];
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-        $consulta = "UPDATE INFORME_DE_PAGO set ID_IP='".$IP."', CP='".$CP."', ID_CCosto='".$cc."', ID_TIPO='".$tipo."', ID_EO_COB='".$estadocobranza."', NRO_COTI='$nrocot', FECHAENVIOIP='$fechaip', VALOR_IP='".$valorip."', OBSERVACIONES='$observaciones'  WHERE ID_IP=".$IP;
+        $consulta = "UPDATE INFORME_DE_PAGO set ID_IP='".$IP."', CP='".$CP."', ID_CCosto='".$cc."', ID_TIPO='".$tipo."', ID_EO_COB='".$eocobranza."', NRO_COTI='$ncoti', FECHAENVIOIP='$fechaip', VALOR_IP='".$valorip."', OBSERVACIONES='$obs'  WHERE ID_IP=".$IP;
+        $consulta2 = "UPDATE concepto set ID_JDE='".$jde."' ,OTT='.$ott.' ,ID_EO_PROYECTO='".$eoproyecto."', NOMBRE='$nombre' WHERE CP=".$CP;
+        //$consulta3 = "UPDATE factura set NFACT = '".$NFACT."'  WHERE  ";
 		/*	$resultado = mysqli_prepare($conexion, $consulta);
 		
 			if(!$resultado){
@@ -56,7 +58,8 @@ if($ok == false){
             
         }
 */
-        $resultado = mysqli_query($conexion, $consulta);		
+        $resultado = mysqli_query($conexion, $consulta);	
+        $resultado2 = mysqli_query($conexion, $consulta2);	
 
 		if(!$resultado){  		
 
@@ -66,7 +69,7 @@ if($ok == false){
 			exit;  
 
 		}  else {
-			 header('Location: listadoInformePago.php');
+			 header('Location: listadoip.php');
 		}
 
 		
@@ -74,3 +77,4 @@ if($ok == false){
 		
 		
 		?>
+

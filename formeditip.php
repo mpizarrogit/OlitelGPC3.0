@@ -353,7 +353,7 @@ exit;
 		  <div class="">
 			<div class="card-body">
 				<div class="d-flex justify-content-between border-bottom">
-					<h2 class="text-primary">Editar Reporte</h2>
+					<h2 class="text-primary">Editar Informe de Pago</h2>
 						  
 				</div>
 			</div>
@@ -369,25 +369,23 @@ exit;
             
             
              <?php 
+
+        $id_ip = $_GET['ID_IP'];
                 
                 include ("bd.php");
 
-         $id_ip = $_GET['ID_IP'];
+         
 
-        $query="SELECT ip.ID_IP, ip.CP, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, ip.NRO_COTI, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, ecobranza.NOM_EO_COB , ep.ID_EO_PROYECTO ,ep.Nombre_Estado ,concepto.OTT, concepto.ID_CC, concepto.ID_JDE, concepto.AVANCE, concepto.VALORPROYECTO,f.ID_FACT,f.NFACT, cc.NOM_CC, tp.NOM_TIPO, je.NOM_JDE 
-        FROM informe_de_pago ip
-        INNER JOIN concepto concepto ON concepto.CP = ip.CP
-        INNER JOIN estado_cobranza ecobranza ON concepto.ID_EO_COB = ecobranza.ID_EO_COB
-        INNER JOIN estado_proyecto ep ON ep.ID_EO_PROYECTO = concepto.ID_EO_PROYECTO
-        INNER JOIN tipo tp ON tp.ID_TIPO = ip.ID_TIPO
-        INNER JOIN jefe_entel je ON je.ID_JDE = concepto.ID_JDE
-        INNER JOIN centro_de_costo cc ON cc.ID_CC = concepto.ID_CC
-        INNER JOIN factura f ON f.ID_FACT = ip.ID_IP
-        WHERE ip.ID_IP ='$id_ip'";
-        $resultado = mysqli_query($conexion, $query);
-        $row = mysqli_fetch_array($resultado);
+        $query="SELECT * FROM informe_de_pago WHERE ID_IP ='$id_ip'";
+        $resultado = $conexion->query($query);
+        $row = $resultado->fetch_assoc();
+        $ID_CC = $row['ID_CCosto'];
+        $ID_TIPO = $row["ID_TIPO"];
+        $ID_EO_COB = $row['ID_EO_COB'];
+        $CP = $row['CP'];
+        //$ccosto = $row['ID_CCosto'];
 
-                ?>
+                ?>   
               
               <?php 
                  //$queryCP="SELECT * FROM CONCEPTO WHERE ID_IP ='$id_ip'";
@@ -404,65 +402,118 @@ exit;
                   <div class="card-body">
                     <h4 class="card-title"></h4>        
                     <form class="form-sample" method="post" action="controladoreditip.php">
-                        <input type="hidden" name="cp" id="cp" value="<?php echo $id_ip ?>">
+                        <input type="hidden" name="ip" id="ip" value="<?php echo $id_ip ?>">
 
                         <p class='card-description'> ID de Informe de Pago = <?php echo "<strong>".$id_ip."</strong>" ?> </p>
-
+                        <input type="hidden" class="form-control" name="id_ip" id="id_ip" value="<?php  echo $id_ip; ?>"/> 
                     <!------------------------------------------------------------------------------------>
                     <!-------------------------------2 COLUMNAS Y 1 FILA---------------------------------->
                     <!------------------------------------------------------------------------------------>
                     <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">CP:</label>
-                            <div class="col-sm-9">
-                              <input class="form-control" type="text" name="cp" id="cp" value="<?php echo $row['CP']; ?>"> 
-                              <input type="hidden" class="form-control" name="id_ip" id="id_ip" value="<?php  echo $id_ip; ?>"/> 
-                            </div>
-                         </div>
-                      </div>
+                    <div class="col-md-6">
+						<div class="form-group row">
+								<label class="col-sm-3 col-form-label">CP / NOMBRE:</label>
+							<div class="col-sm-9">
+							 <?php 
+								$query3 = "SELECT * FROM concepto";
+								$resultado3 = mysqli_query($conexion, $query3);
+                $row33 = $resultado3->fetch_array();
+                ?>
+								<input type="text" class="form-control" name="CP" id="CP" value="<?php echo $row['CP']; ?>" readonly>
+								
+								</div>
+							</div>
+						</div>
                              
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Centro de Costo:</label>
-                          <?php
-                            //$querycc = "SELECT ip.ID_IP ip.ID_CCosto, cc.ID_CC, cc.NOM_CC 
-                            //            FROM informe_de_pago ip 
-                            //            INNER JOIN centro_de_costo cc ON cc.ID_CC = ip.IC_CCosto
-                            //            WHERE ip.ID_IP = '$id_ip' ";
-                            //$resultadocc = $conexion->query($querycc);
-                            //$rowcc = $resultadocc->fetch_array();
-                          ?>
-                            <div class="col-sm-9">
-                              <input class="form-control" type="text" name="cc" id="cc" value="<?php echo $row['NOM_CC']; ?>" readonly>
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
+                      <div class="col-md-6">
+						<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Centro de Costo:</label>
+							<div class="col-sm-9">
+							 <?php 
+								$query3 = "SELECT * FROM centro_de_costo";
+								$resultado3 = mysqli_query($conexion, $query3);?>
+								<select class="form-control" name="ID_CC" id="ID_CC" >
+								<?php 
+									while ($row3 = $resultado3->fetch_array() )
+									{
+										if($row3['ID_CC']==$ID_CC)
+										{?>
+											<option value=" <?php echo$row3['ID_CC'] ?>" selected>
+										<?php echo $row3['NOM_CC']; ?>
+										</option>
+										<?php }
+										else{
+									?>
+										<option value=" <?php echo$row3['ID_CC'] ?>">
+										<?php echo $row3['NOM_CC']; ?>
+										</option>
+										<?php }} ?>
+								</select>
+								</div>
+							</div>
+						</div>
+					</div>
 
                     <!------------------------------------------------------------------------------------>
                     <!-------------------------------2 COLUMNAS Y 1 FILA---------------------------------->
                     <!------------------------------------------------------------------------------------>
 
                       <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">OTT / OPR:</label>
-                            <div class="col-sm-9">
-                              <input class="form-control" type="text" name="ott" id="ott" value="<?php echo $row['OTT']; ?>">
-                            </div>
-                          </div>
-                        </div>
+                      <div class="col-md-6">
+						<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Tipo:</label>
+							<div class="col-sm-9">
+							 <?php 
+								$query3 = "SELECT * FROM tipo";
+								$resultado3 = mysqli_query($conexion, $query3);?>
+								<select class="form-control" name="ID_TIPO" id="ID_TIPO" >
+								<?php 
+									while ($row3 = $resultado3->fetch_array() )
+									{
+										if($row3['ID_TIPO']==$ID_TIPO)
+										{?>
+											<option value=" <?php echo$row3['ID_TIPO'] ?>" selected>
+										<?php echo $row3['NOM_TIPO']; ?>
+										</option>
+										<?php }
+										else{
+									?>
+										<option value=" <?php echo$row3['ID_TIPO'] ?>">
+										<?php echo $row3['NOM_TIPO']; ?>
+										</option>
+										<?php }} ?>
+								</select>
+								</div>
+							</div>
+						</div>
 
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">TIPO:</label>
-                              <div class="col-sm-9">
-                                <input class="form-control" type="text" name="tipo" id="tipo" value="<?php echo $row['NOM_TIPO']; ?>" readonly>   
-                              </div>
-                          </div>
-                        </div>
+            <div class="col-md-6">
+						<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Estado de Cobranza:</label>
+							<div class="col-sm-9">
+							 <?php 
+								$query3 = "SELECT * FROM estado_cobranza";
+								$resultado3 = mysqli_query($conexion, $query3);?>
+								<select class="form-control" name="ID_EO_COB" id="ID_EO_COB" >
+								<?php 
+									while ($row3 = $resultado3->fetch_array() )
+									{
+										if($row3['ID_EO_COB']==$ID_EO_COB)
+										{?>
+											<option value=" <?php echo$row3['ID_EO_COB'] ?>" selected>
+										<?php echo $row3['NOM_EO_COB']; ?>
+										</option>
+										<?php }
+										else{
+									?>
+										<option value=" <?php echo$row3['ID_EO_COB'] ?>">
+										<?php echo $row3['NOM_EO_COB']; ?>
+										</option>
+										<?php }} ?>
+								</select>
+								</div>
+							</div>
+						</div>
                       </div>
 
                     <!------------------------------------------------------------------------------------>
@@ -472,18 +523,18 @@ exit;
                     <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nro de Factura:</label>
+                            <label class="col-sm-3 col-form-label">N.º de Cotización:</label>
                             <div class="col-sm-9">
-                            <input class="form-control" type="text" name="nfact" id="nfact" value="<?php echo $row['NFACT']; ?>" readonly>
+                            <input class="form-control" type="text" name="nrocot" id="nrocot" value="<?php echo $row['NRO_COTI']; ?>">
                             </div>
                           </div>
                         </div>
                         
                           <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Responsable de Pago:</label>
+                            <label class="col-sm-3 col-form-label">Fecha envío de IP:</label>
                             <div class="col-sm-9">
-                            <input class="form-control" type="text" name="njde" id="njde" value="<?php echo $row['NOM_JDE']; ?>" readonly>
+                            <input class="form-control" type="text" name="fechaip" id="fechaip" value="<?php echo $row['FECHAENVIOIP']; ?>" >
                             </div>
                           </div>
                         </div>    
@@ -496,18 +547,18 @@ exit;
                     <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Nro de Cotización:</label>
+                            <label class="col-sm-3 col-form-label">Valor de IP:</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" name="ncoti" id="ncoti" value="<?php  echo $row['NRO_COTI']; ?>"/>
+                              <input type="text" class="form-control" name="vip" id="vip" value="<?php  echo $row['VALOR_IP']; ?>"/>
                             </div>
                           </div>
                         </div>
                         
                           <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Estado Cobranza:</label>
+                            <label class="col-sm-3 col-form-label">Valor Facturado:</label>
                             <div class="col-sm-9">
-                            <input class="form-control" type="text" name="nom_eo_cob" id="nom_eo_cob" value="<?php echo $row['NOM_EO_COB']; ?>" readonly>
+                            <input class="form-control" type="text" name="vfact" id="vfact" value="<?php //echo $row['Valor_Facturado']; ?>" readonly>
                             </div>
                           </div>
                         </div>    
@@ -518,20 +569,20 @@ exit;
                     <!------------------------------------------------------------------------------------>
 
                     <div class="row">
-                        <div class="col-md-6">
+                    <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Estado Proyecto:</label>
+                            <label class="col-sm-3 col-form-label">N.º de Factura Asociada:</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" name="estadop" id="estadop" value="<?php  echo $row['Nombre_Estado']; ?>" readonly/>
+                              <input type="text" class="form-control" name="nfasoc" id="nfasoc" value="<?php  //echo $row['NFACT']; ?>" readonly/>
                             </div>
                           </div>
                         </div>
                         
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Fecha de envio IP:</label>
+                            <label class="col-sm-3 col-form-label">Observaciones:</label>
                             <div class="col-sm-9">
-                            <input type="text" class="form-control" name="fechaip" id="fechaip" value="<?php  echo $row['FECHAENVIOIP']; ?>"/>
+                            <input type="text" class="form-control" name="obs" id="obs" value="<?php  echo $row['OBSERVACIONES']; ?>"/>
                             </div>
                           </div>
                         </div> 
@@ -541,52 +592,9 @@ exit;
                     <!------------------------------------------------------------------------------------>
                     <!-------------------------------2 COLUMNAS Y 1 FILA---------------------------------->
                     <!------------------------------------------------------------------------------------>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">NIP:</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" name="nip" id="nip" value="<?php  echo $row['NIP']; ?>"/>
-                            </div>
-                          </div>
-                        </div>
-                        
-                          <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Valor IP:</label>
-                            <div class="col-sm-9">
-                            <input type="text" class="form-control" name="valorip" id="valorip" value="<?php  echo $row['VALOR_IP']; ?>"/>
-                            </div>
-                          </div>
-                        </div>    
-
-                      </div>
-
                     <!------------------------------------------------------------------------------------>
                     <!-------------------------------2 COLUMNAS Y 1 FILA---------------------------------->
                     <!------------------------------------------------------------------------------------>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Valor Facturado:</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" name="valorfact" id="valorfact" value="<?php  echo $row['VALOR_FACTURADO']; ?>"/> 
-                            </div>
-                          </div>
-                        </div>
-                        
-                          <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Observaciones:</label>
-                            <div class="col-sm-9">
-                            <input type="text" class="form-control" name="obs" id="obs" value="<?php  echo $row['OBSERVACIONES']; ?>"/> 
-                            </div>
-                          </div>
-                        </div>  
-
-                      </div>
 
                     <!------------------------------------------------------------------------------------>
                     <!------------------------------------------------------------------------------------>

@@ -362,56 +362,52 @@ exit;
 		$query="SELECT * FROM FACTURA WHERE ID_FACT ='$id_fact'";
 		$resultado= $conexion->query($query);
 		$row=$resultado->fetch_assoc();
-	$ID_CL=$row['ID_CL'];
+		$ID_CL=$row['ID_CL'];
 				?>
 			  <div class="col-12 grid-margin">
 				<div class="card">
 				  <div class="card-body">
 					<h4 class="card-title"></h4>
 					<form class="form-sample" method="post" action="controladoreditfact.php">
-					<p class="card-description"> ID de Factura: <?php echo $id_fact ?></p>
-						 <div class="row">
-						<div class="col-md-6">
+					<p class="card-description"><strong> ID de Factura: <?php echo $id_fact ?></strong></p>
+					<input type="hidden" class="form-control" name="idfact"  id="idfact" value="<?php  echo $id_fact ?>"/>
+					<!------------------------------------------------------------------------------------------------------------------------------>
+					<div class="row">
+
+						 <div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Por Facturar:</label>
+							<label class="col-sm-3 col-form-label">N.º Factura:</label>
 							<div class="col-sm-9">
-							<input class="form-control" type="number" name="porfacturar" id="porfacturar" value="<?php echo $row['POR_FACTURAR']; ?>"> 
-					 <input type="hidden" class="form-control" name="id_fact" id="id_fact" value="<?php	 echo $id_fact; ?>"/> </div>
-							  </div>
-						  </div>
-							  <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Número Factura:</label>
-							<div class="col-sm-9">
-							  <input type="number" class="form-control" name="nfact"  id="nfact"	 value="<?php  echo $row['NFACT']; ?>"/>
+							  <input type="number" class="form-control" name="nfact"  id="nfact" value="<?php  echo $row['NFACT']; ?>"/>
 							</div>
 						  </div>
 						</div>
 
-					</div>
-
-
-				 <div class="row">
-					 <div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Valor Factura:</label>
-							<div class="col-sm-9">
-							  <input type="number" class="form-control" name="vfact" id="vfact" value=" <?php echo $row['VALOR_FACTURA']; ?>" /> </div>
-						  </div>
-						</div>
 						<div class="col-md-6">
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Fecha Factura:</label>
 							   <div class="col-sm-9">
-								  <input type="date" class="form-control" name="ffact" id="ffact" value= <?php echo $row['F_FACTURA']; ?> />	  
+								  <input type="text" class="form-control" name="ffact" id="ffact" value= <?php echo $row['F_FACTURA']; ?> />	
+								    
 							</div>
 						  </div>
 						</div>
-					  </div>
-					  <div class="row">
-					  <div class="col-md-6">
+					</div>
+				<!------------------------------------------------------------------------------------------------------------------------------>
+
+				 <div class="row">
+					<div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Cliente:</label>
+							<label class="col-sm-3 col-form-label">Valor Factura:</label>
+							<div class="col-sm-9">
+							  <input type="number" class="form-control" name="vfact" id="vfact" value= <?php echo $row['Valor_Facturado']; ?> /> 
+							</div>
+						  </div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Cliente:</label>
 							<div class="col-sm-9">
 							 <?php 
 								$query3 = "SELECT * FROM cliente";
@@ -433,57 +429,18 @@ exit;
 										</option>
 										<?php }} ?>
 								</select>
-							  </div>
-						  </div>
+								</div>
+							</div>
 						</div>
-						<div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">OC:</label>
-							<div class="col-sm-9">
-							 <section class="form-control" name="oc" id="oc">	  
-								<?php 
-						$query2 = "select * from OC, factura where OC.ID_FACT = FACTURA.ID_FACT and FACTURA.ID_FACT = ".$row['ID_FACT'];
-					   $resultado2 = mysqli_query($conexion, $query2);
-						 while($fila = mysqli_fetch_array($resultado2)){
-							 ?>
-							  <?php	 echo $fila['NOC'].","; ?>
-							  <?php
-							  }
-						?>
-							</section>
-							  </div>
-						  </div>
-						</div>
-						
-					  </div>
+					</div>
 
+					<!------------------------------------------------------------------------------------------------------------------------------>
 
-					  <div class="row">
-						<div class="col-md-6">
-						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">IP Asociado:</label>
-							<div class="col-sm-9">
-							 <section class="tmlet">   
-								<?php 
-						$query3 = "SELECT * FROM pago_fact, informe_de_pago, factura where informe_de_pago.ID_IP = pago_fact.ID_IP and factura.ID_FACT = pago_fact.ID_FACT and pago_fact.ID_FACT = ".$row['ID_FACT'];
-					   $resultado3 = mysqli_query($conexion, $query3);
-						 while($fila3 = mysqli_fetch_array($resultado3)){
-							 ?>
-							  <?php	 echo $fila3['ID_IP']."  "; 
-							 echo "<a href= 'eliminaripafact.php?fact=".$row['ID_FACT']."&ip=".$fila3['ID_IP']."'><section class='elim'></section></a> </td>"; echo "</br>";
-							  echo "<br>";
-							  ?>
-							  <?php
-							  }
-						?>
-							</section>
-							  </div>
-						  </div>
-						</div>
-					  </div>
-							 <button type="submit" class="btn btn-success mr-2">Editar</button>
+							 <button type="submit" class="btn btn-success mr-2">Editar Factura</button>
 							 <input class="btn btn-light" type="button" value="Listar Facturas" onclick="cancelar()">
+
 					</form>
+
 				  </div>
 				</div>
 			  </div>

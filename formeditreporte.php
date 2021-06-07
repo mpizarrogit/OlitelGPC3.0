@@ -374,18 +374,24 @@ exit;
 
          $id_ip = $_GET['ID_IP'];
 
-        $query="SELECT ip.ID_IP, ip.CP, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, ip.NRO_COTI, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, ecobranza.NOM_EO_COB , ep.ID_EO_PROYECTO ,ep.Nombre_Estado ,concepto.OTT, concepto.ID_CC, concepto.ID_JDE, concepto.AVANCE, concepto.VALORPROYECTO,f.ID_FACT,f.NFACT, cc.NOM_CC, tp.NOM_TIPO, je.NOM_JDE 
-        FROM informe_de_pago ip
+        $query="SELECT ip.ID_IP, ip.CP, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, ip.NRO_COTI, ip.FECHAENVIOIP, ip.NIP, ip.VALOR_IP, ip.VALOR_FACTURADO, ip.OBSERVACIONES, ecobranza.NOM_EO_COB ,concepto.OTT, concepto.ID_CC, concepto.ID_JDE, concepto.AVANCE, concepto.VALORPROYECTO,concepto.NOMBRE, f.ID_FACT,f.NFACT, cc.NOM_CC, tp.NOM_TIPO, je.NOM_JDE, ep.ID_EO_PROYECTO, ep.Nombre_Estado
+        FROM informe_de_pago ip 
         INNER JOIN concepto concepto ON concepto.CP = ip.CP
-        INNER JOIN estado_cobranza ecobranza ON concepto.ID_EO_COB = ecobranza.ID_EO_COB
+        INNER JOIN estado_cobranza ecobranza ON ecobranza.ID_EO_COB = ip.ID_EO_COB
         INNER JOIN estado_proyecto ep ON ep.ID_EO_PROYECTO = concepto.ID_EO_PROYECTO
         INNER JOIN tipo tp ON tp.ID_TIPO = ip.ID_TIPO
         INNER JOIN jefe_entel je ON je.ID_JDE = concepto.ID_JDE
         INNER JOIN centro_de_costo cc ON cc.ID_CC = concepto.ID_CC
-        INNER JOIN factura f ON f.ID_FACT = ip.ID_IP
+        INNER JOIN factura f ON f.ID_FACT
         WHERE ip.ID_IP ='$id_ip'";
         $resultado = mysqli_query($conexion, $query);
         $row = mysqli_fetch_array($resultado);
+        $ID_CC = $row["ID_CC"];
+        $ID_TIPO = $row['ID_TIPO'];
+        $ID_JDE = $row['ID_JDE'];
+        $ID_EO_COB = $row['ID_EO_COB'];
+
+
 
                 ?>
               
@@ -416,28 +422,39 @@ exit;
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">CP:</label>
                             <div class="col-sm-9">
-                              <input class="form-control" type="text" name="cp" id="cp" value="<?php echo $row['CP']; ?>"> 
+                              <input class="form-control" type="text" name="cp" id="cp" value="<?php echo $row['CP']; ?>" readonly> 
                               <input type="hidden" class="form-control" name="id_ip" id="id_ip" value="<?php  echo $id_ip; ?>"/> 
                             </div>
                          </div>
                       </div>
                              
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Centro de Costo:</label>
-                          <?php
-                            //$querycc = "SELECT ip.ID_IP ip.ID_CCosto, cc.ID_CC, cc.NOM_CC 
-                            //            FROM informe_de_pago ip 
-                            //            INNER JOIN centro_de_costo cc ON cc.ID_CC = ip.IC_CCosto
-                            //            WHERE ip.ID_IP = '$id_ip' ";
-                            //$resultadocc = $conexion->query($querycc);
-                            //$rowcc = $resultadocc->fetch_array();
-                          ?>
-                            <div class="col-sm-9">
-                              <input class="form-control" type="text" name="cc" id="cc" value="<?php echo $row['NOM_CC']; ?>" readonly>
-                            </div>
-                          </div>
-                        </div>
+                      <div class="col-md-6">
+						<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Centro de Costo:</label>
+							<div class="col-sm-9">
+							 <?php 
+								$query3 = "SELECT * FROM centro_de_costo";
+								$resultado3 = mysqli_query($conexion, $query3);?>
+								<select class="form-control" name="ID_CC" id="ID_CC" >
+								<?php 
+									while ($row3 = $resultado3->fetch_array() )
+									{
+										if($row3['ID_CC']==$ID_CC)
+										{?>
+											<option value=" <?php echo$row3['ID_CC'] ?>" selected>
+										<?php echo $row3['NOM_CC']; ?>
+										</option>
+										<?php }
+										else{
+									?>
+										<option value=" <?php echo$row3['ID_CC'] ?>">
+										<?php echo $row3['NOM_CC']; ?>
+										</option>
+										<?php }} ?>
+								</select>
+								</div>
+							</div>
+						</div>
 
                       </div>
 
@@ -456,13 +473,32 @@ exit;
                         </div>
 
                         <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">TIPO:</label>
-                              <div class="col-sm-9">
-                                <input class="form-control" type="text" name="tipo" id="tipo" value="<?php echo $row['NOM_TIPO']; ?>" readonly>   
-                              </div>
-                          </div>
-                        </div>
+						<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Tipo:</label>
+							<div class="col-sm-9">
+							 <?php 
+								$query3 = "SELECT * FROM tipo";
+								$resultado3 = mysqli_query($conexion, $query3);?>
+								<select class="form-control" name="ID_TIPO" id="ID_TIPO" >
+								<?php 
+									while ($row3 = $resultado3->fetch_array() )
+									{
+										if($row3['ID_TIPO']==$ID_TIPO)
+										{?>
+											<option value=" <?php echo$row3['ID_TIPO'] ?>" selected>
+										<?php echo $row3['NOM_TIPO']; ?>
+										</option>
+										<?php }
+										else{
+									?>
+										<option value=" <?php echo$row3['ID_TIPO'] ?>">
+										<?php echo $row3['NOM_TIPO']; ?>
+										</option>
+										<?php }} ?>
+								</select>
+								</div>
+							</div>
+						</div>
                       </div>
 
                     <!------------------------------------------------------------------------------------>
@@ -479,15 +515,34 @@ exit;
                           </div>
                         </div>
                         
-                          <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Responsable de Pago:</label>
-                            <div class="col-sm-9">
-                            <input class="form-control" type="text" name="njde" id="njde" value="<?php echo $row['NOM_JDE']; ?>" readonly>
-                            </div>
-                          </div>
-                        </div>    
-                      </div>
+          <div class="col-md-6">
+						<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Responsable de Pago:</label>
+							<div class="col-sm-9">
+							 <?php 
+								$query3 = "SELECT * FROM jefe_entel";
+								$resultado3 = mysqli_query($conexion, $query3);?>
+								<select class="form-control" name="jde" id="jde" >
+								<?php 
+									while ($row3 = $resultado3->fetch_array() )
+									{
+										if($row3['ID_JDE']==$jde)
+										{?>
+											<option value=" <?php echo$row3['ID_JDE'] ?>" selected>
+										<?php echo $row3['NOM_JDE']; ?>
+										</option>
+										<?php }
+										else{
+									?>
+										<option value=" <?php echo$row3['ID_JDE'] ?>">
+										<?php echo $row3['NOM_JDE']; ?>
+										</option>
+										<?php }} ?>
+								</select>
+								</div>
+							</div> 
+            </div>
+          </div>
 
                     <!------------------------------------------------------------------------------------>
                     <!-------------------------------2 COLUMNAS Y 1 FILA---------------------------------->
@@ -503,14 +558,33 @@ exit;
                           </div>
                         </div>
                         
-                          <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Estado Cobranza:</label>
-                            <div class="col-sm-9">
-                            <input class="form-control" type="text" name="nom_eo_cob" id="nom_eo_cob" value="<?php echo $row['NOM_EO_COB']; ?>" readonly>
-                            </div>
-                          </div>
-                        </div>    
+                        <div class="col-md-6">
+						<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Estado de Cobranza:</label>
+							<div class="col-sm-9">
+							 <?php 
+								$query3 = "SELECT * FROM estado_cobranza";
+								$resultado3 = mysqli_query($conexion, $query3);?>
+								<select class="form-control" name="ID_EO_COB" id="ID_EO_COB" >
+								<?php 
+									while ($row3 = $resultado3->fetch_array() )
+									{
+										if($row3['ID_EO_COB']==$ID_EO_COB)
+										{?>
+											<option value=" <?php echo$row3['ID_EO_COB'] ?>" selected>
+										<?php echo $row3['NOM_EO_COB']; ?>
+										</option>
+										<?php }
+										else{
+									?>
+										<option value=" <?php echo$row3['ID_EO_COB'] ?>">
+										<?php echo $row3['NOM_EO_COB']; ?>
+										</option>
+										<?php }} ?>
+								</select>
+								</div>
+							</div>
+						</div>   
                       </div>
 
                     <!------------------------------------------------------------------------------------>
@@ -519,13 +593,32 @@ exit;
 
                     <div class="row">
                         <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Estado Proyecto:</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" name="estadop" id="estadop" value="<?php  echo $row['Nombre_Estado']; ?>" readonly/>
-                            </div>
-                          </div>
-                        </div>
+						<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Estado de Proyecto:</label>
+							<div class="col-sm-9">
+							 <?php 
+								$query3 = "SELECT * FROM estado_proyecto";
+								$resultado3 = mysqli_query($conexion, $query3);?>
+								<select class="form-control" name="ID_EO_PROYECTO" id="ID_EO_PROYECTO" >
+								<?php 
+									while ($row3 = $resultado3->fetch_array() )
+									{
+										if($row3['ID_EO_COB']==$ID_EO_COB)
+										{?>
+											<option value=" <?php echo$row3['ID_EO_PROYECTO'] ?>" selected>
+										<?php echo $row3['Nombre_Estado']; ?>
+										</option>
+										<?php }
+										else{
+									?>
+										<option value=" <?php echo$row3['ID_EO_PROYECTO'] ?>">
+										<?php echo $row3['Nombre_Estado']; ?>
+										</option>
+										<?php }} ?>
+								</select>
+								</div>
+							</div>
+              </div>
                         
                         <div class="col-md-6">
                           <div class="form-group row">
@@ -535,7 +628,6 @@ exit;
                             </div>
                           </div>
                         </div> 
-
                       </div>
 
                     <!------------------------------------------------------------------------------------>
@@ -545,9 +637,9 @@ exit;
                     <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">NIP:</label>
+                            <label class="col-sm-3 col-form-label">Nombre:</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" name="nip" id="nip" value="<?php  echo $row['NIP']; ?>"/>
+                              <input type="text" class="form-control" name="nompro" id="nompro" value="<?php  echo $row['NOMBRE']; ?>"/>
                             </div>
                           </div>
                         </div>

@@ -461,7 +461,9 @@ exit;
                           <th> ESTADO SERVICIO</th>
                           <th> NOMBRE</th>
                           <th> VALOR IP </th>
-                          <th> ASOCIAR IP </th>
+                          <th> VALOR FACTURADO </th>
+                          <th> N.º FACTURA ASOCIADO </th>
+                          <th> ASOCIAR FACTURA </th>
                           <th> ACCIONES </th>
                           </tr>
                         </thead>
@@ -475,14 +477,14 @@ exit;
                                 <td style="text-align:center;"><?php echo $fila['Nombre_Estado'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['NOMBRE'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['VALOR_IP'];?></td>
-                                <div class="row">
-
-                           
+                                <td style="text-align:center;"><?php //echo $fila['Valor_Facturado'];?></td>
+                                <td style="text-align:center;"><?php //echo $fila['NFACT'];?></td>
                                 <?php   //$query3="SELECT * FROM centro_de_costo where id_cc = ".$fila['ID_CC'];
                                     //$resultado3= $conexion->query($query3);
                                     //$row3=$resultado3->fetch_assoc(); ?>
 
                                 <?php //echo ucfirst($fila['NOMBRE']);?>
+
   
                               <td>
 
@@ -492,7 +494,7 @@ exit;
 
 
                                 <td>
-                                <a href='formeditip.php?ID_IP=<?PHP echo $fila['ID_IP']; ?>'><section class='imgtb'></section></a>
+                                <a href='formeditInformeServicio.php?ID_IP=<?PHP echo $fila['ID_IP'];?>'><section class='imgtb'></section></a>
                                 <a href= 'ipdetallado.php?ID_IP=<?php echo $fila['ID_IP']; ?>'><section class='dtl'></section></a>
                                 </td>
                             </tr>
