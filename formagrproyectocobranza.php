@@ -545,7 +545,7 @@ exit;
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Fecha Real de Inicio:</label>
 							<div class="col-sm-9">
-							  <input type="date" name="fri" id="fri" class="form-control" /> 
+							  <input type="date" name="fri" id="fri" class="form-control"/> 
 							</div>
 						  </div>
 						</div>
@@ -609,7 +609,7 @@ exit;
 						  <div class="form-group row">
 								<label class="col-sm-3 col-form-label">Valor Proyecto:</label>
 								 <div class="col-sm-9">
-								  <input type="number" id="valorPro" name="valorPro" class="form-control" placeholder="0"/>
+								  <input type="number" id="valorPro" name="valorPro" class="form-control" placeholder="0" />
 							</div>
 						  </div>
 						</div>

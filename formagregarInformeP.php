@@ -37,6 +37,10 @@ exit;
 	<link rel="stylesheet" href="./assets/css/demo_1/style.css">
 	<!-- End Layout styles -->
 	<link rel="shortcut icon" href="./img/olimini.png" />
+	<script
+	src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
   </head>
   <body>
   <script>
@@ -435,6 +439,31 @@ exit;
 	</script>
 	<!-- End plugin js for this page -->
 	<!-- inject:js -->
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#cp').val(1);
+		recargarLista();
+
+		$('#cp').change(function(){
+			recargarLista();
+		});
+	})
+</script>
+<script type="text/javascript">
+	function recargarLista(){
+		$.ajax({
+			type:"POST",
+			url:"datos.php",
+			data:"continente=" + $('#cp').val(),
+			success:function(r){
+				$('#select2lista').html(r);
+			}
+		});
+	}
+</script>
+
+
 	<script src="./assets/js/shared/off-canvas.js"></script>
 	<script src="./assets/js/shared/hoverable-collapse.js"></script>
 	<script src="./assets/js/shared/misc.js"></script>

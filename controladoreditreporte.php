@@ -3,13 +3,15 @@
 $CP = $_POST['cp'];
 $IP = $_POST['id_ip'];
 $cc = $_POST['ID_CC'];
-$ott = $_POST['OTT'];
+$ott = $_POST['ot'];
 $tipo = $_POST['ID_TIPO'];
 $nfact = $_POST['nfact'];
 $jde = $_POST['jde'];
+$sup = $_POST['supe'];
 $ncoti = $_POST['ncoti'];
-$eocob = $_POST['ID_EO_COB'];
-$eoproy = $_POST['ID_EO_PROYECTO'];
+$eocob = $_POST['eocob'];
+$reg = $_POST['regi'];
+$eoproy = $_POST['eoproye'];
 $fechaip = $_POST['fechaip'];
 $nombre = $_POST['nompro'];
 $valorip = $_POST['valorip'];
@@ -28,8 +30,8 @@ require("bd.php");
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-        $consulta = "UPDATE INFORME_DE_PAGO set ID_IP='".$IP."', CP='".$CP."', ID_CCosto='".$cc."', ID_TIPO='".$tipo."', ID_EO_COB='".$eocobranza."', NRO_COTI='$ncoti', FECHAENVIOIP='$fechaip', VALOR_IP='".$valorip."', OBSERVACIONES='$obs'  WHERE ID_IP=".$IP;
-        $consulta2 = "UPDATE concepto set ID_JDE='".$jde."' ,OTT='.$ott.' ,ID_EO_PROYECTO='".$eoproyecto."', NOMBRE='$nombre' WHERE CP=".$CP;
+        $consulta = "UPDATE informe_de_pago set ID_IP='".$IP."', CP='".$CP."', ID_CCosto='".$cc."', ID_TIPO='".$tipo."', ID_EO_COB='".$eocob."', NRO_COTI='$ncoti', FECHAENVIOIP='$fechaip', VALOR_IP='".$valorip."', OBSERVACIONES='$obs'  WHERE ID_IP=".$IP;
+        $consulta2 = "UPDATE concepto set ID_JDE='".$jde."' , ID_CC='".$cc."' , ID_TIPO='".$tipo."',ID_SUPENTEL='".$sup."', OTT='$ott' ,ID_EO_COB='".$eocob."', ID_EO_PROYECTO='".$eoproy."',ID_REGION='".$reg."', NOMBRE='$nombre' WHERE CP=".$CP;
         //$consulta3 = "UPDATE factura set NFACT = '".$NFACT."'  WHERE  ";
 		/*	$resultado = mysqli_prepare($conexion, $consulta);
 		

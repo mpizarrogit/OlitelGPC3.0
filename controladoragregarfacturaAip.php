@@ -13,7 +13,7 @@ if(mysqli_connect_errno()){
     exit();    
 }
 
-$sql = "INSERT INTO FACTURAAIP (NFACT, ID_IP) VALUES (".$factura.", ".$informeP.")" ;
+$sql = "INSERT INTO FACTURAAIP (ID_FACT, ID_IP) VALUES (".$factura.", ".$informeP.")" ;
 
 /*$sql .= "INSERT INTO COMPROMETIDOS (CP,ID_CARGO,ID_PERSONAS) VALUES ('".$cp."', '2','".$cor."')";*/
 

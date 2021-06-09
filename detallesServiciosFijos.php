@@ -376,7 +376,7 @@ exit;
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-			$consulta = "SELECT ip.ID_IP,ip.CP,ip.ID_CCosto, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, ip.VALOR_IP, ec.ID_EO_COB, ec.NOM_EO_COB, cc.ID_CC, cc.NOM_CC, c.CP, c.NOMBRE, ep.ID_EO_PROYECTO, ep.Nombre_Estado
+			$consulta = "SELECT ip.ID_IP,ip.CP,ip.ID_CCosto, ip.ID_TIPO, ip.ID_FACTURA, ip.ID_EO_COB, ip.FECHAENVIOIP , ip.VALOR_IP, ec.ID_EO_COB, ec.NOM_EO_COB, cc.ID_CC, cc.NOM_CC, c.CP, c.NOMBRE, ep.ID_EO_PROYECTO, ep.Nombre_Estado
       FROM INFORME_DE_PAGO ip
       INNER JOIN concepto c ON ip.CP = c.CP
       INNER JOIN estado_cobranza ec ON ip.ID_EO_COB = ec.ID_EO_COB
@@ -413,13 +413,7 @@ exit;
                 
                 </ul>
               </div>
-            </li>  
-        
-
-            
-              
-     
-            
+            </li>         
           </ul>
         </nav>
         <!-- partial -->
@@ -459,6 +453,7 @@ exit;
                           <th> CC</th>
                           <th> ESTADO COBRANZA </th>
                           <th> ESTADO SERVICIO</th>
+                          <th> FECHA ENVIO DE IP </th>
                           <th> NOMBRE</th>
                           <th> VALOR IP </th>
                           <th> VALOR FACTURADO </th>
@@ -475,10 +470,42 @@ exit;
                                 <td style="text-align:center;"><?php echo $fila['NOM_CC'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['NOM_EO_COB'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['Nombre_Estado'];?></td>
+                                <td style="text-align:center;"><?php echo $fila['FECHAENVIOIP'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['NOMBRE'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['VALOR_IP'];?></td>
-                                <td style="text-align:center;"><?php //echo $fila['Valor_Facturado'];?></td>
-                                <td style="text-align:center;"><?php //echo $fila['NFACT'];?></td>
+                                <td style="text-align:center;">
+                            <?php // echo $fila['VALOR_FACTURADO']; ?>
+                            <?php
+                            $consultaVF = "SELECT f.ID_FACT, f.NFACT, SUM(f.Valor_Facturado) AS vfacturado , fip.ID_FACT, fip.ID_IP
+                            FROM factura f
+                            INNER JOIN facturaaip fip ON fip.ID_FACT = f.ID_FACT
+                            WHERE fip.ID_IP =".$fila['ID_IP'];
+			                      $resultadoVF = mysqli_query($conexion, $consultaVF);
+
+                            while($fila4 = mysqli_fetch_array($resultadoVF)){
+                              echo $fila4['vfacturado'];
+                              if($fila4['vfacturado'] >= $fila['VALOR_IP']){
+                                $cambioEO = 1;
+                                $consultaEoCob = "UPDATE informe_de_pago set ID_EO_COB = '".$cambioEO."'";
+                                $resultEO = mysqli_query($conexion, $consultaEoCob);
+                              }
+                                }    
+                            ?>
+                            </td>
+                            <td>
+                            <?php
+                            $consultaIP = "SELECT f.ID_FACT , f.NFACT, fip.ID_FACT, fip.ID_IP 
+                            FROM factura f
+                            INNER JOIN facturaaip fip ON fip.ID_FACT = f.ID_FACT
+                            where fip.ID_IP =".$fila['ID_IP'];
+			                      $resultadoIP = mysqli_query($conexion, $consultaIP);
+
+                            while($fila3 = mysqli_fetch_array($resultadoIP)){
+                              echo $fila3['NFACT']." , ";
+                                }
+                                  
+                            ?>
+                            </td>
                                 <?php   //$query3="SELECT * FROM centro_de_costo where id_cc = ".$fila['ID_CC'];
                                     //$resultado3= $conexion->query($query3);
                                     //$row3=$resultado3->fetch_assoc(); ?>

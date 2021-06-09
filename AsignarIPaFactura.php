@@ -437,13 +437,18 @@ exit;
                     <br><br>
                     <?php 
 
-                      $consulta2 = "SELECT * FROM facturaaip where facturaaip.NFACT =".$nfact;
-			             $resultado2 = mysqli_query($conexion, $consulta2);
-                            echo " <p class='card-description'> IP: ";
-                            while($fila2 = mysqli_fetch_array($resultado2)){
-                            echo $fila2['ID_IP']." , ";
-                              }
-                        echo " </p>";
+$consulta2 = "SELECT ip.ID_IP, ip.VALOR_IP, fip.ID_FACT, fip.ID_IP 
+FROM informe_de_pago ip
+INNER JOIN facturaaip fip ON fip.ID_IP = ip.ID_IP
+WHERE fip.ID_FACT =".$idfactura;
+echo " <p class='card-description'> N.º de IP / Valor del IP </p>" ;
+$resultado2 = mysqli_query($conexion, $consulta2);
+        
+        while($fila2 = mysqli_fetch_array($resultado2)){
+          echo " <p>";
+        echo $fila2['ID_IP']." / $".$fila2['VALOR_IP']."";
+          }
+    echo " </p>";
 
                     $id_ip = $fila2['ID_IP'];
                     ?>
@@ -483,7 +488,7 @@ exit;
 								    <div class="col-sm-9">
                               <li> ID de Factura&nbsp;&nbsp; = &nbsp;&nbsp; <?php echo $idfactura; ?> </li>
                               <li> Numero de Factura &nbsp;&nbsp; = &nbsp;&nbsp; <?php echo $nfact; ?> </li>
-                              <input type="hidden" value="<?php echo $nfact; ?>" name="nfact" id="nfact" />
+                              <input type="hidden" value="<?php echo $idfactura; ?>" name="fact" id="fact" />
 							  	  </div>
 						          </div>
 						        </div>
@@ -498,11 +503,11 @@ exit;
 								      $result = $conexion->query($query);
 								  ?>	
 								<div class="col-sm-9">
-									<select	 class="form-control" name="informepago" id="informepago"required>
-									<option value="" > &nbsp;&nbsp;&nbsp; ID IP &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CP</option>
+									<select	 class="form-control" name="informepago" id="informepago" required>
+									<option value="" > &nbsp;&nbsp;&nbsp; ID IP &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valor de IP</option>
 									<?php 
 										while ( $row = $result->fetch_array() ) {?>
-										<option value=" <?php echo $row['ID_IP'] ?> " >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['ID_IP']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['CP']; ?></option>
+										<option value=" <?php echo $row['ID_IP']; ?> " >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['ID_IP']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['CP']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['VALOR_IP']; ?></option>
 										<?php } ?>
 									</select>
 								</div>

@@ -1,5 +1,5 @@
 <?php
-$factura= $_POST['nfact'];
+$factura= $_POST['fact'];
 $informepago = $_POST['informepago'];
 
 require("bd.php");
@@ -13,7 +13,7 @@ if(mysqli_connect_errno()){
     exit();    
 }
 
-$sql = "INSERT INTO FACTURAAIP (NFACT, ID_IP) VALUES (".$factura.", ".$informepago.")" ;
+$sql = "INSERT INTO facturaaip (ID_FACT, ID_IP) VALUES (".$factura.", ".$informepago.")" ;
 
 /*$sql .= "INSERT INTO COMPROMETIDOS (CP,ID_CARGO,ID_PERSONAS) VALUES ('".$cp."', '2','".$cor."')";*/
 

@@ -437,13 +437,19 @@ exit;
                     <br><br>
                     <?php 
 
-                    $consulta2 = "SELECT * FROM facturaaip where facturaaip.ID_IP =".$informep;
+                    $consulta2 = "SELECT f.ID_FACT , f.NFACT, f.Valor_Facturado, fip.ID_FACT, fip.ID_IP 
+                    FROM factura f
+                    INNER JOIN facturaaip fip ON fip.ID_FACT = f.ID_FACT
+                    where fip.ID_IP =".$informep;
+                    echo " <p class='card-description'> N.º de Factura / Valor Factura </p>" ;
 			              $resultado2 = mysqli_query($conexion, $consulta2);
-                            echo " <p class='card-description'> Facturas: ";
+                            
                             while($fila2 = mysqli_fetch_array($resultado2)){
-                            echo $fila2['NFACT']." , ";
+                              echo " <p>";
+                            echo $fila2['NFACT']." / $".$fila2['Valor_Facturado']."";
                               }
                         echo " </p>";
+                        
                     ?>
 
                     </h4>
@@ -497,11 +503,16 @@ exit;
 								  ?>	
 								<div class="col-sm-9">
 									<select	 class="form-control" name="factura" id="factura"required>
-									<option value="" > ID FACTURA &nbsp;&nbsp; - &nbsp;&nbsp; Nº. FACTURA</option>
+									<option value="" > ID FACTURA &nbsp;&nbsp; - &nbsp;&nbsp; Nº. FACTURA - &nbsp;&nbsp; Valor Factura</option>
 									<?php 
-										while ( $row = $result->fetch_array() ) {?>
-										<option value=" <?php echo $row['ID_IP'] ?> " >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['ID_FACT']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['NFACT']; ?></option>
-										<?php } ?>
+										while ( $row = $result->fetch_array() ) {
+                      
+                      ?>
+										<option value=" <?php echo $row['ID_FACT'] ?> " >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['ID_FACT']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['NFACT']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['Valor_Facturado']; ?></option>
+                    
+										<?php } 
+                    ?>
+                  
 									</select>
 								</div>
 						  </div>

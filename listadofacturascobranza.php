@@ -404,12 +404,32 @@ exit;
                             <td style="text-align:center;"><?php  echo $fila['NFACT']; ?></td>
                             <td style="text-align:center;"><?php  echo $fila['F_FACTURA']; ?></td>
                             <td style="text-align:center;"><?php  echo  $fila['Valor_Facturado']; ?></td>
-                            <td style="text-align:center;"><?php echo  0//VALOR_IP TABLA IP ?></td>
+                            
+
+
+                            <td style="text-align:center;">
+                            <?php // echo $fila['VALOR_IP']; ?>
+                            <?php
+                            $consultaVIP = "SELECT ip.ID_IP, SUM(ip.VALOR_IP) AS vip , fip.ID_FACT, fip.ID_IP
+                            FROM informe_de_pago ip
+                            INNER JOIN facturaaip fip ON fip.ID_IP = ip.ID_IP
+                            WHERE fip.ID_FACT =".$fila['ID_FACT'];
+			                      $resultadoVIP = mysqli_query($conexion, $consultaVIP);
+
+                            while($fila4 = mysqli_fetch_array($resultadoVIP)){
+                              echo $fila4['vip'];
+                                }    
+                            ?>
+                            </td>
+
                             <td style="text-align:center;"><?php echo $fila['NOM_CL']; ?></td>
 
-                          <td>
-                            <?php
-                            $consultaIP = "SELECT * FROM facturaaip WHERE NFACT =".$fila['NFACT'];
+                          <td style="text-align:center;">
+                          <?php
+                            $consultaIP = "SELECT ip.ID_IP, fip.ID_FACT, fip.ID_IP 
+                            FROM informe_de_pago ip
+                            INNER JOIN facturaaip fip ON fip.ID_IP = ip.ID_IP
+                            WHERE fip.ID_FACT =".$fila['ID_FACT'];
 			                      $resultadoIP = mysqli_query($conexion, $consultaIP);
 
                             while($fila3 = mysqli_fetch_array($resultadoIP)){
