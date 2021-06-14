@@ -418,162 +418,131 @@ exit;
             
              <?php
                 
-               $nfactura = $_GET['nfactura'];
-                $vfactura = $_GET['vfactura'];
-                
+            $nfactura = $_GET['nfactura'];
+            $vfactura = $_GET['vfact'];
             $idfactura = $_GET['idfactura'];
+            $porfacturar = $_GET['porfa'];
+            //$saldof = $_GET['saldofavor'];
                 
-                        $query5="SELECT * from FACTURA WHERE factura.ID_FACT ='$idfactura'";
-        $resultado5= $conexion->query($query5);
-        $row5=$resultado5->fetch_assoc();
+            $query5="SELECT * from FACTURA WHERE factura.ID_FACT ='$idfactura'";
+            $resultado5= $conexion->query($query5);
+            $row5=$resultado5->fetch_assoc();
 
-                
-         
-                
             ?>
               
-                
-                
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title"></h4>
                      <?php
                       
-                      $consulta2 = "SELECT * FROM pago_fact, informe_de_pago where pago_fact.ID_IP = informe_de_pago.ID_IP and pago_fact.ID_FACT =".$idfactura;
-			             $resultado2 = mysqli_query($conexion, $consulta2);
-                            echo  " <p class='card-description'> IP Asignados: ";
+                    $consulta2 = "SELECT * FROM facturaaip, informe_de_pago where facturaaip.ID_IP = informe_de_pago.ID_IP and facturaaip.ID_FACT =".$idfactura;
+			              $resultado2 = mysqli_query($conexion, $consulta2);
+                            echo  " <p class='card-description'> IP Asignados | Valor facturado por IP: </p>" ;
                             while($fila2 = mysqli_fetch_array($resultado2)){
-                           echo $fila2['NIP']." , ";
+                           echo "<p>".$fila2['ID_IP']." | ".$fila2['VALOR_FACTURADO'];
                               }
                             echo " </p>";
                       ?> 
                       
                       
                     <form class="form-sample" method="post" action="controladorfac_a_ips.php">
-                        
-                         <div class="row">
-                             
+                   
+                      <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Número factura:</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" name="nfactura" id="nfactura" value="<?php  echo $nfactura ?>" disabled/> 
-								
-							</div>
-                              
-                               <input type="hidden" class="form-control" name="nfactura" id="nfactura" value="<?php  echo $nfactura ?>" disabled/> 
-							<input type="hidden" class="form-control" name="id_fact" id="id_fact" value="<?php  echo $idfactura ?>"/>
-
+                              <input type="text" class="form-control" name="nfactura" id="nfactura" value="<?php  echo $nfactura ?>" readonly/> 
+							              </div>
+                              <input type="hidden" class="form-control" name="nfactura" id="nfactura" value="<?php  echo $nfactura ?>" readonly/> 
+							                <input type="hidden" class="form-control" name="id_fact" id="id_fact" value="<?php  echo $idfactura ?>"/>
                           </div>
                         </div>
                              
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Valor Factura:</label>
+                            <label class="col-sm-3 col-form-label">Total Factura:</label>
                             <div class="col-sm-9">
-                                <section class="form-control"> <?php echo number_format($vfactura, 0, ",", "."); ?> </section> </div>
-                                <input type="hidden" class="form-control" name="vfactura" id="vfactura" value="<?php  echo $vfactura ?>"/>
-                              
+                                <section class="form-control"> <?php echo number_format($vfactura, 0, ",", "."); ?> </section>
+                            </div>
+                                <input type="hidden" class="form-control" name="vfactura" id="vfactura" value="<?php  echo $vfactura ?>"/>   
                           </div>
-                            
                         </div>
                       </div>
                          
                         
+                        <!---------------------------------------------------------------------------------------------------------------------> 
+
                       <div class="row">
                         <div class="col-md-6">
-                            
                             <?php 
-    
-                            $query = "SELECT * from informe_de_pago ORDER by nip ASC";
-    
+                            $query = "SELECT * from informe_de_pago ORDER by ID_IP ASC";
                             $result = $conexion->query($query);
                             ?>  
-                            
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">IP:</label>
-                            <div class="col-sm-9">
-                                
-                            <select  class="form-control" name="ipfac" id="ipfac" required>
-                                  <option value="" selected> Seleccionar</option>
+                            <div class="col-sm-9">  
+                              <select  class="form-control" name="ipfac" id="ipfac" required>
+                                <option value="" selected> Seleccionar</option>
                             <?php 
-    
-    
                             while ( $row = $result->fetch_array() )    
                             {
                             ?>
-    
-                        <option value=" <?php echo $row['ID_IP'] ?> " >
-                        <?php echo $row['NIP']." | $".number_format($row['VALOR_IP'], 0, ",", "."); ?>
-                        </option>
-        
+                                <option value=" <?php echo $row['ID_IP'] ?> " >
+                                <?php echo $row['ID_IP']." | $".number_format($row['VALOR_IP'], 0, ",", "."). " | $".number_format($row['VALOR_IP'], 0, ",", "."); ?>
+                                </option>
                         <?php
                             }  
                         ?>
- 
-      </select>
+                              </select>
                             </div>
                           </div>
                         </div>
                        
                           
-                          
-                            <div class="col-md-6">
+                        <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Valor a facturar:</label>
                             <div class="col-sm-9">
-                          
-                          <input type="text" class="form-control" name="valor_a_facturar" id="valor_a_facturar" required/>
-                              </div></div></div> 
-                          
-                        
-                          
-                          
-                          
+                          <input type="number" class="form-control" name="valor_a_facturar" id="valor_a_facturar" required/>
+                            </div>
+                          </div>
+                        </div> 
                       </div>
                         
-                         <div class="row">
-                        
-                             
+                      <!------------------------------------------------------------------------------------------------------------>
+
+                        <div class="row">
                           <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Por facturar:</label>
-                            <div class="col-sm-9">
-                                <section class="form-control"> <?php echo number_format($row5['POR_FACTURAR'], 0, ",", "."); ?> </section>
-                                <input type="hidden" class="form-control" name="por_facturar" id="por_facturar" value="<?php echo $row5['POR_FACTURAR']; ?>"/>
-                              </div></div></div>
-                        
-                        
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Por facturar:</label>
+                              <div class="col-sm-9">
+                              <?php $querySF = "SELECT * FROM facturaaip WHERE ID_FACT=".$row5['ID_FACT'];
+                                  $resultadoSF = mysqli_query($conexion, $querySF);
+                                  $rowSF = mysqli_fetch_array($resultadoSF);
+                            ?>
+                              <section class="form-control"> 
+                              <?php //if($rowSF['POR_FACTURAR'] == null){
+                                //echo 0;
+                              //}else {
+                             //   echo number_format($row5['POR_FACTURAR'], 0, ",", "."); 
+                             // }
+                             echo $row5['POR_FACTURAR'];
+                                ?> 
+                                </section>
+                              <input type="hidden" class="form-control" name="por_facturar" id="por_facturar" value="<?php echo $row5['POR_FACTURAR']; ?>"/>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                      
-                     
-                     
-                    
-              
-                      
-                     
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                             <button type="submit" class="btn btn-success mr-2">Enviar</button>
-                       
-                        
-                              <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
+                     <!------------------------------------------------------------------------------------------------------------>
 
+                          <button type="submit" class="btn btn-success mr-2"> Asociar Factura </button>
+                          <input class="btn btn-light" type="button" value="Volver al listado de Facturas" onclick="cancelar()">
                     </form>
                       <br>
-                      
-
-                  
                   </div>
                 </div>
               </div>
@@ -587,7 +556,7 @@ exit;
             <footer class="footer">
             <div class="container-fluid clearfix">
               
-              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
               </span>
             </div>
           </footer>

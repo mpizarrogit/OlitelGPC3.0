@@ -4,17 +4,10 @@ $vfactura = $_POST['vfactura'];
 $ip = $_POST['ipfac'];
 $id_fact = $_POST['id_fact'];
 $valor_a_facturar = $_POST['valor_a_facturar'];
-$por_facturar = $_POST['por_facturar'];
-
-
-
- $xfact = 0;
-    
-    $xfact = $por_facturar - $valor_a_facturar;
-
-
-
-
+$porfacturar = $_POST['por_facturar'];
+//$saldofavor = $_POST['saldofa'];
+$pf = $vfactura - $valor_a_facturar;
+$pfu = $porfacturar - $valor_a_facturar;
 
 require("bd.php");
 
@@ -27,27 +20,43 @@ if(mysqli_connect_errno()){
     exit();    
 }
 
-$sql = "INSERT INTO PAGO_FACT (ID_FACT,ID_IP) VALUES ('".$id_fact."', '".$ip."')";
+$sql = "INSERT INTO facturaaip (ID_FACT,ID_IP) VALUES ('".$id_fact."', '".$ip."')";
 
+//else if($por_facturar>0){
+    
+ //   $sqlsf = "INSERT INTO facturaaip (POR_FACTURAR, SALDO_FAVOR) VALUES ('".$porfact."', '".$saldofavor."')";
+ //   $resultado3 = mysqli_query($conexion, $sqlsf);
+    //$sql3 = "INSERT INTO informe_de_pago (ID_EO_COB) VALUES (1) WHERE ID_IP= '$ip'";
+    //$resultado3 = mysqli_query($conexion, $sql3);
 
+////}
+//else if($porfacturar<0){
+   //  $sf = $porfacturar*-1;
+   //  $sqlsf2 = "INSERT INTO facturaaip (SALDO_FAVOR) VALUES ('".$sf."')";
+   //  $resultado4 = mysqli_query($conexion, $sqlsf2);
+  // }
 
 if (mysqli_multi_query($conexion, $sql)) {
-
-    
-   
-    
-$sql2 = "UPDATE FACTURA SET POR_FACTURAR = '$xfact' where ID_FACT = '$id_fact'";
-
-$resultado2 = mysqli_query($conexion, $sql2);
-    
-
-    
-    
-$sql2 = "UPDATE INFORME_DE_PAGO SET VALOR_FACTURADO = '$valor_a_facturar' where ID_IP = '$ip'";
+    if($porfacturar == 0){
+        $porfacturar = $pf;
+    $sql1 = "INSERT INTO facturaaip (POR_FACTURAR) VALUES ('".$porfacturar."')";
+    $resultado = mysqli_query($conexion, $sql1);
+    }else{
+        $porfacturar = $pfu;
+        $sql12 = "INSERT INTO facturaaip (POR_FACTURAR) VALUES ('".$porfacturar."')";
+        $resultado = mysqli_query($conexion, $sql12);
+    }
+$sql2 = "UPDATE FACTURA SET POR_FACTURAR = '$porfacturar' where ID_FACT = '$id_fact'";
 
 $resultado2 = mysqli_query($conexion, $sql2);
     
-header ('Location: form_fac_a_ips.php?nfactura='.$nfactura.'&vfactura='.$vfactura.'&idfactura='.$id_fact);
+    
+$sql3 = "UPDATE INFORME_DE_PAGO SET VALOR_FACTURADO = '$valor_a_facturar' where ID_IP = '$ip'";
+
+$resultado3 = mysqli_query($conexion, $sql3);
+
+    
+header ('Location: form_fac_a_ips.php?nfactura='.$nfactura.'&vfact='.$vfactura.'&idfactura='.$id_fact.'&porfa='.$porfacturar);
 }
 else {
 echo "<script language='JavaScript'>

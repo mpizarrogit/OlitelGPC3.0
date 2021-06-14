@@ -48,7 +48,7 @@ $ID_CL = $_POST['ID_CL'];
         // $ok=mysqli_stmt_bind_param($resultado,"ssss",$nfact,$vfact,$ffact,$ID_CL,$idfact);
 			// $ok=mysqli_stmt_execute($resultado);
 
-		  	$consulta = "UPDATE FACTURA set NFACT='$nfact', Valor_Facturado=$vfact,F_FACTURA='$ffact',ID_CL= $ID_CL WHERE ID_FACT=$idfact";
+		  	$consulta = "UPDATE FACTURA set NFACT='$nfact', VALOR_FACTURA=$vfact,F_FACTURA='$ffact',ID_CL= $ID_CL WHERE ID_FACT=$idfact";
 			$resultado = mysqli_prepare($conexion, $consulta);
 		
 			if(!$resultado){

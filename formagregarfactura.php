@@ -456,9 +456,9 @@ exit;
                        
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Valor Facturado:</label>
+                            <label class="col-sm-3 col-form-label">Valor Factura:</label>
                             <div class="col-sm-9">
-                              <input type="number" class="form-control" name="vFacturado" id="vFacturado" placeholder="0" required /> 
+                              <input type="number" class="form-control" name="vFactura" id="vFactura" placeholder="0" required /> 
                             </div>
                           </div>
                         </div>

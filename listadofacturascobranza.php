@@ -310,7 +310,7 @@ exit;
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-			$consulta = "SELECT f.ID_FACT, f.ID_IP ,f.ID_CL, f.NFACT, f.VALOR_FACTURA, f.F_FACTURA, f.Valor_Facturado, c.ID_CL, c.NOM_CL
+			$consulta = "SELECT f.ID_FACT, f.ID_IP ,f.ID_CL, f.NFACT, f.VALOR_FACTURA, f.F_FACTURA, f.Valor_Facturado, f.POR_FACTURAR, c.ID_CL, c.NOM_CL
       FROM factura f
       INNER JOIN cliente c ON f.ID_CL = c.ID_CL";
 			$resultado = mysqli_query($conexion, $consulta);
@@ -386,8 +386,9 @@ exit;
                           <th> ID FACTURA </th>
                           <th> N° FACTURA </th>
                           <th>FECHA</th>
-                          <th> VALOR DE FACTURA</th>
-                          <th> VALOR ASOCIADO</th>  
+                          <th> VALOR DE FACTURA</th>  
+                          <th> VALOR ASOCIADO</th>
+                          <th> POR FACTURAR</th>
                           <th> CLIENTE </th>
                           <th> IP ASOC </th>
                           <th>ACCIONES</th>
@@ -403,10 +404,7 @@ exit;
                             <td style="text-align:center;"><?php  echo $fila['ID_FACT']; ?></td>
                             <td style="text-align:center;"><?php  echo $fila['NFACT']; ?></td>
                             <td style="text-align:center;"><?php  echo $fila['F_FACTURA']; ?></td>
-                            <td style="text-align:center;"><?php  echo  $fila['Valor_Facturado']; ?></td>
-                            
-
-
+                            <td style="text-align:center;"><?php  echo $fila['VALOR_FACTURA']; ?></td>
                             <td style="text-align:center;">
                             <?php // echo $fila['VALOR_IP']; ?>
                             <?php
@@ -422,6 +420,13 @@ exit;
                             ?>
                             </td>
 
+                            <td style="text-align:center;"><?php 
+                           // $queryPF = "SELECT SUM(facturaaip.POR_FACTURAR) AS pf, facturaaip.SALDO_FAVOR FROM facturaaip WHERE ID_FACT =".$fila['ID_FACT'];
+                            //$resultPF = mysqli_query($conexion, $queryPF);
+                           // $rowPF = mysqli_fetch_array($resultPF);
+                            echo $fila['POR_FACTURAR']; ?> </td>
+
+                          
                             <td style="text-align:center;"><?php echo $fila['NOM_CL']; ?></td>
 
                           <td style="text-align:center;">
@@ -464,7 +469,7 @@ exit;
                              
                                 <a href='formeditfact.php?ID_FACT=<?php echo $fila['ID_FACT']; ?>'><section class='imgtb'></section></a> 
                                 
-                                <a href='AsignarIPaFactura.php?nfactura=<?php echo $fila['NFACT']?>&idfactura=<?php echo $fila['ID_FACT']?>'><button type='button' class='btn btn-warning'> Asociar un IP </button></a>
+                                <a href='form_fac_a_ips.php?nfactura=<?php echo $fila['NFACT']?>&idfactura=<?php echo $fila['ID_FACT']?>&vfact=<?php echo $fila['VALOR_FACTURA']?>&porfa=<?php echo $fila['POR_FACTURAR']?>'><button type='button' class='btn btn-warning'> Asociar un IP </button></a>
                                 
                                 <a href= 'formagregaroc.php?idfactura=<?php echo $fila['ID_FACT']; ?>'><button type='button' class='btn btn-danger'> OC </button></a>
                             </td>
