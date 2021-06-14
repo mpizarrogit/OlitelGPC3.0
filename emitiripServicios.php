@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 session_start();
 
@@ -16,8 +16,6 @@ exit;
 
 
 ?>
-
-
 
 <!DOCTYPE html>
 
@@ -51,7 +49,7 @@ exit;
   <body>
     <div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
-       <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
           <a class="navbar-brand brand-logo" href="principalcobranza.php">
             <img src="./img/olitel_lg.png" alt="logo" /> </a>
@@ -63,7 +61,7 @@ exit;
             <span class="mdi mdi-menu"></span>
           </button>
           
-          
+         
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
              
@@ -79,7 +77,7 @@ exit;
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
                     
-                <?php 
+                    <?php 
                      $usuario = "SELECT * FROM PERSONAS WHERE RUT = '".$_SESSION['username']."'";
     
                         $resultadousuario = $conexion->query($usuario);
@@ -117,10 +115,9 @@ exit;
                     
                     
                   <p class="mb-1 mt-3 font-weight-semibold"><?php echo $nombreuser;?></p>
-                  
                 </div>
                 
-                
+               
                 <a href="./cerrarsession.php" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary"></i>Cerrar Sesión</a>
               </div>
             </li>
@@ -261,7 +258,7 @@ exit;
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 
-                <div class="text-wrapper">
+                  <div class="text-wrapper">
                   <p class="profile-name"><?php echo $nombreuser;?></p>
                     
                     
@@ -274,8 +271,8 @@ exit;
               
               
               
-           <li class="nav-item nav-category">Menú Principal</li><li class='nav-item'><a class='nav-link' href='./principalcobranza.php'><i class='menu-icon fa fa-th'></i><span class='menu-title'>Inicio</span></a></li>
-           <li class="nav-item">
+                   <li class="nav-item nav-category">Menú Principal</li><li class='nav-item'><a class='nav-link' href='./principalcobranza.php'><i class='menu-icon fa fa-th'></i><span class='menu-title'>Inicio</span></a></li>
+            <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
                 <i class="menu-icon typcn typcn-chevron-right"></i>
                 <span class="menu-title">Formularios</span>
@@ -329,6 +326,7 @@ exit;
 				</ul>
               </div>
             </li>
+                 
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#reportes" aria-expanded="false" aria-controls="reportes">
                 <i class="menu-icon typcn typcn-chevron-right"></i>
@@ -352,50 +350,8 @@ exit;
                 </ul>
               </div>
             </li>  
-           
-       <!--     
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <i class="menu-icon typcn typcn-document-add"></i>
-                <span class="menu-title">Manejo de usuarios</span>
-                <i class="menu-arrow"></i>
-              </a>
-              <div class="collapse" id="auth">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item">
-                    <a class="nav-link" href="pages/samples/login.html"> Login </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="pages/samples/mutli-level-login.html">Multi Step Login</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="pages/samples/register.html"> Register </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a>
-                  </li>
-                </ul>
-              </div>
-            </li>-->
-           
-            
-            
-          
           </ul>
         </nav>
-          
-          
-          
-          
-          
-          
-          
           
         <!-- NO QUITAR FORM -->
         <div class="main-panel">
@@ -403,146 +359,194 @@ exit;
 			<div class="">
 				<div class="card-body">
 					<div class="d-flex justify-content-between border-bottom">
-						<h2 class="text-primary">Asignar Facturas a Informes de Pago</h2>
-							  
+						<h2 class="text-primary">Emitir Informe de Pago</h2>
 					</div>
 				</div>
 			</div>
             <div class="row">
-            
-              
-              <div class="col-md-6 grid-margin stretch-card">
+              <div class="col-md-6 grid-margin stretch-card"> </div>
+             <?php 
                 
-              </div>
-            
-            
-             <?php
-                
-            $nfactura = $_GET['nfactura'];
-            $vfactura = $_GET['vfact'];
-            $idfactura = $_GET['idfactura'];
-            $porfacturar = $_GET['porfa'];
-            //$saldof = $_GET['saldofavor'];
-                
-            $query5="SELECT * from FACTURA WHERE factura.ID_FACT ='$idfactura'";
-            $resultado5= $conexion->query($query5);
-            $row5=$resultado5->fetch_assoc();
-
-            ?>
-              
+                $cp = $_GET['cp'];
+      
+      include ("bd.php");
+        $query="SELECT * FROM concepto WHERE cp ='$cp'";
+        $resultado= $conexion->query($query);
+        $row=$resultado->fetch_assoc();
+    
+                ?>
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title"></h4>
-                     <?php
-                      
-                    $consulta2 = "SELECT * FROM facturaaip, informe_de_pago where facturaaip.ID_IP = informe_de_pago.ID_IP and facturaaip.ID_FACT =".$idfactura;
-			              $resultado2 = mysqli_query($conexion, $consulta2);
-                            echo  " <p class='card-description'> IP Asignados | Valor facturado por IP: </p>" ;
-                            while($fila2 = mysqli_fetch_array($resultado2)){
-                           echo "<p>".$fila2['ID_IP']." | ".$fila2['VALOR_FACTURADO'];
-                              }
-                            echo " </p>";
-                      ?> 
-                      
-                      
-                    <form class="form-sample" method="post" action="controladorfac_a_ips.php">
-                   
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Número factura:</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" name="nfactura" id="nfactura" value="<?php  echo $nfactura ?>" readonly/> 
-							              </div>
-                              <input type="hidden" class="form-control" name="nfactura" id="nfactura" value="<?php  echo $nfactura ?>" readonly/> 
-							                <input type="hidden" class="form-control" name="id_fact" id="id_fact" value="<?php  echo $idfactura ?>"/>
-                          </div>
-                        </div>
-                             
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Total Factura:</label>
-                            <div class="col-sm-9">
-                                <section class="form-control"> <?php echo number_format($vfactura, 0, ",", "."); ?> </section>
-                            </div>
-                                <input type="hidden" class="form-control" name="vfactura" id="vfactura" value="<?php  echo $vfactura ?>"/>   
-                          </div>
-                        </div>
-                      </div>
-                         
+                    <h4 class="card-title">CP: <?php echo $cp ?></h4>
+                    <form class="form-sample" method="post" action="controladoremitiripservicios.php">
+                        <input type="hidden" name="cp" id="cp" value="<?php echo $cp ?>">
                         
-                        <!---------------------------------------------------------------------------------------------------------------------> 
-
+                    <!------------------------------------------------------------------------------------>
                       <div class="row">
                         <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Nombre Proyecto:</label>
+                            <div class="col-sm-9">
+                                <section class="form-control">
+                                 <?php  echo $row['NOMBRE']; ?>
+                                </section>   
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Descripción:</label>
+                            <div class="col-sm-9">
+                                <section class="form-control">
+                                 <?php  echo $row['DESCRIPCION']; ?>
+                                </section>    
+                            </div>
+                          </div> 
+                        </div> 
+                      </div>
+                          
+                     <!------------------------------------------------------------------------------------>
+                      <div class="row">
+                        <div class="col-md-6">                           
                             <?php 
-                            $query = "SELECT * from informe_de_pago ORDER by ID_IP ASC";
+                            $tipoproyy = $row['ID_TIPO'];
+                            $query = "SELECT * FROM TIPO";
                             $result = $conexion->query($query);
                             ?>  
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">IP:</label>
-                            <div class="col-sm-9">  
-                              <select  class="form-control" name="ipfac" id="ipfac" required>
-                                <option value="" selected> &nbsp;&nbsp;&nbsp;ID IP&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp; VALOR DE IP &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; VALOR FACTURADO POR IP </option>
+                            <label class="col-sm-3 col-form-label">Tipo Proyecto:</label>
+                            <div class="col-sm-9">   
+                           <section class="form-control">  
                             <?php 
-                            while ( $row = $result->fetch_array() )    
-                            {
+                             $query = "SELECT tipo.ID_TIPO, tipo.NOM_TIPO FROM tipo, concepto where tipo.ID_TIPO = concepto.ID_TIPO and concepto.cp = '$cp'";
+                              $result = $conexion->query($query);
+                            ?> 
+                            <?php
+                            while ($rowx = $result->fetch_array())
+                              {
                             ?>
-                                <option value=" <?php echo $row['ID_IP'] ?> " >
-                                <?php echo $row['ID_IP']."   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;   $".number_format($row['VALOR_IP'], 0, ",", "."). "   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;  $".number_format($row['VALOR_FACTURADO'], 0, ",", "."); ?>
-                                </option>
-                        <?php
-                            }  
-                        ?>
-                              </select>
+                            <input type="hidden"  id="ID_TIPO" name="ID_TIPO" value=" <?php echo $rowx['ID_TIPO']; ?>">
+                            <?php echo $rowx['NOM_TIPO']; ?>
+                            <?php } ?>                  
+                            </section>          
                             </div>
                           </div>
                         </div>
-                       
-                          
+
                         <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Valor a facturar:</label>
-                            <div class="col-sm-9">
-                          <input type="number" class="form-control" name="valor_a_facturar" id="valor_a_facturar" required/>
+                          <div class="form-group row">  
+                              <?php 
+                                 $query2 = "SELECT * FROM CENTRO_DE_COSTO";
+                                 $result2 = $conexion->query($query2);
+                              ?>
+                            <label class="col-sm-3 col-form-label">Centro de costo:</label>
+                            <div class="col-sm-9">       
+                            <?php 
+    $query2 = "SELECT centro_de_costo.ID_CC, centro_de_costo.NOM_CC from centro_de_costo, concepto WHERE centro_de_costo.ID_CC = concepto.ID_CC AND concepto.CP = '$cp'";
+    $result2 = $conexion->query($query2);
+                            ?>                                          
+                          <?php 
+                          while ( $row8 = $result2->fetch_array())    
+                          {
+                          ?>
+                             <section class="form-control">
+                                <input type="hidden"  id="ID_CC" name="ID_CC" value=" <?php echo $row8['ID_CC']; ?>">
+                                 <?php echo $row8['NOM_CC']; ?>
+                              </section>
+        
+                                        <?php
+                                        }  
+                                        ?>                     
                             </div>
                           </div>
-                        </div> 
+                        </div>
                       </div>
-                        
-                      <!------------------------------------------------------------------------------------------------------------>
+                      
+                <!------------------------------------------------------------------------------------>
 
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group row">
-                              <label class="col-sm-3 col-form-label">Por facturar:</label>
-                              <div class="col-sm-9">
-                              <?php $querySF = "SELECT * FROM facturaaip WHERE ID_FACT=".$row5['ID_FACT'];
-                                  $resultadoSF = mysqli_query($conexion, $querySF);
-                                  $rowSF = mysqli_fetch_array($resultadoSF);
-                            ?>
+                 <div class="row">
+                     <div class="col-md-6">
+                          <div class="form-group row">
+                              <?php 
+                                 $queryec = "SELECT * FROM estado_cobranza";
+                                 $resultec = $conexion->query($queryec);
+                              ?>
+                                <label class="col-sm-3 col-form-label">Estado de Cobranza:</label>
+                                <div class="col-sm-9">
+                              <?php 
+                                  $queryec = "SELECT ec.ID_EO_COB, ec.NOM_EO_COB FROM estado_cobranza ec, concepto c WHERE ec.ID_EO_COB = c.ID_EO_COB AND c.CP = '$cp'";
+                                  $resultec = $conexion->query($queryec);
+                              ?>                                          
+                              <?php 
+                                  while ( $rowx = $resultec->fetch_array())    
+                                  {
+                              ?>
                               <section class="form-control"> 
-                              <?php //if($rowSF['POR_FACTURAR'] == null){
-                                //echo 0;
-                              //}else {
-                             //   echo number_format($row5['POR_FACTURAR'], 0, ",", "."); 
-                             // }
-                             echo $row5['POR_FACTURAR'];
-                                ?> 
-                                </section>
-                              <input type="hidden" class="form-control" name="por_facturar" id="por_facturar" value="<?php echo $row5['POR_FACTURAR']; ?>"/>
+                              <input type="hidden"  id="escobranza" name="escobranza" value=" <?php echo $rowx['ID_EO_COB']; ?>">
+                              <?php echo $rowx['NOM_EO_COB']; ?> 
+                              </section>
+                              <?php }  ?>     
+                                </div>
+                          </div>
+                      </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Número de Cotización</label>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" name="ncoti" id="ncoti" value="0" />
+                                </div>
+                          </div>
+                        </div>
+                    </div>
+                        
+                  <!------------------------------------------------------------------------------------>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Fecha Envio IP</label>
+                              <div class="col-sm-9">
+                              <input type="date" class="form-control" name="fechaenvio"  id="fechaenvio" placeholder="dd/mm/yyyy"  required/>
+                              </div>
+                          </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                              <label class="col-sm-3 col-form-label">Valor IP</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="valorip" id="valorip" placeholder="0" required/>
                               </div>
                             </div>
                           </div>
-                        </div>
-                     
-                     <!------------------------------------------------------------------------------------------------------------>
+                      </div>      
+                        
+                    <!------------------------------------------------------------------------------------>
 
-                          <button type="submit" class="btn btn-success mr-2"> Asociar Factura </button>
-                          <input class="btn btn-light" type="button" value="Volver al listado de Facturas" onclick="cancelar()">
+                    <!------------------------------------------------------------------------------------>
+
+                      <div class="row">
+                          <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Observaciones:</label>
+                              <div class="col-sm-9">  
+                                <input type="text" class="form-control" name="observaciones" id="observaciones" placeholder="">
+                              </div>
+                          </div>
+                        </div>   
+                      </div>
+                        
+                    <!------------------------------------------------------------------------------------>
+
+                             <button type="submit" class="btn btn-success mr-2">Emitir Informe de Pago</button>
+                        
+                             <input class="btn btn-light" type="button" value="Volver atrás" onclick="cancelar()">
+                      
                     </form>
-                      <br>
+               
                   </div>
                 </div>
               </div>
@@ -553,7 +557,7 @@ exit;
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:../../partials/_footer.html -->
-            <footer class="footer">
+          <footer class="footer">
             <div class="container-fluid clearfix">
               
               <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
@@ -572,11 +576,12 @@ exit;
     <!-- endinject -->
 	<script>
 		function cancelar(){
-			if (confirm("¿Está seguro que desea cancelar?")){
-				window.location.href="listadofacturascobranza.php";
+			if (confirm("¿Está seguro que desea cancelar y volver atrás?")){
+				history.back();
 			}
 		}
 	</script>
+	
     <!-- Plugin js for this page -->
     <script src="./assets/vendors/select2/select2.min.js"></script>
     <script src="./assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
@@ -597,3 +602,4 @@ exit;
     <!-- End custom js for this page -->
   </body>
 </html>
+

@@ -758,7 +758,7 @@ exit;
                     <!------------------------------------------------------------------------------------>
                     
                     <!------------------------------------------------------------------------------------>
-                             <button type="submit" class="btn btn-success mr-2">Modificar IP</button>
+                             <button type="submit" class="btn btn-success mr-2"> MODIFICAR </button>
                               <input class="btn btn-light" type="button" value="Listado de Reportes" onclick="cancelar()">
                       
                     </form>

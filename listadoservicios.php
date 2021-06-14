@@ -522,7 +522,7 @@ exit;
                             
                             ?></td>
                             
-                            <td style="text-align:center;"> <a href= 'emitirip.php?cp=<?PHP echo $fila['CP']; ?>'><button type='button' class='btn btn-success mr-2'>Asociar IP </button></a> </td>
+                            <td style="text-align:center;"> <a href= 'emitiripServicios.php?cp=<?PHP echo $fila['CP']; ?>'><button type='button' class='btn btn-success mr-2'>Asociar IP </button></a> </td>
                             <td style="text-align:center;">
                              <a href='formeditproyectoscobranza.php?cp=<?PHP echo $fila['CP']; ?>'> <section class='imgtb'></section></a>
                              <a href= 'detalleproyectocob.php?cp=<?PHP echo $fila['CP']; ?>'><section class='dtl'></section></a>   
