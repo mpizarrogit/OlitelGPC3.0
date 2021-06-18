@@ -19,7 +19,7 @@ if(mysqli_connect_errno()){
     echo "error al conectar";
     exit();    
 }
-
+// SE DEBE ARREGLAR ESTA COSA
 $sql = "INSERT INTO facturaaip (ID_FACT,ID_IP) VALUES ('".$id_fact."', '".$ip."')";
 
 //else if($por_facturar>0){
@@ -52,9 +52,8 @@ $resultado2 = mysqli_query($conexion, $sql2);
     
     
 $sql3 = "UPDATE INFORME_DE_PAGO SET VALOR_FACTURADO = '$valor_a_facturar' where ID_IP = '$ip'";
-
 $resultado3 = mysqli_query($conexion, $sql3);
-
+    
     
 header ('Location: form_fac_a_ips.php?nfactura='.$nfactura.'&vfact='.$vfactura.'&idfactura='.$id_fact.'&porfa='.$porfacturar);
 }
