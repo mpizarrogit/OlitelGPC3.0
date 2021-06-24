@@ -516,7 +516,7 @@ exit;
                                 
                             
                             
-                            <td><?php echo  number_format($fila['VALORPROYECTO'], 0, ",", ".");
+                            <td><?php echo  "$".number_format($fila['VALORPROYECTO'], 0, ",", ".");//number_format($fila['VALORPROYECTO'], 0, ",", ".");
                             
                               //echo $fila['VALOR_FACTURA'];
                             

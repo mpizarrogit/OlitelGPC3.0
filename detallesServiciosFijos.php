@@ -472,7 +472,7 @@ exit;
                                 <td style="text-align:center;"><?php echo $fila['Nombre_Estado'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['FECHAENVIOIP'];?></td>
                                 <td style="text-align:center;"><?php echo $fila['NOMBRE'];?></td>
-                                <td style="text-align:center;"><?php echo $fila['VALOR_IP'];?></td>
+                                <td style="text-align:center;"><?php echo "$".number_format($fila['VALOR_IP'], 0, ",", ".");//$fila['VALOR_IP'];?></td>
                                 <td style="text-align:center;">
                             <?php // echo $fila['VALOR_FACTURADO']; ?>
                             <?php
@@ -483,7 +483,7 @@ exit;
 			                      $resultadoVF = mysqli_query($conexion, $consultaVF);
 
                             while($fila4 = mysqli_fetch_array($resultadoVF)){
-                              echo $fila4['vfacturado'];
+                              echo "$".number_format($fila4['vfacturado'], 0, ",", ".");//$fila4['vfacturado'];
                               if($fila4['vfacturado'] >= $fila['VALOR_IP']){
                                 $cambioEO = 1;
                                 $consultaEoCob = "UPDATE informe_de_pago set ID_EO_COB = '".$cambioEO."'";
@@ -501,7 +501,7 @@ exit;
 			                      $resultadoIP = mysqli_query($conexion, $consultaIP);
 
                             while($fila3 = mysqli_fetch_array($resultadoIP)){
-                              echo $fila3['NFACT']." , ";
+                              echo number_format($fila3['NFACT'], 0, ",", ".");//$fila3['NFACT']." , ";
                                 }
                                   
                             ?>

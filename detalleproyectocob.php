@@ -744,7 +744,7 @@ exit;
 						  <div class="form-group row">
 								<label class="col-sm-3 col-form-label">Valor del Proyecto:</label>
 								 <div class="col-sm-9">
-								 <section class="form-control"> <?php  echo $row['VALORPROYECTO']; ?></section>
+								 <section class="form-control"> <?php  echo "$".number_format($row['VALORPROYECTO'], 0, ",", ".");//$row['VALORPROYECTO']; ?></section>
 							</div>
 						  </div>
 						</div>

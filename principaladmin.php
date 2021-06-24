@@ -445,7 +445,7 @@ exit;
                             <th>INICIO REAL</th>
                             <th>INICIO ESTIMADO</th>
                             <th>AVANCE</th>
-                            <th>ESTADO</th>
+                            <th>ESTADO PROYECTO</th>
                             <th>ACCIONES</th>
                           </tr>
                         </thead>
@@ -513,7 +513,12 @@ exit;
                             <td><?php echo $fila['INI_ASIG']; ?></td>
                             <td><?php echo $fila['AVANCE']."% <meter max=100 id='barra' value=".$fila['AVANCE']." low='30' high='60' optimun='100'></meter>"; ?></td>
                             <td>
-                              <label class="badge badge-inverse-info"><?php echo ucfirst(strtolower($fila['ESTADO'])); ?></label>
+                              <label class="badge badge-inverse-info">
+                              <?PHP $query2="SELECT * FROM estado_proyecto where ID_EO_PROYECTO = ".$fila['ID_EO_PROYECTO'];
+                        $resultado2= $conexion->query($query2);
+                        $row2=$resultado2->fetch_assoc(); ?>
+                              
+                              <?php echo $row2['Nombre_Estado']; ?></label>
                             </td>
                             
                             <td>

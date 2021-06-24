@@ -436,11 +436,13 @@ exit;
                     <h4 class="card-title"></h4>
                      <?php
                       
-                    $consulta2 = "SELECT * FROM facturaaip, informe_de_pago where facturaaip.ID_IP = informe_de_pago.ID_IP and facturaaip.ID_FACT =".$idfactura;
+                    $consulta2 = "SELECT * 
+                    FROM facturaaip, informe_de_pago 
+                    where facturaaip.ID_IP = informe_de_pago.ID_IP and facturaaip.ID_FACT =".$idfactura;
 			              $resultado2 = mysqli_query($conexion, $consulta2);
-                            echo  " <p class='card-description'> IP Asignados | Valor facturado por IP: </p>" ;
+                            echo  " <p class='card-description'> Datos de IP: </p>" ;
                             while($fila2 = mysqli_fetch_array($resultado2)){
-                           echo "<p>".$fila2['ID_IP']." | ".$fila2['VALOR_FACTURADO'];
+                           echo "<p> IP =".$fila2['ID_IP']." || Valor total IP = $".number_format($fila2['VALOR_IP'], 0, ",", ".")." || Valor facturado por IP = $".number_format($fila2['VALOR_FACTURADOIP'], 0, ",", ".");//." || "."<a href= 'controladoreliminaripasoc.php?ip=".$fila2['ID_IP']."&idfact=".$idfactura."'> Quitar IP Asociado </a>";
                               }
                             echo " </p>";
                       ?> 
@@ -451,9 +453,9 @@ exit;
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Número factura:</label>
+                            <label class="col-sm-3 col-form-label">ID | Núm. Factura:</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" name="nfactura" id="nfactura" value="<?php  echo $nfactura ?>" readonly/> 
+                              <input type="text" class="form-control" name="nfactura" id="nfactura" value="<?php  echo "$idfactura"."   |   ".number_format($nfactura, 0, ",", "."); ?>" readonly/> 
 							              </div>
                               <input type="hidden" class="form-control" name="nfactura" id="nfactura" value="<?php  echo $nfactura ?>" readonly/> 
 							                <input type="hidden" class="form-control" name="id_fact" id="id_fact" value="<?php  echo $idfactura ?>"/>
@@ -464,7 +466,7 @@ exit;
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Total Factura:</label>
                             <div class="col-sm-9">
-                                <section class="form-control"> <?php echo number_format($vfactura, 0, ",", "."); ?> </section>
+                                <section class="form-control"> <?php echo "$".number_format($vfactura, 0, ",", "."); ?> </section>
                             </div>
                                 <input type="hidden" class="form-control" name="vfactura" id="vfactura" value="<?php  echo $vfactura ?>"/>   
                           </div>
@@ -479,22 +481,26 @@ exit;
                             <?php 
                             $query = "SELECT * from informe_de_pago ORDER by ID_IP ASC";
                             $result = $conexion->query($query);
+                            $rowVF = mysqli_fetch_array($result);
                             ?>  
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">IP:</label>
                             <div class="col-sm-9">  
                               <select  class="form-control" name="ipfac" id="ipfac" required>
-                                <option value="" selected> &nbsp;&nbsp;&nbsp;ID IP&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp; VALOR DE IP &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; VALOR FACTURADO POR IP </option>
+                                <option value="" selected> ID IP&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp; VALOR DE IP &nbsp;&nbsp;&nbsp;</option>
                             <?php 
                             while ( $row = $result->fetch_array() )    
                             {
                             ?>
                                 <option value=" <?php echo $row['ID_IP'] ?> " >
-                                <?php echo $row['ID_IP']."   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;   $".number_format($row['VALOR_IP'], 0, ",", "."). "   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;  $".number_format($row['VALOR_FACTURADO'], 0, ",", "."); ?>
+                                <?php echo $row['ID_IP']."   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;   $".number_format($row['VALOR_IP'], 0, ",", "."); ?>
+                                
                                 </option>
+
                         <?php
                             }  
                         ?>
+                        <input type="hidden" class="form-control" name="vfactip" id="vfactip" value="<?php echo $rowVF['VALOR_FACTURADO']; ?>"/>
                               </select>
                             </div>
                           </div>
@@ -518,17 +524,17 @@ exit;
                             <div class="form-group row">
                               <label class="col-sm-3 col-form-label">Por facturar:</label>
                               <div class="col-sm-9">
-                              <?php $querySF = "SELECT * FROM facturaaip WHERE ID_FACT=".$row5['ID_FACT'];
-                                  $resultadoSF = mysqli_query($conexion, $querySF);
-                                  $rowSF = mysqli_fetch_array($resultadoSF);
+                              <?php //$querySF = "SELECT ID_FACT SUM(POR_FACTURAR AS xfact) FROM facturaaip WHERE ID_FACT=".$idfactura;
+                                  //$resultadoSF = mysqli_query($conexion, $querySF);
+                                  //$rowSF = mysqli_fetch_array($resultadoSF);
                             ?>
-                              <section class="form-control"> 
+                              <section class="form-control" min="0"> 
                               <?php //if($rowSF['POR_FACTURAR'] == null){
                                 //echo 0;
                               //}else {
                              //   echo number_format($row5['POR_FACTURAR'], 0, ",", "."); 
                              // }
-                             echo $row5['POR_FACTURAR'];
+                             echo "$".number_format($porfacturar, 0, ",", ".");//$row5['POR_FACTURAR'];
                                 ?> 
                                 </section>
                               <input type="hidden" class="form-control" name="por_facturar" id="por_facturar" value="<?php echo $row5['POR_FACTURAR']; ?>"/>

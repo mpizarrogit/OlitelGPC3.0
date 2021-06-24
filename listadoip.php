@@ -546,7 +546,7 @@ exit;
                                 <td><?php echo $fila['NOM_CC']; ?></td>
                                 <td><?php echo $fila['OTT']; ?></td>
                                 <td><?php echo $fila['NOM_TIPO']; ?></td>
-                                <td><?php echo $fila['NFACT'];  ?></td>
+                                <td><?php echo number_format($fila['NFACT'], 0, ",", ".");//$fila['NFACT'];  ?></td>
                                 <td><?php echo $fila['NOM_JDE'];  ?></td>
                                 <td><?php echo $fila['NRO_COTI'];  ?></td>
                                 <td><?php echo $fila['NOM_EO_COB']; ?></td> 
@@ -677,8 +677,8 @@ exit;
                           ?>
                               
                               <td><?php echo $fila['FECHAENVIOIP']; ?></td> 
-                            <td><?php  echo $fila['VALOR_IP']; ?></td>
-                            <td><?php echo $fila['VALOR_FACTURADO']; ?></td>
+                            <td><?php  echo "$".number_format($fila['VALOR_IP'], 0, ",", "."); //$fila['VALOR_IP']; ?></td>
+                            <td><?php echo "$".number_format($fila['VALOR_FACTURADO'], 0, ",", "."); //$fila['VALOR_FACTURADO']; ?></td>
                             <td><?php  echo $fila['OBSERVACIONES']; ?></td>
                             
                              <!-- <td> <?php //echo $fila['VALORPROYECTO'];?> </td>  --> 

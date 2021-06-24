@@ -393,7 +393,7 @@ exit;
                           <th> N.º de Cotización </th>
                           <th> Envío de IP </th>
                           <th> Valor de IP </th>
-                          <th> Valor Facturado </th>
+                          <th> Valor Facturado por IP</th>
                           <th> Observaciones </th>
                           <th> N.º Factura Asoc </th>
                           <th> ACCIONES </th>
@@ -417,52 +417,54 @@ exit;
                             <?php echo $fila['NOM_EO_COB']; ?>
                             
                             
-                            
-                            
                             </td>
                             <td style="text-align:center;"><?php echo $fila['NRO_COTI']; ?></td>
                             <td style="text-align:center;"><?php echo $fila['FECHAENVIOIP']; ?></td>
-                            <td style="text-align:center;"><?php echo $fila['VALOR_IP']; ?></td>
+                            <td style="text-align:center;"><?php echo "$".number_format($fila['VALOR_IP'], 0, ",", "."); //$fila['VALOR_IP']; ?></td>
 
 
 
                             <td style="text-align:center;">
                             <?php // echo $fila['VALOR_FACTURADO']; ?>
                             <?php
-                            $consultaVF = "SELECT f.ID_FACT, f.NFACT, SUM(f.Valor_Facturado) AS vfacturado , fip.ID_FACT, fip.ID_IP
-                            FROM factura f
-                            INNER JOIN facturaaip fip ON fip.ID_FACT = f.ID_FACT
-                            WHERE fip.ID_IP =".$fila['ID_IP'];
-			                      $resultadoVF = mysqli_query($conexion, $consultaVF);
+                           // $consultaVF = "SELECT ip.ID_IP SUM(fip.VALOR_FACTURADOIP) AS vfacturado, fip.ID_IP
+                            //FROM informe_de_pago ip
+                            //INNER JOIN facturaaip fip ON fip.ID_IP = ip.ID_IP
+                      //WHERE fip.ID_IP =".$fila['ID_IP'];
 
-                            while($fila4 = mysqli_fetch_array($resultadoVF)){
-                              echo $fila4['vfacturado'];
-                              if($fila4['vfacturado'] >= $fila['VALOR_IP']){
-                                $cambioEO = 1;
-                                $consultaEoCob = "UPDATE informe_de_pago set ID_EO_COB = '".$cambioEO."'";
-                                $resultEO = mysqli_query($conexion, $consultaEoCob);
-                              }
-                                }    
+                            $consultaVF = "SELECT ip.ID_IP, SUM(VALOR_FACTURADOIP) AS vfact , fip.ID_IP
+                            FROM informe_de_pago ip
+                            INNER JOIN facturaaip fip ON fip.ID_IP = ip.ID_IP
+                            WHERE fip.ID_IP =".$fila['ID_IP'];
+
+			                      $resultadoVF = mysqli_query($conexion, $consultaVF);
+                            //$rowVF = mysqli_fetch_assoc($resultadoVF);
+                            while($filaVF = mysqli_fetch_array($resultadoVF)){
+                              echo "$".number_format($filaVF['vfact'], 0, ",", ".");//$filaVF['vfact'];
+                              //if($fila4['vfacturado'] >= $fila['VALOR_IP']){
+                              //  $cambioEO = 1;
+                               // $consultaEoCob = "UPDATE informe_de_pago set ID_EO_COB = '".$cambioEO."'";
+                              //  $resultEO = mysqli_query($conexion, $consultaEoCob);
+                              //}
+                           }    
                             ?>
                             </td>
 
                             <td style="text-align:left;"><?php echo $fila['OBSERVACIONES']; ?></td>
 
-                            <td>
                             <?php
-                            $consultaIP = "SELECT f.ID_FACT , f.NFACT, fip.ID_FACT, fip.ID_IP 
-                            FROM factura f
-                            INNER JOIN facturaaip fip ON fip.ID_FACT = f.ID_FACT
-                            where fip.ID_IP =".$fila['ID_IP'];
-			                      $resultadoIP = mysqli_query($conexion, $consultaIP);
+                            //$consultaIP = "SELECT f.ID_FACT , f.NFACT, fip.ID_FACT, fip.ID_IP 
+                            //FROM factura f
+                            //INNER JOIN facturaaip fip ON fip.ID_FACT = f.ID_FACT
+                            //where fip.ID_IP =".$fila['ID_IP'];
+			                      //$resultadoIP = mysqli_query($conexion, $consultaIP);
 
-                            while($fila3 = mysqli_fetch_array($resultadoIP)){
-                              echo $fila3['NFACT']." , ";
-                                }
+                            //while($fila3 = mysqli_fetch_array($resultadoIP)){
+                             // echo $fila3['NFACT']." , ";
+                             //   }
                                   
                             ?>
-                            </td>
-                           
+                            
                               <?PHP
                               //echo $fila['NOM_CL'];
                               // $cliente = "SELECT * FROM CLIENTE, factura WHERE CLIENTE.ID_CL = FACTURA.ID_CL AND factura.ID_FACT = ".$fila['ID_FACT'];
@@ -483,7 +485,39 @@ exit;
                            //<a href='formeditfact.php?ID_FACT=<?php echo $fila['ID_FACT']; '><section class='imgtb'></section></a> 
                            //<a href= 'formagregaroc.php?idfactura=<?php echo $fila['ID_FACT']; ><button type='button' class='btn btn-danger'> OC </button></a>
                            // } ?>
-   
+
+                            <td style="text-align:left;">
+                              <?PHP
+                              //echo $fila['NOM_CL'];
+                              // $cliente = "SELECT * FROM CLIENTE, factura WHERE CLIENTE.ID_CL = FACTURA.ID_CL AND factura.ID_FACT = ".$fila['ID_FACT'];
+                        // $resultadooo = mysqli_query($conexion, $cliente);
+                            
+                       //     while($cl = mysqli_fetch_array($resultadooo)){ 
+                         //    echo  ucfirst($cl['NOM_CL']);;
+                            
+                            //}
+                            
+                              ?>
+                                <?php
+                                //echo $fila['ID_IP'];
+                                $consultaNF = "SELECT ip.ID_IP, fip.ID_IP, fip.ID_FACT, f.ID_FACT, f.NFACT
+                                FROM informe_de_pago ip
+                                INNER JOIN facturaaip fip ON fip.ID_IP = ip.ID_IP
+                                INNER JOIN factura f ON f.ID_FACT = fip.ID_FACT
+                                WHERE fip.ID_IP =".$fila['ID_IP'];
+                                $resultadoNF = mysqli_query($conexion, $consultaNF);
+                            //$rowVF = mysqli_fetch_assoc($resultadoVF);
+                            while($filaNF = mysqli_fetch_array($resultadoNF)){
+                              echo "| ".number_format($filaNF['NFACT'], 0, ",", ".")." | ";//$filaNF['NFACT'];
+                            }
+                            
+                           // while($fila2 = mysqli_fetch_array($resultado2)){
+                           // echo $fila2['NIP']." <br> ";
+                           //<a href='formeditfact.php?ID_FACT=<?php echo $fila['ID_FACT']; '><section class='imgtb'></section></a> 
+                           //<a href= 'formagregaroc.php?idfactura=<?php echo $fila['ID_FACT']; ><button type='button' class='btn btn-danger'> OC </button></a>
+                           // } ?>
+                          </td>
+
                             <td>
                                 
                             <a href='formeditip.php?ID_IP=<?PHP echo $fila['ID_IP']; ?>'><section class='imgtb'></section></a>

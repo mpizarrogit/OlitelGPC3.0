@@ -462,7 +462,7 @@ exit;
 						<label class="col-sm-3 col-form-label">N.º de Factura</label>
 							<div class="col-sm-9">
 						  <section	class="form-control">
-									  <?php $row['NFACT']; ?>					 
+									  <?php echo number_format($row['NFACT'], 0, ",", ".");//$row['NFACT']; ?>					 
 								</section>
                                      </div>
 						         </div>
@@ -540,7 +540,7 @@ exit;
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Valor de IP</label>
 								<div class="col-sm-9">
-							  	<section class="form-control"> <?php echo $row['VALOR_IP'];?> </section>
+							  	<section class="form-control"> <?php echo "$".number_format($row['VALOR_IP'], 0, ",", ".");//$row['VALOR_IP'];?> </section>
 							  </div>
 						  </div>
                         </div>
@@ -549,7 +549,7 @@ exit;
 						  <div class="form-group row">
 							<label class="col-sm-3 col-form-label">Valor Facturado</label>
 								<div class="col-sm-9">
-							  		<section class="form-control"> <?php echo $row['VALOR_FACTURADO'];?> </section>
+							  		<section class="form-control"> <?php echo "$".number_format($row['VALOR_FACTURADO'], 0, ",", ".");//$row['VALOR_FACTURADO'];?> </section>
 							  	</div>
 						  </div>
                         </div>

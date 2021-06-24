@@ -456,9 +456,9 @@ exit;
                      
                         <div class="col-md-6">
 						  <div class="form-group row">
-							<label class="col-sm-3 col-form-label">Valor Informe de Pago</label>
+							<label class="col-sm-3 col-form-label">Valor IP</label>
 								<div class="col-sm-9">
-							  		<section class="form-control"> <?php echo $row['VALOR_IP'];?> </section>
+							  		<section class="form-control"> <?php echo "$".number_format($row['VALOR_IP'], 0, ",", ".");//$row['VALOR_IP'];?> </section>
 							  	</div>
 						  </div>
                         </div>

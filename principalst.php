@@ -356,13 +356,13 @@ exit;
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-			//$consulta = "SELECT * FROM concepto";
-			$consulta = "SELECT  distinct (c.NOMBRE), c.cp,cc.NOM_CC, c.INI_REAL, c.INI_ASIG, c.AVANCE, c.ESTADO FROM gpc.concepto as c
-				inner join gpc.centro_de_costo as cc on c.id_cc= cc.id_cc 
-				inner join gpc.fase as f on c.CP= f.cp
-				inner join gpc.panel as pa on pa.ID_FASE=f.ID_FASE
-				inner join gpc.actividad as a on a.id_panel = pa.ID_PANEL
-				where a.ENCARGADO='".$nombreuser."'and c.ID_TIPO=1";
+			$consulta = "SELECT * FROM concepto";
+			//$consulta = "SELECT  distinct (c.NOMBRE), c.cp,cc.NOM_CC, c.INI_REAL, c.INI_ASIG, c.AVANCE, c.ESTADO FROM gpc.concepto as c
+				//inner join gpc.centro_de_costo as cc on c.id_cc= cc.id_cc 
+			//	inner join gpc.fase as f on c.CP= f.cp
+				//inner join gpc.panel as pa on pa.ID_FASE=f.ID_FASE
+			//	inner join gpc.actividad as a on a.id_panel = pa.ID_PANEL
+			//	where a.ENCARGADO='".$nombreuser."'and c.ID_TIPO=1";
 			$resultado = mysqli_query($conexion, $consulta);
       
       
@@ -416,7 +416,7 @@ exit;
                             <th>INICIO REAL</th>
                             <th>INICIO ESTIMADO</th>
                             <th>AVANCE</th>
-                            <th>ESTADO</th>
+                            <th>ESTADO PROYECTO</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -429,16 +429,26 @@ exit;
 
                             
                           <tr>
-                            <td><?php echo $fila['cp'];?></td>
-                            <td class="text-capitalize"> <a href='actividadst.php?cp=<?PHP echo $fila['cp']; ?>&p=<?PHP echo $fila['NOMBRE']; ?>'><?php echo $fila['NOMBRE'];?></a></td>
+                            <td><?php echo $fila['CP'];?></td>
+                            <td class="text-capitalize"> <a href='actividadst.php?cp=<?PHP echo $fila['CP']; ?>&p=<?PHP echo $fila['NOMBRE']; ?>'><?php echo $fila['NOMBRE'];?></a></td>
                               
                                                          
-                            <td><?php echo ucfirst($fila['NOM_CC']); ?></td>
+                            <td>
+                            <?PHP $query2 = "SELECT * FROM centro_de_costo WHERE ID_CC=".$fila['ID_CC']; 
+                                    $resultado3= $conexion->query($query2);
+                                    $row3=$resultado3->fetch_assoc();
+                              ?>
+                            <?php echo ucfirst($row3['NOM_CC']); ?></td>
                             <td><?php echo $fila['INI_REAL']; ?></td>
                             <td><?php echo $fila['INI_ASIG']; ?></td>
                             <td><?php echo $fila['AVANCE']."% <meter max=100 id='barra' value=".$fila['AVANCE']." low='30' high='60' optimun='100'></meter>"; ?></td>
                             <td>
-                              <label class="badge badge-inverse-info"><?php echo ucfirst(strtolower($fila['ESTADO'])); ?></label>
+                              <label class="badge badge-inverse-info">
+                              <?PHP $query1 = "SELECT * FROM estado_proyecto WHERE ID_EO_PROYECTO=".$fila['ID_EO_PROYECTO']; 
+                                    $resultado4= $conexion->query($query1);
+                                    $row4=$resultado4->fetch_assoc();
+                              ?>
+                              <?php echo ucfirst(strtolower($row4['Nombre_Estado'])); ?></label>
                             </td>
                             
                             
