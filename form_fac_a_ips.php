@@ -534,10 +534,10 @@ exit;
                               //}else {
                              //   echo number_format($row5['POR_FACTURAR'], 0, ",", "."); 
                              // }
-                             echo "$".number_format($porfacturar, 0, ",", ".");//$row5['POR_FACTURAR'];
+                             echo $porfacturar;//$row5['POR_FACTURAR'];
                                 ?> 
                                 </section>
-                              <input type="hidden" class="form-control" name="por_facturar" id="por_facturar" value="<?php echo $row5['POR_FACTURAR']; ?>"/>
+                              <input type="hidden" class="form-control" name="por_facturar" id="por_facturar" value="<?php echo $porfacturar; ?>"/>
                               </div>
                             </div>
                           </div>

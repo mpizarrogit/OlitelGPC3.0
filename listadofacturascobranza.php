@@ -484,7 +484,7 @@ exit;
                              
                                 <a href='formeditfact.php?ID_FACT=<?php echo $fila['ID_FACT']; ?>'><section class='imgtb'></section></a> 
                                 
-                                <a href='form_fac_a_ips.php?nfactura=<?php echo $fila['NFACT']?>&idfactura=<?php echo $fila['ID_FACT']?>&vfact=<?php echo $fila['VALOR_FACTURA']?>&porfa=<?php echo $porfacturar?>'><button type='button' class='btn btn-warning'> Asociar un IP </button></a>
+                                <a href='form_fac_a_ips.php?nfactura=<?php echo $fila['NFACT']?>&idfactura=<?php echo $fila['ID_FACT']?>&vfact=<?php echo $fila['VALOR_FACTURA']?>&porfa=<?php echo "$".number_format($porfacturar, 0, ",", ".")?>'><button type='button' class='btn btn-warning'> Asociar un IP </button></a>
                                 
                                 <a href= 'formagregaroc.php?idfactura=<?php echo $fila['ID_FACT']; ?>'><button type='button' class='btn btn-danger'> OC </button></a>
                             </td>
