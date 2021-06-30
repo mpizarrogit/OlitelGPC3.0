@@ -402,7 +402,7 @@ exit;
                            
                           <tr>
                             <td style="text-align:center;"><?php  echo $fila['ID_FACT']; ?></td>
-                            <td style="text-align:center;"><?php  echo number_format($fila['NFACT'], 0, ",", "."); //$fila['NFACT']; ?></td>
+                            <td style="text-align:center;"><?php  echo $fila['NFACT']; //$fila['NFACT']; ?></td>
                             <td style="text-align:center;"><?php  echo $fila['F_FACTURA']; ?></td>
                             <td style="text-align:center;"><?php  echo "$".number_format($fila['VALOR_FACTURA'], 0, ",", "."); ?></td>
                             <td style="text-align:center;">
@@ -425,18 +425,19 @@ exit;
                             //$resultPF = mysqli_query($conexion, $queryPF);
                            // $rowPF = mysqli_fetch_array($resultPF);
 
-                           $consultaFact = "SELECT f.ID_FACT, SUM(fip.VALOR_FACTURADOIP) AS vip , fip.ID_FACT, fip.POR_FACTURAR
-                           FROM factura f
-                           INNER JOIN facturaaip fip ON fip.ID_FACT = f.ID_FACT
-                           WHERE fip.ID_FACT =".$fila['ID_FACT'];
-                           $resultadoFact = mysqli_query($conexion, $consultaFact);
+                           //$consultaFact = "SELECT f.ID_FACT, f.POR_FACTURAR, fip.ID_FACT
+                          // FROM factura f
+                          // INNER JOIN facturaaip fip ON fip.ID_FACT = f.ID_FACT
+                          // WHERE fip.ID_FACT =".$fila['ID_FACT'];
+                          // $resultadoFact = mysqli_query($conexion, $consultaFact);
 
-                           while($fila5 = mysqli_fetch_array($resultadoFact)){
-                             echo "$".number_format($fila5['POR_FACTURAR'], 0, ",", ".");
-                             $porfacturar = $fila5['POR_FACTURAR'];
-                               }    
+                          // while($fila5 = mysqli_fetch_array($resultadoFact)){
+                            // echo "$".number_format($fila5['POR_FACTURAR'], 0, ",", ".");
+                           //  $porfacturar = $fila5['POR_FACTURAR'];
+                            //   }    
                           
-
+                            echo $fila['POR_FACTURAR'];
+                             $porfacturar = $fila['POR_FACTURAR'];
 
 
                             //echo  "$".number_format($fila['POR_FACTURAR'], 0, ",", ".");//$fila['POR_FACTURAR']; ?> </td>
@@ -484,7 +485,7 @@ exit;
                              
                                 <a href='formeditfact.php?ID_FACT=<?php echo $fila['ID_FACT']; ?>'><section class='imgtb'></section></a> 
                                 
-                                <a href='form_fac_a_ips.php?nfactura=<?php echo $fila['NFACT']?>&idfactura=<?php echo $fila['ID_FACT']?>&vfact=<?php echo $fila['VALOR_FACTURA']?>&porfa=<?php echo "$".number_format($porfacturar, 0, ",", ".")?>'><button type='button' class='btn btn-warning'> Asociar un IP </button></a>
+                                <a href='form_fac_a_ips.php?nfactura=<?php echo $fila['NFACT']?>&idfactura=<?php echo $fila['ID_FACT']?>&vfact=<?php echo $fila['VALOR_FACTURA']?>&porfa=<?php echo $porfacturar?>'><button type='button' class='btn btn-warning'> Asociar un IP </button></a>
                                 
                                 <a href= 'formagregaroc.php?idfactura=<?php echo $fila['ID_FACT']; ?>'><button type='button' class='btn btn-danger'> OC </button></a>
                             </td>

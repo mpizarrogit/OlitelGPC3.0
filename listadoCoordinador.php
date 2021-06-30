@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     
-      <?php include "bd.php"; ?>
+       <?php include "bd.php"; ?>
       <?php $hoy = date("Y-m-d") ?>
       
     
@@ -19,8 +19,17 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['
 exit;
 }
 
+
+
+
 ?>
+    
+    
+    
+
   <head>
+      
+      
       
 <style>
         #barra{
@@ -94,13 +103,12 @@ exit;
             padding: 0px!important;
         }
     
-                  p{
-                      
-                     
-                      
-                  }
+           
         
     </style>
+      
+
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -137,7 +145,7 @@ exit;
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-menu"></span><label class="text-primary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sistema de Gestión de Proyectos y Finanzas </label>
+            <span class="mdi mdi-menu"></span>
           </button>
       
          <!-- <form class="ml-auto search-form d-none d-md-block" action="#">
@@ -178,12 +186,19 @@ exit;
       
                             while ( $rolsito = $resultadorol->fetch_array() )    
                 {
+   
+    
+                         
+                        
                        $nombrerol= $rolsito['NOM_ROL'];
+        
             
                 }
       
                 ?>      
-
+                    
+                    
+                    
                   <p class="mb-1 mt-3 font-weight-semibold"><?php echo $nombreuser;?></p>
                   
                 </div>
@@ -205,7 +220,7 @@ exit;
         <div class="theme-setting-wrapper">
          
         </div>
-      
+        
         <!-- partial -->
         <!-- partial:../../partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -222,10 +237,8 @@ exit;
                 </div>
               </a>
             </li>
-             <li class="nav-item nav-category">Menú Principal</li><li class='nav-item'><a class='nav-link' href='./principalcobranza.php'><i class='menu-icon fa fa-th'></i><span class='menu-title'>Inicio</span></a></li>
-          
-            
-			<li class="nav-item">
+            <li class="nav-item nav-category">Menú Principal</li><li class='nav-item'><a class='nav-link' href='./principalcobranza.php'><i class='menu-icon fa fa-th'></i><span class='menu-title'>Inicio</span></a></li>
+                <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
                 <i class="menu-icon typcn typcn-chevron-right"></i>
                 <span class="menu-title">Formularios</span>
@@ -235,17 +248,18 @@ exit;
                 <ul class="nav flex-column sub-menu">
 					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
-          <li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCliente.php">Agregar Cliente</a></li>
+                    <li class="nav-item"><a class="nav-link" href="formagregarCoordinador.php">Agregar Coordinador</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarDetalle.php">Agregar Detalle</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarEstadoC.php">Agregar Estado Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarJefeE.php">Agregar Jefe Externo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarLinea.php">Agregar Línea Negocio</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarRegion.php">Agregar Región</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarSupE.php">Agregar Supervisor Externo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="formagregarSupI.php">Agregar Supervisor Interno</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarTipoI.php">Agregar Tipo Informe</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarTipo.php">Agregar Tipo Proyecto</a></li>
 				</ul>
@@ -260,42 +274,31 @@ exit;
               </a>
               <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
-          <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Informes Servicios Fijos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
+                    <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
+					<li class="nav-item"><a class="nav-link" href="listadoip.php">Informes de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCiudad.php">Ciudad</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCliente.php">Cliente</a></li>
+                    <li class="nav-item"><a class="nav-link" href="listadoCoordinador.php">Coordinador</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoDetalle.php">Detalle</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoEstadoC.php">Estado de Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoJefeE.php">Jefe Externo</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoLinea.php">Línea Negocio</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoRegion.php">Región</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoSupE.php">Supervisor Externo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="listadoSupI.php">Supervisor Interno</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoTipoI.php">Tipo Informe</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoTipo.php">Tipo Proyecto</a></li>
 				</ul>
               </div>
             </li>
-			<li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#reportes" aria-expanded="false" aria-controls="reportes">
-                <i class="menu-icon typcn typcn-chevron-right"></i>
-                <span class="menu-title">Reportes</span>
-                <i class="menu-arrow"></i>
-              </a>
-              <div class="collapse" id="reportes">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"><a class="nav-link" href="desempeñoReporte.php">Desempeño Proyectos F.O</a></li>
-                  <li class="nav-item"><a class="nav-link" href="desempeñoReporteAR.php">Desempeño Proy. Andrés Retamal</a></li>
-				  <li class="nav-item"><a class="nav-link" href="desempeñoReporteRanco.php">Desempeño Proyectos Ranco</a></li>
-                </ul>
-              </div>
-            </li>
             
+          
+          
       <?php
           
       require("bd.php");    
@@ -311,19 +314,42 @@ exit;
 			mysqli_select_db($conexion, $base_datos) or die("No se encuentra la base de datos.");
 			mysqli_set_charset($conexion, "utf8");
 		
-			$consulta = "SELECT * FROM concepto";
+			$consulta = "SELECT * FROM CLIENTE";
 			$resultado = mysqli_query($conexion, $consulta);
       
       
       
       
       
-     ?>   
-         
-            
-      
+     ?>    
+          
+          
+          
      
-        
+                    
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#reportes" aria-expanded="false" aria-controls="reportes">
+                <i class="menu-icon typcn typcn-chevron-right"></i>
+                <span class="menu-title">Reportes</span>
+                <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="reportes">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="desempeñoReporte.php">Desempeño Proyectos F.O</a>
+                  </li>  <li class="nav-item">
+                    <a class="nav-link" href="desempeñoReporteAR.php">Desempeño Proy. Andrés Retamal</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="desempeñoReporteRanco.php">Desempeño Proyectos Ranco</a>
+                  </li>
+                  <!--
+                  <li class="nav-item">
+                    <a class="nav-link" href="pages/tables/sortable-table.html">Sortable table</a>
+                  </li>-->
+                </ul>
+              </div>
+            </li>  
 
             
               
@@ -335,177 +361,97 @@ exit;
         <div class="main-panel">
           <div class="content-wrapper">
 			<div class="">
-			  <div class="card-body">
-				<div class="d-flex justify-content-between border-bottom">
-				  <h2 class="text-primary">Panel Principal</h2>
-				  
+				<div class="card-body">
+					<div class="d-flex justify-content-between border-bottom">
+						<h2 class="text-primary">Coordinador</h2>
+							  
+					</div>
 				</div>
-			  </div>
 			</div>
             <div class="row">
-              
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                <div class="card card-statistics">
+			<div class="col-md-6 grid-margin stretch-card">
+</div>
+              <div class="col-md-12 grid-margin">
+                <div class="card">
                   <div class="card-body">
-				   <a  href="listadoproyectoscobranza.php" style="text-decoration:none;">
-				  
-                    <div class="clearfix">
-                      <div class="float-left">
-                        <i class="mdi mdi-receipt text-warning icon-lg"></i>
-                      </div>
-                      <div class="float-right">
-                        <p class="mb-0 text-right">Listado de</p>
-                        <div class="fluid-container">
-                          <h3 class="font-weight-medium text-right mb-0">Proyectos</h3>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="text-muted mt-3 mb-0">
+                    <h4 class="card-title">Listado de Coordinadores</h4>
+                     
+                      <p class="text-right">   
+							<!--<a href="generar_excel.php">
+								<button type="button" class="btn btn-inverse-secondary"><img src="img/microsoft-excel.png" width="16px" height="16px"> Generar Excel</button>
+							</a>-->
+							<a title= "Agregar Factura" href="formagregarCliente.php">
+								<button  type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Cliente</button>
+							</a>
+						</p>  
+                    <div class="table-responsive">
+                        
+                                              
+                        
+                      <table id="order-listing" class="table table-striped">
+                          
+
+                        <thead>
+                        <tr>
+                          <th> ID </th>
+                          <th>RUT</th>
+
+                          <th> NOMBRE</th>
+                            
+                  
+                            
+                            <th>ACCIONES</th>
+                            
+                        </tr>
+                      </thead>
+                        <tbody>
+                            
+                            
+                             <?php  while($fila = mysqli_fetch_array($resultado)){ ?>
+                           
                       
-					 </a>
+
+
+                            
+                          <tr>
+                            <td><?php  echo $fila['ID_CL']; ?></td>
+                            <td><?php  echo $fila['RUT_CL']; ?></td>
+                              
+                              
+                              
+                            <td><?php  echo  $fila['NOM_CL']; ?></td>
+                              
+                              
+                         
+                         
+                            
+                           
+                            
+                            <td>
+                             
+                               <a href='formeditCliente.php?id=<?PHP echo $fila['ID_CL']; ?>'> <section class='imgtb'></section></a>
+                             <a href= 'detalleCliente.php?id=<?PHP echo $fila['ID_CL']; ?>'><section class='dtl'></section></a> 
+                            </td>
+                          </tr>
+                         
+                         
+                         
+                      
+                        <?php    }
+                          ?>
+                       
+                        
+                         
+                   
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
-			  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                <div class="card card-statistics">
-                  <div class="card-body">
-				   <a  href="listadofacturascobranza.php" style="text-decoration:none;">
-				  
-                    <div class="clearfix">
-                      <div class="float-left">
-                        <i class="fa fa-files-o text-info icon-lg"></i>
-                      </div>
-                      <div class="float-right">
-                        <p class="mb-0 text-right">Listado de</p>
-                        <div class="fluid-container">
-                          <h3 class="font-weight-medium text-right mb-0">Facturas</h3>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="text-muted mt-3 mb-0">
-                      
-					 </a>
-                  </div>
-                </div>
+              <div class="col-md-12 grid-margin">
+            
               </div>
-			   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                <div class="card card-statistics">
-                  <div class="card-body">
-				   <a  href="listadoservicios.php" style="text-decoration:none;">
-				  
-                    <div class="clearfix">
-                      <div class="float-left">
-                        <i class="fa fa-list text-success icon-lg"></i>
-                      </div>
-                      <div class="float-right">
-                        <p class="mb-0 text-right">Listado de</p>
-                        <div class="fluid-container">
-                          <h3 class="font-weight-medium text-right mb-0">Servicios Fijos</h3>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="text-muted mt-3 mb-0">
-                      
-					 </a>
-                  </div>
-                </div>
-              </div>
-			  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                <div class="card card-statistics">
-                  <div class="card-body">
-				   <a  href="listadoip.php" style="text-decoration:none;">
-				  
-                    <div class="clearfix">
-                      <div class="float-left">
-                        <i class="fa fa-file-text-o text-danger icon-lg"></i>
-                      </div>
-                      <div class="float-right">
-                        <p class="mb-0 text-right">Listado de</p>
-                        <div class="fluid-container">
-                          <h3 class="font-weight-medium text-right mb-0">Informes de Pago</h3>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="text-muted mt-3 mb-0">
-                      
-					 </a>
-                  </div>
-                </div>
-              </div>
-           
-              
-            </div>
-			<div class="row">
-              
-              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                <div class="card card-statistics">
-                  <div class="card-body">
-				   <a  href="desempeñoReporte.php" style="text-decoration:none;">
-				  
-                    <div class="clearfix">
-                      <div class="float-left">
-                        <i class="fa fa-list-alt text-dark icon-lg"></i>
-                      </div>
-                      <div class="float-right">
-                        <p class="mb-0 text-right">Reporte de</p>
-                        <div class="fluid-container">
-                          <h3 class="font-weight-medium text-right mb-0">Desempeño F.O</h3>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="text-muted mt-3 mb-0">
-                      
-					 </a>
-                  </div>
-                </div>
-              </div>
-			  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                <div class="card card-statistics">
-                  <div class="card-body">
-				   <a  href="desempeñoReporteAR.php" style="text-decoration:none;">
-				  
-                    <div class="clearfix">
-                      <div class="float-left">
-                        <i class="fa fa-list-alt text-dark icon-lg"></i>
-                      </div>
-                      <div class="float-right">
-                        <p class="mb-0 text-right">Reporte de</p>
-                        <div class="fluid-container">
-                          <h3 class="font-weight-medium text-right mb-0">Desempeño AR</h3>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="text-muted mt-3 mb-0">
-                      
-					 </a>
-                  </div>
-                </div>
-              </div>
-			   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-                <div class="card card-statistics">
-                  <div class="card-body">
-				   <a  href="desempeñoReporteRanco.php" style="text-decoration:none;">
-				  
-                    <div class="clearfix">
-                      <div class="float-left">
-                        <i class="fa fa-list-alt text-dark icon-lg"></i>
-                      </div>
-                      <div class="float-right">
-                        <p class="mb-0 text-right">Reporte de</p>
-                        <div class="fluid-container">
-                          <h3 class="font-weight-medium text-right mb-0">Desempeño Ranco</h3>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="text-muted mt-3 mb-0">
-                      
-					 </a>
-                  </div>
-                </div>
-              </div>
-			  
-           
-              
             </div>
           </div>
           <!-- content-wrapper ends -->
@@ -525,9 +471,13 @@ exit;
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
+      
+       
     <script src="./assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
+      
+ 
     <script src="./assets/vendors/datatables.net/jquery.dataTables.js"></script>
     <script src="./assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
     <script src="./assets/vendors/datatables.net-fixedcolumns/dataTables.fixedColumns.min.js"></script>
@@ -540,7 +490,8 @@ exit;
     <script src="./assets/js/shared/todolist.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-      <script>
+      
+        <script>
         $(document).ready(function() {
             $('#order-listing').DataTable({
                 "order": [
@@ -553,6 +504,12 @@ exit;
             });
         });
     </script>
+      
+        
+      
+     
+      
+
     <!-- End custom js for this page -->
   </body>
 </html>

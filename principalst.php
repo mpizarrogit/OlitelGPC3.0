@@ -315,14 +315,6 @@ exit;
             </li>
               
             <li class="nav-item nav-category">Menú Principal</li>
-          
-          
-          
-            
-            
-                 
-            
-            
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
                 <i class="menu-icon typcn typcn-chevron-right"></i>

@@ -43,14 +43,18 @@ if(mysqli_connect_errno()){
         $porfacturar = $pf;
     $sql1 = "INSERT INTO facturaaip (ID_FACT,ID_IP,POR_FACTURAR, VALOR_FACTURADOIP) VALUES ('".$id_fact."', '".$ip."' , '".$porfacturar."' , '".$valor_a_facturar."')";
     $resultado = mysqli_query($conexion, $sql1);
+    $sql1f = "UPDATE factura SET POR_FACTURAR = '$porfacturar' WHERE ID_FACT=".$id_fact;
+    $resultado1f = mysqli_query($conexion, $sql1f);
     }else{
         $porfacturar = $pfu;
         $sql12 = "INSERT INTO facturaaip (ID_FACT,ID_IP, POR_FACTURAR, VALOR_FACTURADOIP) VALUES ('".$id_fact."', '".$ip."' , '".$porfacturar."' , '".$valor_a_facturar."')";
         $resultado = mysqli_query($conexion, $sql12);
+        $sql2f = "UPDATE factura SET POR_FACTURAR = '$porfacturar' WHERE ID_FACT=".$id_fact;
+        $resultado2f = mysqli_query($conexion, $sql2f);
     }
-$sql2 = "UPDATE FACTURA SET POR_FACTURAR = '$porfacturar' where ID_FACT = '$id_fact'";
+////$sql2 = "UPDATE FACTURA SET POR_FACTURAR = '$porfacturar' where ID_FACT = '$id_fact'";
 
-$resultado2 = mysqli_query($conexion, $sql2);
+//$resultado2 = mysqli_query($conexion, $sql2);
     
     
 //$sql3 = "INSERT INTO INFORME_DE_PAGO SET (VALOR_FACTURADO) VALUES ('.$valorfacturadoxip.') WHERE ID_IP = '$ip'";
@@ -59,16 +63,16 @@ $resultado2 = mysqli_query($conexion, $sql2);
 
 		
 
-		if(!$resultado2){  		
+		//if(!$resultado){  		
 
-			echo 'MySQL Error: ' . mysqli_error($conexion).' favor reportar al administrador del sistema<br>'.$consulta;  
+			//echo 'MySQL Error: ' . mysqli_error($conexion).' favor reportar al administrador del sistema<br>'.$consulta;  
 			//echo 'MySQL Error: favor reportar al administrador del sistema<br>';  
 
-			exit;  
+		//	exit;  
 
-		}  else {
+		//}  else {
             header ('Location: form_fac_a_ips.php?ipfac='.$ip.'&nfactura='.$nfactura.'&vfact='.$vfactura.'&idfactura='.$id_fact.'&porfa='.$porfacturar.'&vfacturaip='.$valorfacturadoxip);
-		}
+		//}
 
 
 ?>

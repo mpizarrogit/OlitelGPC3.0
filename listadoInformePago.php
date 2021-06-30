@@ -508,7 +508,7 @@ exit;
                                 $resultadoNF = mysqli_query($conexion, $consultaNF);
                             //$rowVF = mysqli_fetch_assoc($resultadoVF);
                             while($filaNF = mysqli_fetch_array($resultadoNF)){
-                              echo "| ".number_format($filaNF['NFACT'], 0, ",", ".")." | ";//$filaNF['NFACT'];
+                              echo "| ".$filaNF['NFACT']." | ";//$filaNF['NFACT'];
                             }
                             
                            // while($fila2 = mysqli_fetch_array($resultado2)){
