@@ -85,15 +85,11 @@ exit;
             margin: 0px!important;
             padding: 0px!important;
         }
-<<<<<<< HEAD
-=======
-    
->>>>>>> d420382704139c2e763073682430717e74c32adc
+
         .tuclase {
 text-align: left; 
 font-family: Arial Black; 
 font-weight: bold; font-size: 30px; 
-<<<<<<< HEAD
 background: #0F4CB8; 
 -webkit-background-clip: text; 
 -moz-background-clip: text; 
@@ -107,15 +103,13 @@ text-align: left;
 font-family: Arial Black; 
 font-weight: bold; font-size: 30px; 
 background: #0F4CB8; 
-=======
-background: white; 
->>>>>>> d420382704139c2e763073682430717e74c32adc
 -webkit-background-clip: text; 
 -moz-background-clip: text; 
 background-clip: text; 
 color: transparent; 
 text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
 }
+    
     
         
     </style>

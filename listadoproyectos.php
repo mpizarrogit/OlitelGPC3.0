@@ -60,7 +60,6 @@ exit;
 text-align: left; 
 font-family: Arial Black; 
 font-weight: bold; font-size: 30px; 
-<<<<<<< HEAD
 background: #0F4CB8; 
 -webkit-background-clip: text; 
 -moz-background-clip: text; 
@@ -74,16 +73,13 @@ text-align: left;
 font-family: Arial Black; 
 font-weight: bold; font-size: 30px; 
 background: #0F4CB8; 
-=======
-background: white; 
->>>>>>> d420382704139c2e763073682430717e74c32adc
 -webkit-background-clip: text; 
 -moz-background-clip: text; 
 background-clip: text; 
 color: transparent; 
 text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
 }
-
+    
 
 
 	</style>
@@ -389,7 +385,7 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
 		  <!-- partial:../../partials/_footer.html -->
 		  <footer class="footer">
 			<div class="container-fluid clearfix">
-			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+			  <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
 			  </span>
 			</div>
 		  </footer>
