@@ -85,7 +85,29 @@ exit;
             margin: 0px!important;
             padding: 0px!important;
         }
-    
+        .tuclase {
+text-align: left; 
+font-family: Arial Black; 
+font-weight: bold; font-size: 30px; 
+background: #0F4CB8; 
+-webkit-background-clip: text; 
+-moz-background-clip: text; 
+background-clip: text; 
+color: transparent; 
+text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
+}
+
+.subtitulo {
+text-align: left; 
+font-family: Arial Black; 
+font-weight: bold; font-size: 30px; 
+background: #0F4CB8; 
+-webkit-background-clip: text; 
+-moz-background-clip: text; 
+background-clip: text; 
+color: transparent; 
+text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
+}
     
         
     </style>
@@ -125,7 +147,7 @@ exit;
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-menu"></span>
+            <span class="mdi mdi-menu"></span><label class="tuclase"> &nbsp; Sistema Gestión de Proyectos y Finanzas </label>
           </button>
       
           <ul class="navbar-nav ml-auto">
@@ -218,7 +240,7 @@ exit;
           
             <li class='nav-item'><a class='nav-link' href='./principal.php'><i class='menu-icon fa fa-th'></i><span class='menu-title'>Inicio</span></a></li> 
             
-          <!--  <li class="nav-item">
+           <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
                 <i class="menu-icon typcn typcn-chevron-right"></i>
 				
@@ -228,14 +250,15 @@ exit;
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
-                    <a class="nav-link" href="./formproyectos.php">Agregar Proyectos</a>
+                  <li class="nav-item"><a class="nav-link" href="formagregarCliente.php">Agregar Cliente</a></li>
+                  <li class="nav-item"><a class="nav-link" href="formagregarJefeE.php">Agregar Jefe Externo</a></li>
+                  <li class="nav-item"><a class="nav-link" href="formagregarSupE.php">Agregar Supervisor Externo</a></li>
                   </li>
-				  
                   
                 </ul>
               </div>
             </li>
-            -->
+            
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
                 <i class="menu-icon typcn typcn-chevron-right"></i>
@@ -297,7 +320,7 @@ exit;
 			<div class="">
 			  <div class="card-body">
 				<div class="d-flex justify-content-between border-bottom">
-				  <h2 class="text-primary">Panel Principal</h2>
+				  <h2 class="subtitulo">Panel Principal</h2>
 				  
 				</div>
 			  </div>

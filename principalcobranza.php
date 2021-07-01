@@ -93,6 +93,30 @@ exit;
             margin: 0px!important;
             padding: 0px!important;
         }
+
+        .tuclase {
+text-align: left; 
+font-family: Arial Black; 
+font-weight: bold; font-size: 30px; 
+background: #0F4CB8; 
+-webkit-background-clip: text; 
+-moz-background-clip: text; 
+background-clip: text; 
+color: transparent; 
+text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
+}
+
+.subtitulo {
+text-align: left; 
+font-family: Arial Black; 
+font-weight: bold; font-size: 30px; 
+background: #0F4CB8; 
+-webkit-background-clip: text; 
+-moz-background-clip: text; 
+background-clip: text; 
+color: transparent; 
+text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
+}
     
                   p{
                       
@@ -124,6 +148,10 @@ exit;
     <link rel="stylesheet" href="./assets/css/demo_1/style.css">
     <!-- End Layout styles -->
     <link rel="shortcut icon" href="./img/olimini.png" />
+
+    
+
+
   </head>
   <body>
     <div class="container-scroller">
@@ -137,7 +165,7 @@ exit;
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-menu"></span><label class="text-primary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sistema de Gestión de Proyectos y Finanzas </label>
+            <span class="mdi mdi-menu"></span><label class="tuclase"> &nbsp;&nbsp; Sistema Gestión de Proyectos y Finanzas </label>
           </button>
       
          <!-- <form class="ml-auto search-form d-none d-md-block" action="#">
@@ -233,7 +261,7 @@ exit;
               </a>
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
+          <li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
           <li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
@@ -242,6 +270,7 @@ exit;
 					<li class="nav-item"><a class="nav-link" href="formagregarCliente.php">Agregar Cliente</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarDetalle.php">Agregar Detalle</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarEstadoC.php">Agregar Estado Cobranza</a></li>
+          <li class="nav-item"><a class="nav-link" href="formagregarestadoproyecto.php">Agregar Estado de Proyecto</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarJefeE.php">Agregar Jefe Externo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarLinea.php">Agregar Línea Negocio</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarRegion.php">Agregar Región</a></li>
@@ -260,10 +289,10 @@ exit;
               </a>
               <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="listadoip.php">Reporte Cobranza</a></li>
+                <li class="nav-item"><a class="nav-link" href="listadoip.php">Reportes Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoproyectoscobranza.php">Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoservicios.php">Servicios Fijos</a></li> 
-          <li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Informes Servicios Fijos</a></li> 
+					<li class="nav-item"><a class="nav-link" href="detallesServiciosFijos.php">Detalles Servicios Fijos</a></li> 
 					<li class="nav-item"><a class="nav-link" href="listadoInformePago.php">Informes de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadofacturascobranza.php">Facturas</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoAgrupacion.php">Agrupación</a></li>
@@ -272,6 +301,7 @@ exit;
 					<li class="nav-item"><a class="nav-link" href="listadoCliente.php">Cliente</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoDetalle.php">Detalle</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoEstadoC.php">Estado de Cobranza</a></li>
+                    <li class="nav-item"><a class="nav-link" href="listadoEstadoProyecto.php">Estado de Proyecto</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoJefeE.php">Jefe Externo</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoLinea.php">Línea Negocio</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoRegion.php">Región</a></li>
@@ -337,7 +367,7 @@ exit;
 			<div class="">
 			  <div class="card-body">
 				<div class="d-flex justify-content-between border-bottom">
-				  <h2 class="text-primary">Panel Principal</h2>
+				  <h2 class="subtitulo">Panel Principal</h2>
 				  
 				</div>
 			  </div>
@@ -513,7 +543,7 @@ exit;
           <footer class="footer">
             <div class="container-fluid clearfix">
               
-              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
+              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
               </span>
             </div>
           </footer>
