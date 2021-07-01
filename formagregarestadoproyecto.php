@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 session_start();
 
@@ -47,35 +47,6 @@ exit;
     <link rel="stylesheet" href="./assets/css/demo_1/style.css">
     <!-- End Layout styles -->
     <link rel="shortcut icon" href="./img/olimini.png" />
-
-    <style>
-.tuclase {
-text-align: left; 
-font-family: Arial Black; 
-font-weight: bold; font-size: 30px; 
-background: #0F4CB8; 
--webkit-background-clip: text; 
--moz-background-clip: text; 
-background-clip: text; 
-color: transparent; 
-text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
-}
-
-.subtitulo {
-text-align: left; 
-font-family: Arial; 
-font-weight: bold; font-size: 24px; 
-background: #166AFF; 
--webkit-background-clip: text; 
--moz-background-clip: text; 
-background-clip: text; 
-color: transparent; 
-text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
-}
-
-</style>
-
-
   </head>
   <body>
     <div class="container-scroller">
@@ -89,10 +60,10 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-menu"></span><label class="tuclase"> &nbsp;&nbsp; Sistema Gestión de Proyectos y Finanzas </label>
+            <span class="mdi mdi-menu"></span>
           </button>
           
-          
+         
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
              
@@ -304,6 +275,8 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
               
               
            <li class="nav-item nav-category">Menú Principal</li><li class='nav-item'><a class='nav-link' href='./principalcobranza.php'><i class='menu-icon fa fa-th'></i><span class='menu-title'>Inicio</span></a></li>
+          
+            
            <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
                 <i class="menu-icon typcn typcn-chevron-right"></i>
@@ -312,9 +285,9 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
               </a>
               <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
+					<li class="nav-item"><a class="nav-link" href="formagrproyectocobranza.php">Agregar Proyectos</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarfactura.php">Agregar Factura</a></li>
-          			<li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
+          <li class="nav-item"><a class="nav-link" href="formagregarInformeP.php">Agregar Informe de Pago</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarAgrupacion.php">Agregar Agrupación</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
@@ -331,7 +304,6 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
 				</ul>
               </div>
             </li>
-            
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
                 <i class="menu-icon typcn typcn-chevron-right"></i>
@@ -362,7 +334,7 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
 				</ul>
               </div>
             </li>
-            <li class="nav-item">
+			<li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#reportes" aria-expanded="false" aria-controls="reportes">
                 <i class="menu-icon typcn typcn-chevron-right"></i>
                 <span class="menu-title">Reportes</span>
@@ -372,20 +344,16 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
                     <a class="nav-link" href="desempeñoReporte.php">Desempeño Proyectos F.O</a>
-                  </li>  <li class="nav-item">
-                    <a class="nav-link" href="desempeñoReporteAR.php">Desempeño Proy. Andrés Retamal</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="desempeñoReporteRanco.php">Desempeño Proyectos Ranco</a>
-                  </li>
-                  <!--
-                  <li class="nav-item">
-                    <a class="nav-link" href="pages/tables/sortable-table.html">Sortable table</a>
-                  </li>-->
+					<a class="nav-link" href="desempeñoReporteAR.php">Desempeño Proy. Andrés Retamal</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="desempeñoReporteRanco.php">Desempeño Proyectos Ranco</a>
+				  </li>
                 </ul>
               </div>
-            </li>  
-           
+            </li>
        <!--     
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
@@ -434,154 +402,74 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
         <div class="main-panel">
           <div class="content-wrapper">
 			<div class="">
-				<div class="card-body">
-					<div class="d-flex justify-content-between border-bottom">
-						<h2 class="subtitulo">Asignar Facturas a Informes de Pago</h2>
-							  
-					</div>
+			  <div class="card-body">
+				<div class="d-flex justify-content-between border-bottom">
+				  <h2 class="text-primary">Agregar Estado de Cobranza</h2>
+				  
 				</div>
+			  </div>
 			</div>
             <div class="row">
-            
               
               <div class="col-md-6 grid-margin stretch-card">
                 
               </div>
+             
             
             
-             <?php
-                
-            $nfactura = $_GET['nfactura'];
-            $vfactura = $_GET['vfact'];
-            $idfactura = $_GET['idfactura'];
-            $porfacturar = $_GET['porfa'];
-            //$saldof = $_GET['saldofavor'];
-                
-            $query5="SELECT * from FACTURA WHERE factura.ID_FACT ='$idfactura'";
-            $resultado5= $conexion->query($query5);
-            $row5=$resultado5->fetch_assoc();
-
-            ?>
+             
               
+                
+                
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title"></h4>
-                     <?php
-                      
-                    $consulta2 = "SELECT * 
-                    FROM facturaaip, informe_de_pago 
-                    where facturaaip.ID_IP = informe_de_pago.ID_IP and facturaaip.ID_FACT =".$idfactura;
-			              $resultado2 = mysqli_query($conexion, $consulta2);
-                            echo  " <p class='card-description'> Datos de IP: </p>" ;
-                            while($fila2 = mysqli_fetch_array($resultado2)){
-                           echo "<p> IP =".$fila2['ID_IP']." || Valor total IP = $".number_format($fila2['VALOR_IP'], 0, ",", ".")." || Valor facturado por IP = $".number_format($fila2['VALOR_FACTURADOIP'], 0, ",", ".");//." || "."<a href= 'controladoreliminaripasoc.php?ip=".$fila2['ID_IP']."&idfact=".$idfactura."'> Quitar IP Asociado </a>";
-                              }
-                            echo " </p>";
-                      ?> 
                       
                       
-                    <form class="form-sample" method="post" action="controladorfac_a_ips.php">
+                      
+                    <form class="form-sample" method="post" action="controladoragregarestadoProyecto.php">
                    
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">ID | Núm. Factura:</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" name="nfactura" id="nfactura" value="<?php  echo "$idfactura"."   |   ".number_format($nfactura, 0, ",", "."); ?>" readonly/> 
-							              </div>
-                              <input type="hidden" class="form-control" name="nfactura" id="nfactura" value="<?php  echo $nfactura ?>" readonly/> 
-							                <input type="hidden" class="form-control" name="id_fact" id="id_fact" value="<?php  echo $idfactura ?>"/>
-                          </div>
-                        </div>
+                        
+                         <div class="row">
+                             
+                   
                              
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Total Factura:</label>
+                            <label class="col-sm-3 col-form-label">Nombre:</label>
                             <div class="col-sm-9">
-                                <section class="form-control"> <?php echo "$".number_format($vfactura, 0, ",", "."); ?> </section>
-                            </div>
-                                <input type="hidden" class="form-control" name="vfactura" id="vfactura" value="<?php  echo $vfactura ?>"/>   
+                              <input type="text" class="form-control" name="NOM_EO_PROYECTO"  id="NOM_EO_PROYECTO" required/> </div>
                           </div>
+                            
                         </div>
                       </div>
                          
                         
-                        <!---------------------------------------------------------------------------------------------------------------------> 
-
-                      <div class="row">
-                        <div class="col-md-6">
-                            <?php 
-                            $query = "SELECT * from informe_de_pago ORDER by ID_IP ASC";
-                            $result = $conexion->query($query);
-                            $rowVF = mysqli_fetch_array($result);
-                            ?>  
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">IP:</label>
-                            <div class="col-sm-9">  
-                              <select  class="form-control" name="ipfac" id="ipfac" required>
-                                <option value="" selected> ID IP&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp; VALOR DE IP &nbsp;&nbsp;&nbsp;</option>
-                            <?php 
-                            while ( $row = $result->fetch_array() )    
-                            {
-                            ?>
-                                <option value=" <?php echo $row['ID_IP'] ?> " >
-                                <?php echo $row['ID_IP']."   &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;   $".number_format($row['VALOR_IP'], 0, ",", "."); ?>
-                                
-                                </option>
-
-                        <?php
-                            }  
-                        ?>
-                        <input type="hidden" class="form-control" name="vfactip" id="vfactip" value="<?php echo $rowVF['VALOR_FACTURADO']; ?>"/>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                       
-                          
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Valor a facturar:</label>
-                            <div class="col-sm-9">
-                          <input type="number" class="form-control" name="valor_a_facturar" id="valor_a_facturar" required/>
-                            </div>
-                          </div>
-                        </div> 
-                      </div>
                         
-                      <!------------------------------------------------------------------------------------------------------------>
-
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group row">
-                              <label class="col-sm-3 col-form-label">Por facturar:</label>
-                              <div class="col-sm-9">
-                              <?php //$querySF = "SELECT ID_FACT SUM(POR_FACTURAR AS xfact) FROM facturaaip WHERE ID_FACT=".$idfactura;
-                                  //$resultadoSF = mysqli_query($conexion, $querySF);
-                                  //$rowSF = mysqli_fetch_array($resultadoSF);
-                            ?>
-                              <section class="form-control" min="0"> 
-                              <?php //if($rowSF['POR_FACTURAR'] == null){
-                                //echo 0;
-                              //}else {
-                             //   echo number_format($row5['POR_FACTURAR'], 0, ",", "."); 
-                             // }
-                             echo $porfacturar;//$row5['POR_FACTURAR'];
-                                ?> 
-                                </section>
-                              <input type="hidden" class="form-control" name="por_facturar" id="por_facturar" value="<?php echo $porfacturar; ?>"/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                    
+              
+                      
                      
-                     <!------------------------------------------------------------------------------------------------------------>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                             <button type="submit" class="btn btn-success mr-2">Agregar</button>
+                              <input class="btn btn-light" type="button" value="Cancelar" onclick="cancelar()">
 
-                          <button type="submit" class="btn btn-success mr-2"> Asociar Factura </button>
-                          <input class="btn btn-light" type="button" value="Volver al listado de Facturas" onclick="cancelar()">
                     </form>
                       <br>
+                      
+
+                  
                   </div>
                 </div>
               </div>
@@ -595,7 +483,7 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
             <footer class="footer">
             <div class="container-fluid clearfix">
               
-              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2021 - Creado por MP
+              <span class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Olitel © 2020 - Creado por YB
               </span>
             </div>
           </footer>
@@ -612,10 +500,11 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
 	<script>
 		function cancelar(){
 			if (confirm("¿Está seguro que desea cancelar?")){
-				window.location.href="listadofacturascobranza.php";
+				window.location.href="listadoEstadoC.php";
 			}
 		}
 	</script>
+
     <!-- Plugin js for this page -->
     <script src="./assets/vendors/select2/select2.min.js"></script>
     <script src="./assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>

@@ -86,6 +86,17 @@ exit;
             padding: 0px!important;
         }
     
+        .tuclase {
+text-align: left; 
+font-family: Arial Black; 
+font-weight: bold; font-size: 30px; 
+background: white; 
+-webkit-background-clip: text; 
+-moz-background-clip: text; 
+background-clip: text; 
+color: transparent; 
+text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
+}
     
         
     </style>
@@ -125,7 +136,7 @@ exit;
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-menu"></span>
+            <span class="mdi mdi-menu"></span><label class="tuclase"> &nbsp; Sistema Gestión de Proyectos y Finanzas </label>
           </button>
       
           <ul class="navbar-nav ml-auto">
