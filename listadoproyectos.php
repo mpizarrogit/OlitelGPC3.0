@@ -267,9 +267,9 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
 			   <div class="collapse" id="form-elements">
 				 <ul class="nav flex-column sub-menu">
 				   <li class="nav-item">
-				   <li class="nav-item"><a class="nav-link" href="formagregarCliente.php">Agregar Cliente</a></li>
-				   <li class="nav-item"><a class="nav-link" href="formagregarJefeE.php">Agregar Jefe Externo</a></li>
-				   <li class="nav-item"><a class="nav-link" href="formagregarSupE.php">Agregar Supervisor Externo</a></li>
+				   <li class="nav-item"><a class="nav-link" href="formagregarClienteRol2.php">Agregar Cliente</a></li>
+				   <li class="nav-item"><a class="nav-link" href="formagregarJefeERol2.php">Agregar Jefe Externo</a></li>
+				   <li class="nav-item"><a class="nav-link" href="formagregarSupERol2.php">Agregar Supervisor Externo</a></li>
 				   </li>
 				   
 				 </ul>

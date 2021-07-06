@@ -104,6 +104,29 @@ exit;
         }
     
            
+.tuclase {
+text-align: left; 
+font-family: Arial Black; 
+font-weight: bold; font-size: 30px; 
+background: #0F4CB8; 
+-webkit-background-clip: text; 
+-moz-background-clip: text; 
+background-clip: text; 
+color: transparent; 
+text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
+}
+
+.subtitulo {
+text-align: left; 
+font-family: Arial Black; 
+font-weight: bold; font-size: 30px; 
+background: #0F4CB8; 
+-webkit-background-clip: text; 
+-moz-background-clip: text; 
+background-clip: text; 
+color: transparent; 
+text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
+}
         
     </style>
       
@@ -145,7 +168,7 @@ exit;
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-menu"></span>
+            <span class="mdi mdi-menu"></span><label class="tuclase"> &nbsp;&nbsp; Sistema Gestión de Proyectos y Finanzas </label>
           </button>
       
          <!-- <form class="ml-auto search-form d-none d-md-block" action="#">
@@ -363,7 +386,7 @@ exit;
 			<div class="">
 				<div class="card-body">
 					<div class="d-flex justify-content-between border-bottom">
-						<h2 class="text-primary">Coordinador</h2>
+          <h2 class="subtitulo">Coordinador</h2>
 							  
 					</div>
 				</div>

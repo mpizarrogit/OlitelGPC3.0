@@ -264,12 +264,14 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
 					<li class="nav-item"><a class="nav-link" href="formagregarCC.php">Agregar Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCiudad.php">Agregar Ciudad</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarCliente.php">Agregar Cliente</a></li>
+					<li class="nav-item"><a class="nav-link" href="formagregarCoordinador.php">Agregar Coordinador</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarDetalle.php">Agregar Detalle</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarEstadoC.php">Agregar Estado Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarJefeE.php">Agregar Jefe Externo</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarLinea.php">Agregar Línea Negocio</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarRegion.php">Agregar Región</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarSupE.php">Agregar Supervisor Externo</a></li>
+					<li class="nav-item"><a class="nav-link" href="formagregarSupI.php">Agregar Supervisor Interno</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarTipoI.php">Agregar Tipo Informe</a></li>
 					<li class="nav-item"><a class="nav-link" href="formagregarTipo.php">Agregar Tipo Proyecto</a></li>
 				</ul>
@@ -293,12 +295,14 @@ text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
 					<li class="nav-item"><a class="nav-link" href="listadoCC.php">Centro de Costo</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCiudad.php">Ciudad</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoCliente.php">Cliente</a></li>
+					<li class="nav-item"><a class="nav-link" href="listadoCoordinador.php">Coordinador</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoDetalle.php">Detalle</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoEstadoC.php">Estado de Cobranza</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoJefeE.php">Jefe Externo</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoLinea.php">Línea Negocio</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoRegion.php">Región</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoSupE.php">Supervisor Externo</a></li>
+					<li class="nav-item"><a class="nav-link" href="listadoSupI.php">Supervisor Interno</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoTipoI.php">Tipo Informe</a></li>
 					<li class="nav-item"><a class="nav-link" href="listadoTipo.php">Tipo Proyecto</a></li>
 				</ul>
